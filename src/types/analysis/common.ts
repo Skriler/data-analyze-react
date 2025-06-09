@@ -7,7 +7,6 @@ export interface ParameterSettingsDto {
   Weight: number;
 }
 
-
 /**
  * Represents a data object used in analysis.
  */

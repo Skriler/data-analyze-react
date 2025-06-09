@@ -19,15 +19,16 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "erasableSyntaxOnly": true,
+    "erasableSyntaxOnly": false,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
 
     /* Path aliases */
     "baseUrl": ".",
     "paths": {
-      "@api-types/*": ["src/types/*"]
+      "@api-types/*": ["src/types/*"],
+      "@services/*": ["src/services/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src"]
 }

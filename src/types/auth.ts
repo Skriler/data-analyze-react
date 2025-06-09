@@ -15,7 +15,7 @@ export interface AuthResult {
   Token: string;
   Expiration: string;
   Username: string;
-  Roles: string[];
+  Roles: UserRole[];
 }
 
 /**
@@ -28,4 +28,21 @@ export interface RegisterDto {
   ConfirmPassword: string;
   FirstName?: string;
   LastName?: string;
+}
+
+/**
+ * Contains basic information about an authenticated user.
+ */
+export interface UserInfo {
+  username: string;
+  roles: UserRole[];
+  expiration: string;
+}
+
+/**
+ * Enum representing the available user roles.
+ */
+export enum UserRole {
+  ADMIN = 'Admin',
+  USER = 'User',
 }
