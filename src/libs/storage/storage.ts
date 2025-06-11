@@ -7,13 +7,15 @@ export const authStorage = {
     USER: 'data_analyze_user',
   } as const,
 
-  // Error handling
+  // === Error handling ===
+
   handleStorageError(operation: string, error: unknown): void {
     const message = `Auth storage ${operation} failed`;
     console.error(message, error);
   },
 
-  // Validation
+  // === Validation ===
+
   isValidUserInfo(user: unknown): user is UserInfo {
     return (
       typeof user === 'object' &&
@@ -30,7 +32,8 @@ export const authStorage = {
     return typeof token === 'string' && token.length > 0;
   },
 
-  // Token operations
+  // === Token operations ===
+
   getToken(): StorageResult<string> {
     try {
       const token = localStorage.getItem(this.STORAGE_KEYS.TOKEN);
@@ -84,7 +87,8 @@ export const authStorage = {
     }
   },
 
-  // User info operations
+  // === User info operations ===
+
   getUserInfo(): StorageResult<UserInfo> {
     try {
       const userInfoStr = localStorage.getItem(this.STORAGE_KEYS.USER);
@@ -140,7 +144,8 @@ export const authStorage = {
     }
   },
 
-  // Auth data operations
+  // === Auth data operations ===
+
   setAuthData(authResult: AuthResult): StorageResult<void> {
     if (!authResult.Success) {
       return {
@@ -179,7 +184,8 @@ export const authStorage = {
     }
   },
 
-  // Auth state checks
+  // === Auth state checkss ===
+
   isTokenExpired(): boolean {
     const userResult = this.getUserInfo();
 
@@ -203,7 +209,8 @@ export const authStorage = {
     return tokenResult.success && !this.isTokenExpired();
   },
 
-  // Permission checks
+  // === Permission checks ===
+
   hasRole(role: UserRole): boolean {
     const userResult = this.getUserInfo();
     return userResult.success && userResult.data?.roles.includes(role) === true;

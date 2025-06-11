@@ -46,3 +46,18 @@ export enum UserRole {
   ADMIN = 'Admin',
   USER = 'User',
 }
+
+/**
+ * DTO used to request a new access token using a refresh token.
+ */
+export interface RefreshTokenRequest {
+  refreshToken: string;
+}
+
+/**
+ * DTO used for user logout.
+ * Optionally includes a refresh token to revoke on the server.
+ */
+export interface LogoutRequest {
+  refreshToken?: string;
+}

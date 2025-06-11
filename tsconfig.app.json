@@ -24,10 +24,11 @@
     "noUncheckedSideEffectImports": true,
 
     /* Path aliases */
-    "baseUrl": ".",
+    "baseUrl": "src",
     "paths": {
-      "@api-types/*": ["src/types/*"],
-      "@services/*": ["src/services/*"]
+      "@api/*": ["api/*"],
+      "@services/*": ["services/*"],
+      "@api-types/*": ["types/*"]
     }
   },
   "include": ["src"]

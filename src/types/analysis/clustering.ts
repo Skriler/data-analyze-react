@@ -58,3 +58,8 @@ export type NumericMetric = 'Euclidean' | 'Manhattan' | 'Cosine';
  * Supported categorical distance metrics for clustering.
  */
 export type CategoricalMetric = 'Hamming' | 'Jaccard';
+
+/**
+ * Supported clustering algorithms.
+ */
+export type ClusteringAlgorithm = 'KMeans' | 'DBSCAN' | 'Agglomerative';

@@ -1,3 +1,9 @@
-export * as CommonAnalysisTypes from './common';
-export * as SimilarityTypes from './similarity';
-export * as ClusteringTypes from './clustering';
+export type { SimilarityRequest, SimilarityResult } from './similarity';
+
+export type {
+  KMeansClusteringRequest,
+  DBSCANClusteringRequest,
+  AgglomerativeClusteringRequest,
+  ClusteringResult,
+  ClusteringAlgorithm,
+} from './clustering';
