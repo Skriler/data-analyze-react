@@ -27,8 +27,10 @@
     "baseUrl": "src",
     "paths": {
       "@api/*": ["api/*"],
+      "@components/*": ["components/*"],
       "@libs/*": ["libs/*"],
       "@hooks/*": ["hooks/*"],
+      "@pages/*": ["pages/*"],
       "@api-types/*": ["types/*"]
     }
   },
