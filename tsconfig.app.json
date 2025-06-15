@@ -28,6 +28,7 @@
     "paths": {
       "@api/*": ["api/*"],
       "@components/*": ["components/*"],
+      "@ui/*": ["components/ui/*"],
       "@libs/*": ["libs/*"],
       "@hooks/*": ["hooks/*"],
       "@pages/*": ["pages/*"],
