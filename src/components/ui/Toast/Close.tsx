@@ -1,0 +1,49 @@
+import React from 'react';
+import * as ToastPrimitives from '@radix-ui/react-toast';
+import { cn } from '@libs/utils/cn';
+import { X } from 'lucide-react';
+
+const toastCloseClasses = `
+  absolute
+  right-2
+  top-2
+  rounded-md
+  p-1
+  text-foreground/50
+  opacity-0
+  transition-opacity
+  hover:text-foreground
+  focus:opacity-100
+  focus:outline-none
+  focus:ring-2
+  group-hover:opacity-100
+  group-[.destructive]:text-red-300
+  group-[.destructive]:hover:text-red-50
+  group-[.destructive]:focus:ring-red-400
+  group-[.destructive]:focus:ring-offset-red-600
+`;
+
+const ToastClose = React.forwardRef<
+  React.ComponentRef<typeof ToastPrimitives.Close>,
+  React.ComponentPropsWithoutRef<typeof ToastPrimitives.Close>
+>(({ className, ...props }, ref) => {
+  const computedClassName = React.useMemo(
+    () => cn(toastCloseClasses, className),
+    [className]
+  );
+
+  return (
+    <ToastPrimitives.Close
+      ref={ref}
+      className={computedClassName}
+      toast-close=""
+      {...props}
+    >
+      <X className="h-4 w-4" />
+    </ToastPrimitives.Close>
+  );
+});
+
+ToastClose.displayName = 'ToastClose';
+
+export { ToastClose };
