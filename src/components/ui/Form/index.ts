@@ -1,8 +1,8 @@
 export { Form } from './Form';
-export { FormField } from './FormField';
-export { FormItem } from './FormItem';
-export { FormLabel } from './FormLabel';
-export { FormControl } from './FormControl';
-export { FormDescription } from './FormDescription';
-export { FormMessage } from './FormMessage';
+export { FormField } from './Field';
+export { FormItem } from './Item';
+export { FormLabel } from './Label';
+export { FormControl } from './Control';
+export { FormDescription } from './Description';
+export { FormMessage } from './Message';
 export { useFormField } from './useFormField';
