@@ -2,7 +2,7 @@ import React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { Slot } from '@radix-ui/react-slot';
 import { cn } from '@libs/utils/cn';
-import { Spinner } from '@ui/Spinner';
+import { Spinner } from '@components/Ui/Spinner';
 
 const baseButtonClasses = `
   inline-flex

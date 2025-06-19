@@ -1,4 +1,4 @@
-import { authStorage } from 'libs/storage/storage';
+import { authStorage } from '@libs/storage/storage';
 import { ApiError } from '@api/types';
 import {
   HttpStatusCode,

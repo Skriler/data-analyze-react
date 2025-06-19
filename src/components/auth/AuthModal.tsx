@@ -1,7 +1,7 @@
 import React from 'react';
 import { Eye, EyeOff, ChartLine } from 'lucide-react';
-import { Button } from '@components/ui/Button';
-import { Dialog, DialogContent } from '@components/ui/Dialog';
+import { Button } from '@components/Ui/Button';
+import { Dialog, DialogContent } from '@components/Ui/Dialog';
 import {
   Form,
   FormControl,
@@ -9,8 +9,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@components/ui/Form';
-import { Input } from '@components/ui/Input';
+} from '@components/Ui/Form';
+import { Input } from '@components/Ui/Input';
 import { useToast } from '@hooks/toast/useToast';
 import { useAuthModal } from '@hooks/auth/useAuthModal';
 import { useAuthForms } from '@hooks/auth/useAuthForms';

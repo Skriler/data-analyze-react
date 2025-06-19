@@ -1,6 +1,6 @@
 import type { ReactElement, ReactNode } from 'react';
 import type { VariantProps } from 'class-variance-authority';
-import type { toastVariants } from '@components/ui/Toast';
+import type { toastVariants } from '@components/Ui/Toast';
 
 // === Toast configuration constants ===
 export const TOAST_CONFIG = {

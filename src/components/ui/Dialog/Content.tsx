@@ -3,7 +3,7 @@ import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { X } from 'lucide-react';
 import { cn } from '@libs/utils/cn';
 import { DialogPortal } from './Dialog';
-import { DialogOverlay } from './DialogOverlay';
+import { DialogOverlay } from './Overlay';
 
 const contentClasses = `
   fixed

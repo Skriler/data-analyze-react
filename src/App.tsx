@@ -3,8 +3,8 @@ import { queryClient } from '@libs/queries/queryClient';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 
-import { Layout } from '@components/layout/Layout';
-import { AuthGuard } from '@components/auth/AuthGuard';
+import { Layout } from '@components/Layout';
+import { AuthGuard } from '@components/Auth';
 
 // Pages
 import LoginPage from '@pages/auth/LoginPage';

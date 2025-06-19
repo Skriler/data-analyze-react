@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useLogin, useRegister } from '@hooks/api/useAuth';
+import type { LoginDto, RegisterDto, AuthResult } from '@api-types/auth';
 
 const loginSchema = z.object({
   Username: z.string().min(3, 'Username must be at least 3 characters').max(50),
@@ -36,11 +37,8 @@ const registerSchema = z
     path: ['ConfirmPassword'],
   });
 
-type LoginFormData = z.infer<typeof loginSchema>;
-type RegisterFormData = z.infer<typeof registerSchema>;
-
 interface UseAuthFormsProps {
-  onLoginSuccess: (result: any) => void;
+  onLoginSuccess: (result: AuthResult) => void;
   onLoginError: (error: string) => void;
   onRegisterSuccess: () => void;
   onRegisterError: () => void;
@@ -55,13 +53,15 @@ export const useAuthForms = ({
   const login = useLogin();
   const register = useRegister();
 
-  const loginForm = useForm<LoginFormData>({
+  const loginForm = useForm<LoginDto>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
       Username: '',
       Password: '',
     },
   });
+
+  type RegisterFormData = RegisterDto & { ConfirmPassword: string };
 
   const registerForm = useForm<RegisterFormData>({
     resolver: zodResolver(registerSchema),
@@ -75,19 +75,19 @@ export const useAuthForms = ({
     },
   });
 
-  const handleLoginSubmit = async (data: LoginFormData) => {
+  const handleLoginSubmit = async (data: LoginDto) => {
     try {
-      const result = await login.mutateAsync(data);
+      const result: AuthResult = await login.mutateAsync(data);
       if (result.Success) {
         onLoginSuccess(result);
       } else {
-        onLoginError(result.Error || 'Invalid credentials.');
+        onLoginError(result.Error ?? 'Invalid credentials.');
       }
     } catch (error) {
       onLoginError('An error occurred while logging in.');
     }
   };
-
+  
   const handleRegisterSubmit = async (data: RegisterFormData) => {
     try {
       await register.mutateAsync(data);
