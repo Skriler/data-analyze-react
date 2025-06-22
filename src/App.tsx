@@ -5,6 +5,7 @@ import './App.css';
 
 import { Layout } from '@components/Layout';
 import { AuthGuard } from '@components/Auth';
+import { Toaster } from '@components/Ui/Toast';
 
 // Pages
 import LoginPage from '@pages/auth/LoginPage';
@@ -29,32 +30,30 @@ function App() {
           <Route
             path="/*"
             element={
-              <Layout>
-                <AuthGuard>
-                  <Routes>
-                    <Route path="/" element={<DashboardPage />} />
-                    <Route path="/datasets" element={<DatasetsPage />} />
-                    <Route
-                      path="/datasets/:id"
-                      element={<DatasetDetailsPage />}
-                    />
-                    <Route path="/analysis" element={<AnalysisPage />} />
-                    <Route
-                      path="/analysis/:datasetId"
-                      element={<AnalysisPage />}
-                    />
-                    <Route path="/results" element={<ResultsPage />} />
-                    <Route
-                      path="/results/:datasetId"
-                      element={<ResultsPage />}
-                    />
-                    <Route path="*" element={<NotFoundPage />} />
-                  </Routes>
-                </AuthGuard>
-              </Layout>
+              // <Layout>
+              <AuthGuard>
+                <Routes>
+                  <Route path="/" element={<DashboardPage />} />
+                  <Route path="/datasets" element={<DatasetsPage />} />
+                  <Route
+                    path="/datasets/:id"
+                    element={<DatasetDetailsPage />}
+                  />
+                  <Route path="/analysis" element={<AnalysisPage />} />
+                  <Route
+                    path="/analysis/:datasetId"
+                    element={<AnalysisPage />}
+                  />
+                  <Route path="/results" element={<ResultsPage />} />
+                  <Route path="/results/:datasetId" element={<ResultsPage />} />
+                  <Route path="*" element={<NotFoundPage />} />
+                </Routes>
+              </AuthGuard>
+              // </Layout>
             }
           />
         </Routes>
+        <Toaster />
       </Router>
     </QueryClientProvider>
   );

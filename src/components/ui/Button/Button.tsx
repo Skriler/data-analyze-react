@@ -37,12 +37,19 @@ const buttonVariants = cva(baseButtonClasses, {
       secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
       ghost: 'hover:bg-accent hover:text-accent-foreground',
       link: 'text-primary underline-offset-4 hover:underline',
+      blue: 'bg-blue-500 text-white hover:bg-blue-600 font-medium transition-colors',
+      tab: 'flex-1 py-2 px-4 text-sm font-medium rounded-md transition-all duration-200 text-gray-500 hover:text-gray-700',
+      'tab-active':
+        'flex-1 py-2 px-4 text-sm font-medium rounded-md transition-all duration-200 bg-white text-gray-900 shadow-sm',
+      'tab-active-signup':
+        'flex-1 py-2 px-4 text-sm font-medium rounded-md transition-all duration-200 bg-blue-500 text-white shadow-sm',
     },
     size: {
       default: 'h-10 px-4 py-2',
       sm: 'h-9 rounded-md px-3',
       lg: 'h-11 rounded-md px-8',
       icon: 'h-10 w-10',
+      tall: 'h-12 px-4 py-2',
     },
   },
   defaultVariants: {

@@ -28,12 +28,30 @@ const inputClasses = `
   md:text-sm
 `;
 
-export interface InputProps extends React.ComponentProps<'input'> {}
+const modalInputClasses = `
+  h-12
+  bg-gray-50
+  border-gray-200
+  focus:border-blue-500
+  focus:ring-blue-500
+  focus:ring-1
+  rounded-lg
+`;
+
+export interface InputProps extends React.ComponentProps<'input'> {
+  variant?: 'default' | 'modal';
+}
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, ...props }, ref) => {
+  ({ className, variant = 'default', ...props }, ref) => {
+    const variantClasses = variant === 'modal' ? modalInputClasses : '';
+
     return (
-      <input className={cn(inputClasses, className)} ref={ref} {...props} />
+      <input
+        className={cn(inputClasses, variantClasses, className)}
+        ref={ref}
+        {...props}
+      />
     );
   }
 );

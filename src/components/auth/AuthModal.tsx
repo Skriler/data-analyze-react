@@ -1,7 +1,12 @@
 import React from 'react';
 import { Eye, EyeOff, ChartLine } from 'lucide-react';
 import { Button } from '@components/Ui/Button';
-import { Dialog, DialogContent } from '@components/Ui/Dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogDescription,
+} from '@components/Ui/Dialog';
 import {
   Form,
   FormControl,
@@ -24,8 +29,8 @@ interface AuthModalProps {
 const AuthModalHeader: React.FC<{ isLoginMode: boolean }> = React.memo(
   ({ isLoginMode }) => (
     <div className="text-center mb-6">
-      <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
-        <ChartLine className="text-primary-foreground text-2xl" />
+      <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+        <ChartLine className="text-white text-2xl" />
       </div>
       <h2 className="text-2xl font-bold text-gray-900">
         Welcome to DataAnalyze
@@ -45,19 +50,17 @@ const AuthModeTabs: React.FC<{
   isLoginMode: boolean;
   onModeChange: (isLogin: boolean) => void;
 }> = React.memo(({ isLoginMode, onModeChange }) => (
-  <div className="flex bg-gray-100 rounded-lg p-1">
+  <div className="flex bg-gray-100 rounded-lg p-1 mb-6">
     <Button
       type="button"
-      variant={isLoginMode ? 'default' : 'ghost'}
-      className="flex-1"
+      variant={isLoginMode ? 'tab-active' : 'tab'}
       onClick={() => onModeChange(true)}
     >
       Sign In
     </Button>
     <Button
       type="button"
-      variant={!isLoginMode ? 'default' : 'ghost'}
-      className="flex-1"
+      variant={!isLoginMode ? 'tab-active-signup' : 'tab'}
       onClick={() => onModeChange(false)}
     >
       Sign Up
@@ -81,12 +84,14 @@ const PasswordInput: React.FC<PasswordInputProps> = React.memo(
         type={showPassword ? 'text' : 'password'}
         placeholder={placeholder}
         {...field}
+        variant="modal"
+        className="pr-10"
       />
       <Button
         type="button"
         variant="ghost"
         size="sm"
-        className="absolute right-2 top-1/2 transform -translate-y-1/2 h-auto p-1"
+        className="absolute right-2 top-1/2 transform -translate-y-1/2 h-auto p-1 text-gray-400 hover:text-gray-600"
         onClick={onTogglePassword}
       >
         {showPassword ? (
@@ -153,6 +158,14 @@ export const AuthModal: React.FC<AuthModalProps> = React.memo(
 
     return (
       <Dialog open={open} onOpenChange={onOpenChange}>
+        <DialogTitle className="sr-only">
+          {isLoginMode ? 'Sign in to Data Analyze' : 'Sign up for Data Analyze'}
+        </DialogTitle>
+        <DialogDescription className="sr-only">
+          {isLoginMode
+            ? 'Enter your credentials to access your dashboard'
+            : 'Create a new account to get started with Data Analyze'}
+        </DialogDescription>
         <DialogContent className="max-w-md">
           <div className="p-6">
             <AuthModalHeader isLoginMode={isLoginMode} />
@@ -173,11 +186,12 @@ export const AuthModal: React.FC<AuthModalProps> = React.memo(
                       name="Username"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Username</FormLabel>
+                          <FormLabel variant="modal">Username</FormLabel>
                           <FormControl>
                             <Input
                               placeholder="Enter your username"
                               {...field}
+                              variant="modal"
                             />
                           </FormControl>
                           <FormMessage />
@@ -189,7 +203,7 @@ export const AuthModal: React.FC<AuthModalProps> = React.memo(
                       name="Password"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Password</FormLabel>
+                          <FormLabel variant="modal">Password</FormLabel>
                           <FormControl>
                             <PasswordInput
                               field={field}
@@ -204,7 +218,9 @@ export const AuthModal: React.FC<AuthModalProps> = React.memo(
                     />
                     <Button
                       type="submit"
-                      className="w-full"
+                      variant="blue"
+                      size="tall"
+                      className="w-full rounded-lg"
                       disabled={login.isPending}
                     >
                       {login.isPending ? 'Signing In...' : 'Sign In'}
@@ -222,9 +238,13 @@ export const AuthModal: React.FC<AuthModalProps> = React.memo(
                       name="Username"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Username</FormLabel>
+                          <FormLabel variant="modal">Username</FormLabel>
                           <FormControl>
-                            <Input placeholder="Choose a username" {...field} />
+                            <Input
+                              placeholder="Choose a username"
+                              {...field}
+                              variant="modal"
+                            />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -235,12 +255,13 @@ export const AuthModal: React.FC<AuthModalProps> = React.memo(
                       name="Email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Email</FormLabel>
+                          <FormLabel variant="modal">Email</FormLabel>
                           <FormControl>
                             <Input
                               type="email"
                               placeholder="Enter your email"
                               {...field}
+                              variant="modal"
                             />
                           </FormControl>
                           <FormMessage />
@@ -253,9 +274,13 @@ export const AuthModal: React.FC<AuthModalProps> = React.memo(
                         name="FirstName"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>First Name</FormLabel>
+                            <FormLabel variant="modal">First Name</FormLabel>
                             <FormControl>
-                              <Input placeholder="First name" {...field} />
+                              <Input
+                                placeholder="First name"
+                                {...field}
+                                variant="modal"
+                              />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -266,9 +291,13 @@ export const AuthModal: React.FC<AuthModalProps> = React.memo(
                         name="LastName"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Last Name</FormLabel>
+                            <FormLabel variant="modal">Last Name</FormLabel>
                             <FormControl>
-                              <Input placeholder="Last name" {...field} />
+                              <Input
+                                placeholder="Last name"
+                                {...field}
+                                variant="modal"
+                              />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -280,7 +309,7 @@ export const AuthModal: React.FC<AuthModalProps> = React.memo(
                       name="Password"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Password</FormLabel>
+                          <FormLabel variant="modal">Password</FormLabel>
                           <FormControl>
                             <PasswordInput
                               field={field}
@@ -298,7 +327,9 @@ export const AuthModal: React.FC<AuthModalProps> = React.memo(
                       name="ConfirmPassword"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Confirm Password</FormLabel>
+                          <FormLabel variant="modal">
+                            Confirm Password
+                          </FormLabel>
                           <FormControl>
                             <PasswordInput
                               field={field}
@@ -313,7 +344,9 @@ export const AuthModal: React.FC<AuthModalProps> = React.memo(
                     />
                     <Button
                       type="submit"
-                      className="w-full"
+                      variant="blue"
+                      size="tall"
+                      className="w-full rounded-lg"
                       disabled={register.isPending}
                     >
                       {register.isPending

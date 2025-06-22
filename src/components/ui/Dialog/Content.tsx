@@ -17,9 +17,10 @@ const contentClasses = `
   translate-y-[-50%]
   gap-4
   border
-  bg-background
+  bg-white
+  text-gray-900
   p-6
-  shadow-lg
+  shadow-2xl
   duration-200
   data-[state=open]:animate-in
   data-[state=closed]:animate-out
@@ -40,7 +41,6 @@ const closeButtonClasses = `
   top-4
   rounded-sm
   opacity-70
-  ring-offset-background
   transition-opacity
   hover:opacity-100
   focus:outline-none
@@ -48,8 +48,8 @@ const closeButtonClasses = `
   focus:ring-ring
   focus:ring-offset-2
   disabled:pointer-events-none
-  data-[state=open]:bg-accent
-  data-[state=open]:text-muted-foreground
+  text-gray-500
+  hover:text-gray-700
 `;
 
 const DialogContent = React.forwardRef<
