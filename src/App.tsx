@@ -30,8 +30,8 @@ function App() {
           <Route
             path="/*"
             element={
-              // <Layout>
-              <AuthGuard>
+              <Layout>
+                {/* <AuthGuard> */}
                 <Routes>
                   <Route path="/" element={<DashboardPage />} />
                   <Route path="/datasets" element={<DatasetsPage />} />
@@ -48,8 +48,9 @@ function App() {
                   <Route path="/results/:datasetId" element={<ResultsPage />} />
                   <Route path="*" element={<NotFoundPage />} />
                 </Routes>
-              </AuthGuard>
-              // </Layout>
+
+                {/* </AuthGuard> */}
+              </Layout>
             }
           />
         </Routes>
