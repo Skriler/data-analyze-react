@@ -16,7 +16,7 @@ interface StatItem {
   description: string;
 }
 
-interface DashboardStatsProps {
+export interface DashboardStatsProps {
   datasets?: DatasetDto[];
   isLoading: boolean;
 }

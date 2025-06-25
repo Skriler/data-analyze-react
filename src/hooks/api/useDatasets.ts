@@ -79,7 +79,7 @@ export const useUpdateDataset = () => {
  * Delete dataset by ID.
  * Removes detail cache and invalidates dataset list.
  */
-export const useDelete = () => {
+export const useDeleteDataset = () => {
   const queryClient = useQueryClient();
 
   return useMutation<void, Error, number>({

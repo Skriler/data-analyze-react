@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@components/Ui/Card';
 import { Database, Activity, TrendingUp, type LucideIcon } from 'lucide-react';
 
-interface QuickAction {
+export interface QuickAction {
   title: string;
   description: string;
   icon: LucideIcon;
@@ -11,7 +11,7 @@ interface QuickAction {
   onClick?: () => void;
 }
 
-interface QuickActionsProps {
+export interface QuickActionsProps {
   onCreateDataset?: () => void;
   onRunAnalysis?: () => void;
   onViewResults?: () => void;

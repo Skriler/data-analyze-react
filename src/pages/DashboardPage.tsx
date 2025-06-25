@@ -4,9 +4,9 @@ import { useDatasets } from '@hooks/api/useDatasets';
 import { useAuthState } from '@hooks/api/useAuth';
 
 // Dashboard components
-import { DashboardStats } from '@components/Ui/DashboardStats';
-import { RecentDatasets } from '@components/Ui/RecentDatasets';
-import { QuickActions } from '@components/Ui/QuickActions';
+import { DashboardStats } from '@components/Ui/Dashboard/DashboardStats';
+import { RecentDatasets } from '@components/Ui/Dashboard/RecentDatasets';
+import { QuickActions } from '@components/Ui/Dashboard/QuickActions';
 
 export default function Dashboard() {
   const { data: datasets, isLoading } = useDatasets();

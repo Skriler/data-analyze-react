@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@components/Ui/Card';
 import { Database } from 'lucide-react';
 import type { DatasetDto } from '@api-types/dataset';
 
-interface RecentDatasetsProps {
+export interface RecentDatasetsProps {
   datasets?: DatasetDto[];
   isLoading: boolean;
   maxItems?: number;
