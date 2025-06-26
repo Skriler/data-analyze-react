@@ -16,6 +16,7 @@ import DatasetDetailsPage from '@pages/datasets/DatasetDetailsPage';
 import AnalysisPage from '@pages/analysis/AnalysisPage';
 import ResultsPage from '@pages/analysis/ResultsPage';
 import NotFoundPage from '@pages/NotFoundPage';
+import SettingsPage from '@pages/SettingsPage';
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
                   />
                   <Route path="/results" element={<ResultsPage />} />
                   <Route path="/results/:datasetId" element={<ResultsPage />} />
+                  <Route path="/settings" element={<SettingsPage />} />
                   <Route path="*" element={<NotFoundPage />} />
                 </Routes>
 

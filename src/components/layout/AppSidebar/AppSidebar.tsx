@@ -1,8 +1,14 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { BarChart3, Database, Home, Search } from 'lucide-react';
+import {
+  BarChart3,
+  Database,
+  Home,
+  Search,
+  Settings,
+  type LucideIcon,
+} from 'lucide-react';
 import { SidebarNavItem } from './SidebarNavItem';
-import type { LucideIcon } from 'lucide-react';
 
 interface NavigationItem {
   name: string;
@@ -13,9 +19,13 @@ interface NavigationItem {
 
 const defaultNavigation: NavigationItem[] = [
   { name: 'Dashboard', href: '/', icon: Home },
-  { name: 'Datasets', href: '/datasets', icon: Database },
-  { name: 'Analysis', href: '/analysis', icon: BarChart3 },
+  { name: 'Datasets', href: '/datasets', icon: Database, badge: '2' },
+  { name: 'Analysis', href: '/analysis', icon: BarChart3, badge: 'New' },
   { name: 'Results', href: '/results', icon: Search },
+];
+
+const bottomNavigation: NavigationItem[] = [
+  { name: 'Settings', href: '/settings', icon: Settings },
 ];
 
 interface AppSidebarProps {
@@ -31,11 +41,11 @@ const AppSidebar: React.FC<AppSidebarProps> = ({
 
   return (
     <aside
-      className={`fixed inset-y-0 left-0 w-64 bg-white shadow-sm border-r border-gray-200 ${className}`}
+      className={`w-64 h-full bg-white/90 backdrop-blur-sm shadow-lg border-r border-gray-200/50 ${className}`}
       aria-label="Main navigation"
     >
-      <div className="flex flex-col h-full pt-20">
-        <nav className="flex-1 px-4 pb-4 space-y-1" role="navigation">
+      <div className="flex flex-col h-full">
+        <nav className="flex-1 px-4 py-4 space-y-1" role="navigation">
           {navigation.map(item => (
             <SidebarNavItem
               key={item.href}
@@ -44,6 +54,17 @@ const AppSidebar: React.FC<AppSidebarProps> = ({
             />
           ))}
         </nav>
+
+        {/* Bottom Navigation */}
+        <div className="px-4 py-4 border-t border-gray-100">
+          {bottomNavigation.map(item => (
+            <SidebarNavItem
+              key={item.href}
+              item={item}
+              isActive={location.pathname === item.href}
+            />
+          ))}
+        </div>
       </div>
     </aside>
   );

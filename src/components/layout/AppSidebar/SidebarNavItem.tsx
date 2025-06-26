@@ -22,9 +22,9 @@ const SidebarNavItem: React.FC<SidebarNavItemProps> = ({
   <Link
     to={item.href}
     className={cn(
-      'group flex items-center justify-between px-2 py-2 text-sm font-medium rounded-md transition-colors',
+      'group flex items-center justify-between px-3 py-3 text-sm font-medium rounded-xl transition-all duration-200 hover:scale-[1.02]',
       isActive
-        ? 'bg-primary text-primary-foreground'
+        ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg shadow-blue-500/25'
         : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
       className
     )}
@@ -33,23 +33,23 @@ const SidebarNavItem: React.FC<SidebarNavItemProps> = ({
     <div className="flex items-center">
       <item.icon
         className={cn(
-          'mr-3 h-5 w-5 flex-shrink-0',
-          isActive
-            ? 'text-primary-foreground'
-            : 'text-gray-400 group-hover:text-gray-500'
+          'mr-3 h-5 w-5 flex-shrink-0 transition-transform group-hover:scale-110',
+          isActive ? 'text-white' : 'text-gray-400 group-hover:text-gray-600'
         )}
         aria-hidden="true"
       />
-      <span>{item.name}</span>
+      <span className="font-medium">{item.name}</span>
     </div>
 
     {item.badge && (
       <span
         className={cn(
-          'ml-3 inline-block py-0.5 px-2 text-xs rounded-full',
+          'ml-3 inline-block py-1 px-2 text-xs font-semibold rounded-full transition-colors',
           isActive
-            ? 'bg-primary-foreground/20 text-primary-foreground'
-            : 'bg-gray-100 text-gray-600'
+            ? 'bg-white/20 text-white'
+            : item.badge === 'New'
+              ? 'bg-green-100 text-green-700'
+              : 'bg-blue-100 text-blue-700'
         )}
       >
         {item.badge}
