@@ -11,12 +11,13 @@ const HeaderTitle: React.FC<HeaderTitleProps> = ({
   subtitle,
   className = '',
 }) => (
-  <div className={`flex items-center space-x-4 ${className}`}>
+  <div className={`flex items-baseline space-x-3 ${className}`}>
     <h1 className="text-2xl font-semibold text-gray-900">{title}</h1>
     {subtitle && (
-      <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium">
-        {subtitle}
-      </span>
+      <div className="relative">
+        <span className="text-sm font-medium text-gray-600">{subtitle}</span>
+        <div className="absolute -bottom-0.5 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 to-transparent rounded-full"></div>
+      </div>
     )}
   </div>
 );

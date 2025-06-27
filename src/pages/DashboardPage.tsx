@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout } from '@components/Layout';
+import { useSetLayout } from '@components/Layout';
 import { useDashboard } from '@hooks/features/useDashboard';
 import { DashboardSections } from '@components/Dashboard';
 
@@ -19,13 +19,13 @@ export default function Dashboard() {
     return `${greeting}, ${username}`;
   }, [authState?.user?.username]);
 
+  useSetLayout('Dashboard', welcomeMessage);
+
   return (
-    <Layout title="Dashboard" subtitle={welcomeMessage}>
-      <DashboardSections
-        datasets={datasets}
-        isLoading={isLoading}
-        actions={actions}
-      />
-    </Layout>
+    <DashboardSections
+      datasets={datasets}
+      isLoading={isLoading}
+      actions={actions}
+    />
   );
 }

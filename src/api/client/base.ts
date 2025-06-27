@@ -20,7 +20,6 @@ export class BaseHttpClient {
       headers: {
         'Content-Type': 'application/json',
       },
-      withCredentials: true,
     });
 
     setupInterceptors(this.axiosInstance);
@@ -71,4 +70,4 @@ export class BaseHttpClient {
 /**
  * Singleton HTTP client instance configured with base API URL.
  */
-export const httpClient = new BaseHttpClient(import.meta.env.API_URL);
+export const httpClient = new BaseHttpClient(import.meta.env.VITE_API_URL);

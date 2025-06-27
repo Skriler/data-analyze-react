@@ -4,49 +4,49 @@ import type { ParameterSettingsDto, DataObjectAnalysisDto } from './common';
  * Request object containing common clustering parameters.
  */
 export interface BaseClusteringRequest {
-  ParameterSettings: ParameterSettingsDto[];
-  NumericMetric: NumericMetric;
-  CategoricalMetric: CategoricalMetric;
-  IncludeParameters: boolean;
+  parameterSettings: ParameterSettingsDto[];
+  numericMetric: NumericMetric;
+  categoricalMetric: CategoricalMetric;
+  includeParameters: boolean;
 }
 
 /**
  * Request object for K-Means clustering algorithm.
  */
 export interface KMeansClusteringRequest extends BaseClusteringRequest {
-  MaxIterations: number;
-  NumberOfClusters: number;
+  maxIterations: number;
+  numberOfClusters: number;
 }
 
 /**
  * Request object for DBSCAN clustering algorithm.
  */
 export interface DBSCANClusteringRequest extends BaseClusteringRequest {
-  Epsilon: number;
-  MinPoints: number;
+  epsilon: number;
+  minPoints: number;
 }
 
 /**
  * Request object for Agglomerative clustering algorithm.
  */
 export interface AgglomerativeClusteringRequest extends BaseClusteringRequest {
-  Threshold: number;
+  threshold: number;
 }
 
 /**
  * Result object returned after performing clustering analysis.
  */
 export interface ClusteringResult {
-  DatasetId: number;
-  Clusters: ClusterDto[];
+  datasetId: number;
+  clusters: ClusterDto[];
 }
 
 /**
  * Represents a cluster containing a name and list of data objects.
  */
 export interface ClusterDto {
-  Name: string;
-  Objects: DataObjectAnalysisDto[];
+  name: string;
+  objects: DataObjectAnalysisDto[];
 }
 
 /**

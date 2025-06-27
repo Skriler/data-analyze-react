@@ -1,42 +1,40 @@
-/**
- * DTOs used for reading datasets and their related data structures.
- */
+// === DTOs used for reading datasets and their related data structures ===
+
 export interface DatasetDto {
-  Id: number;
-  Name: string;
-  CreatedAt: string;
-  Parameters: ParameterDto[];
-  Objects: DataObjectDto[];
+  id: number;
+  name: string;
+  createdAt: string;
+  parameters: ParameterDto[];
+  objects: DataObjectDto[];
 }
 
 export interface ParameterDto {
-  Id: number;
-  Name: string;
-  Type: ParameterType;
+  id: number;
+  name: string;
+  type: ParameterType;
 }
 
 export interface DataObjectDto {
-  Name: string;
-  Values: ParameterValueDto[];
+  name: string;
+  values: ParameterValueDto[];
 }
 
 export interface ParameterValueDto {
-  ParameterId: number;
-  Value: string;
+  parameterId: number;
+  value: string;
 }
 
 export type ParameterType = 'Numeric' | 'Categorical';
 
-/**
- * DTOs used for creating datasets and related data objects.
- */
+// === DTOs used for creating datasets and related data objects ===
+
 export interface DatasetCreateDto {
-  Name: string;
-  Parameters: string[];
-  Objects: DataObjectCreateDto[];
+  name: string;
+  parameters: string[];
+  objects: DataObjectCreateDto[];
 }
 
 export interface DataObjectCreateDto {
-  Name: string;
-  Values: string[];
+  name: string;
+  values: string[];
 }

@@ -7,7 +7,7 @@ const ToastTitle = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof ToastPrimitives.Title>
 >(({ className, ...props }, ref) => {
   const computedClassName = React.useMemo(
-    () => cn('text-sm font-semibold', className),
+    () => cn('text-sm font-semibold leading-none tracking-tight', className),
     [className]
   );
 

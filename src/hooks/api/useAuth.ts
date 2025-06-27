@@ -47,14 +47,14 @@ export const useLogin = () => {
     mutationFn: (credentials: LoginDto) => authApi.login(credentials),
 
     onSuccess: (authResult: AuthResult) => {
-      if (!authResult.Success) return;
+      if (!authResult.success) return;
 
       authStorage.setAuthData(authResult);
 
       const authState = createAuthState(true, authStorage.isAdmin(), {
-        username: authResult.Username,
-        roles: authResult.Roles,
-        expiration: authResult.Expiration,
+        username: authResult.username,
+        roles: authResult.roles,
+        expiration: authResult.expiration,
       } as UserInfo);
 
       queryClient.setQueryData(AUTH_QUERY_KEYS.state, authState);

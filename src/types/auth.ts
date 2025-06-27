@@ -2,32 +2,31 @@
  * DTO used for user login.
  */
 export interface LoginDto {
-  Username: string;
-  Password: string;
+  username: string;
+  password: string;
 }
 
 /**
  * Result object of a user authentication attempt.
  */
 export interface AuthResult {
-  Success: boolean;
-  Error: string;
-  Token: string;
-  Expiration: string;
-  Username: string;
-  Roles: UserRole[];
+  success: boolean;
+  error: string;
+  token: string;
+  expiration: string;
+  username: string;
+  roles: UserRole[];
 }
-
 /**
  * DTO used for user registration.
  */
 export interface RegisterDto {
-  Username: string;
-  Email: string;
-  Password: string;
-  ConfirmPassword: string;
-  FirstName?: string;
-  LastName?: string;
+  username: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  firstName?: string;
+  lastName?: string;
 }
 
 /**

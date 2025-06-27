@@ -30,28 +30,22 @@ const dispatch = (action: ToastAction): void => {
 const createToast = (props: CreateToastProps): ToastReturn => {
   const id = generateToastId();
 
-  const update = useCallback(
-    (updatedProps: Partial<BaseToastProps>) => {
-      dispatch({
-        type: 'UPDATE_TOAST',
-        toast: { ...updatedProps, id },
-      });
-    },
-    [id]
-  );
-
-  const dismiss = useCallback(() => {
+  const dismiss = () => {
     handleToastDismissal(id, memoryState, dispatch);
-  }, [id]);
+  };
 
-  const onOpenChange = useCallback(
-    (open: boolean) => {
-      if (!open) {
-        dismiss();
-      }
-    },
-    [dismiss]
-  );
+  const update = (updatedProps: Partial<BaseToastProps>) => {
+    dispatch({
+      type: 'UPDATE_TOAST',
+      toast: { ...updatedProps, id },
+    });
+  };
+
+  const onOpenChange = (open: boolean) => {
+    if (!open) {
+      dismiss();
+    }
+  };
 
   const toast: BaseToastProps = {
     ...props,

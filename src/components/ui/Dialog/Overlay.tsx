@@ -6,10 +6,8 @@ const overlayClasses = `
   fixed
   inset-0
   z-50
-  bg-gradient-to-br
-  from-blue-900
-  via-purple-900
-  to-indigo-900
+  bg-black/20
+  backdrop-blur-sm
   data-[state=open]:animate-in
   data-[state=closed]:animate-out
   data-[state=closed]:fade-out-0

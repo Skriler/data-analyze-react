@@ -7,7 +7,7 @@ const ToastDescription = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof ToastPrimitives.Description>
 >(({ className, ...props }, ref) => {
   const computedClassName = React.useMemo(
-    () => cn('text-sm opacity-90', className),
+    () => cn('text-sm opacity-85 mt-1 leading-relaxed', className),
     [className]
   );
 

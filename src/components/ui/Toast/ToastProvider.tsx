@@ -10,12 +10,14 @@ const toastViewportClasses = `
   max-h-screen
   w-full
   flex-col-reverse
-  p-4
+  p-6
   sm:bottom-0
   sm:right-0
   sm:top-auto
   sm:flex-col
-  md:max-w-[420px]
+  md:max-w-[440px]
+  gap-4
+  pointer-events-none
 `;
 
 export interface ToastProviderProps
@@ -25,7 +27,9 @@ export interface ToastProviderProps
 
 const ToastProvider = React.memo<ToastProviderProps>(
   ({ children, ...props }) => (
-    <ToastPrimitives.Provider {...props}>{children}</ToastPrimitives.Provider>
+    <ToastPrimitives.Provider swipeDirection="right" duration={5000} {...props}>
+      {children}
+    </ToastPrimitives.Provider>
   )
 );
 

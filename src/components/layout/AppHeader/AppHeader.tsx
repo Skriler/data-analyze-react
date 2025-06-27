@@ -34,18 +34,18 @@ const AppHeader: React.FC<AppHeaderProps> = ({
 
         <div className="flex items-center space-x-4">
           {/* Search Button */}
-          <Button variant="ghost" size="sm" aria-label="Search">
-            <Search className="h-4 w-4" />
-          </Button>
+          <div className="relative mr-3">
+            <button className="p-2 rounded-xl bg-white/80 backdrop-blur-sm border border-gray-200/50 hover:shadow-xl hover:border-primary/20 hover:bg-white/95 transition-all duration-300 group">
+              <Search className="h-5 w-5 text-gray-600 group-hover:text-primary transition-colors" />
+            </button>
+          </div>
 
-          {/* Notifications with indicator */}
-          <div className="relative">
-            <Button variant="ghost" size="sm" aria-label="Notifications">
-              <Bell className="h-4 w-4" />
-            </Button>
-            {hasNotifications && (
-              <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-white"></div>
-            )}
+          {/* Notification Bell */}
+          <div className="relative mr-3">
+            <button className="p-2 rounded-xl bg-white/80 backdrop-blur-sm border border-gray-200/50 hover:shadow-xl hover:border-primary/20 hover:bg-white/95 transition-all duration-300 group">
+              <Bell className="h-5 w-5 text-gray-600 group-hover:text-primary transition-colors" />
+              <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-white animate-pulse"></div>
+            </button>
           </div>
 
           <UserMenu />

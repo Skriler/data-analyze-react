@@ -42,7 +42,7 @@ const addAuthHeaders = (
     );
   }
 
-  config.headers.Authorization = `Bearer ${token}`;
+  config.headers.Authorization = `Bearer ${token.data}`;
   return config;
 };
 

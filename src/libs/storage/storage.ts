@@ -147,22 +147,22 @@ export const authStorage = {
   // === Auth data operations ===
 
   setAuthData(authResult: AuthResult): StorageResult<void> {
-    if (!authResult.Success) {
+    if (!authResult.success) {
       return {
         success: false,
         error: AuthError.INVALID_TOKEN,
       };
     }
 
-    const tokenResult = this.setToken(authResult.Token);
+    const tokenResult = this.setToken(authResult.token);
     if (!tokenResult.success) {
       return tokenResult;
     }
 
     const userResult = this.setUserInfo({
-      username: authResult.Username,
-      roles: authResult.Roles,
-      expiration: authResult.Expiration,
+      username: authResult.username,
+      roles: authResult.roles,
+      expiration: authResult.expiration,
     });
 
     return userResult;
