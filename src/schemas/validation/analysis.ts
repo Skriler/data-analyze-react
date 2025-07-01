@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const analysisSchema = z
+const analysisSchema = z
   .object({
     type: z.enum(['similarity', 'kmeans', 'dbscan', 'agglomerative']),
     includeParameters: z.boolean().default(true),
@@ -55,3 +55,5 @@ export const analysisSchema = z
   );
 
 export type FormData = z.infer<typeof analysisSchema>;
+
+export { analysisSchema };

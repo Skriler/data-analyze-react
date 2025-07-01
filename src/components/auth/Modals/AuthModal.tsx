@@ -5,8 +5,8 @@ import {
   DialogTitle,
   DialogDescription,
 } from '@components/Ui/Dialog';
-import { useAuthModal } from '@hooks/auth/useAuthModal';
-import { useAuthForms } from '@hooks/auth/useAuthForms';
+import { useAuthModal } from '@hooks/features/auth/useAuthModal';
+import { useAuthForms } from '@hooks/features/auth/useAuthForms';
 import { useToast } from '@hooks/toast/useToast';
 import { AuthModalHeader } from './AuthModalHeader';
 import { AuthModeTabs } from './AuthModeTabs';

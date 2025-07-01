@@ -32,6 +32,7 @@
       "@libs/*": ["libs/*"],
       "@hooks/*": ["hooks/*"],
       "@pages/*": ["pages/*"],
+      "@schemas/*": ["schemas/*"],
       "@api-types/*": ["types/*"]
     }
   },

@@ -39,15 +39,65 @@ const baseToastClasses = `
 export const toastVariants = cva(baseToastClasses, {
   variants: {
     variant: {
-      default:
-        'border-white/20 bg-white/90 text-gray-900 shadow-black/10 dark:border-gray-800/50 dark:bg-gray-900/90 dark:text-white',
-      destructive:
-        'destructive group border-red-200/50 bg-gradient-to-r from-red-50/95 to-pink-50/95 text-red-900 shadow-red-500/20 dark:border-red-800/50 dark:from-red-950/90 dark:to-pink-950/90 dark:text-red-100',
-      success:
-        'border-green-200/50 bg-gradient-to-r from-green-50/95 to-emerald-50/95 text-green-900 shadow-green-500/20 dark:border-green-800/50 dark:from-green-950/90 dark:to-emerald-950/90 dark:text-green-100',
-      warning:
-        'border-amber-200/50 bg-gradient-to-r from-amber-50/95 to-yellow-50/95 text-amber-900 shadow-amber-500/20 dark:border-amber-800/50 dark:from-amber-950/90 dark:to-yellow-950/90 dark:text-amber-100',
-      info: 'border-blue-200/50 bg-gradient-to-r from-blue-50/95 to-indigo-50/95 text-blue-900 shadow-blue-500/20 dark:border-blue-800/50 dark:from-blue-950/90 dark:to-indigo-950/90 dark:text-blue-100',
+      default: `
+        border-white/20
+        bg-white/90
+        text-gray-900
+        shadow-black/10
+        dark:border-gray-800/50
+        dark:bg-gray-900/90
+        dark:text-white
+      `,
+      destructive: `
+        destructive
+        group
+        border-red-200/50
+        bg-gradient-to-r
+        from-red-50/95
+        to-pink-50/95
+        text-red-900
+        shadow-red-500/20
+        dark:border-red-800/50
+        dark:from-red-950/90
+        dark:to-pink-950/90
+        dark:text-red-100
+      `,
+      success: `
+        border-green-200/50
+        bg-gradient-to-r
+        from-green-50/95
+        to-emerald-50/95
+        text-green-900
+        shadow-green-500/20
+        dark:border-green-800/50
+        dark:from-green-950/90
+        dark:to-emerald-950/90
+        dark:text-green-100
+      `,
+      warning: `
+        border-amber-200/50
+        bg-gradient-to-r
+        from-amber-50/95
+        to-yellow-50/95
+        text-amber-900
+        shadow-amber-500/20
+        dark:border-amber-800/50
+        dark:from-amber-950/90
+        dark:to-yellow-950/90
+        dark:text-amber-100
+      `,
+      info: `
+        border-blue-200/50
+        bg-gradient-to-r
+        from-blue-50/95
+        to-indigo-50/95
+        text-blue-900
+        shadow-blue-500/20
+        dark:border-blue-800/50
+        dark:from-blue-950/90
+        dark:to-indigo-950/90
+        dark:text-blue-100
+      `,
     },
   },
   defaultVariants: {

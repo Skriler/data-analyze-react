@@ -8,7 +8,7 @@ import {
 } from '@components/Ui/Form';
 import { Input } from '@components/Ui/Input';
 import type { Control } from 'react-hook-form';
-import type { FormData } from './analysisSchema';
+import type { FormData } from '@schemas/validation/analysis';
 
 interface AlgorithmSettingsProps {
   control: Control<FormData>;
