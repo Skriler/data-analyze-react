@@ -1,7 +1,7 @@
 import { Search, Network, Map, GitBranch } from 'lucide-react';
-import type { AnalysisType } from './types';
+import type { AnalysisType } from 'shared/types/analysisType';
 
-export const analysisTypes: AnalysisType[] = [
+export const ANALYSIS_TYPES: AnalysisType[] = [
   {
     id: 'similarity',
     name: 'Similarity Analysis',

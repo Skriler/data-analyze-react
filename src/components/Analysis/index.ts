@@ -1,1 +1,1 @@
-export { AnalysisModal } from './Modal';
+export { AnalysisContent } from './AnalysisContent';

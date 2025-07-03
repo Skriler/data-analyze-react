@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from '@components/Ui/Card';
 import { Play } from 'lucide-react';
-import type { AnalysisType } from './types';
+import type { AnalysisType } from '@shared/types/analysisType';
 
 interface AnalysisTypeDetailsProps {
   analysisType: AnalysisType;

@@ -7,3 +7,5 @@ export type {
   ClusteringResult,
   ClusteringAlgorithm,
 } from './clustering';
+
+export type { ParameterSettingsDto, DataObjectAnalysisDto } from './common';

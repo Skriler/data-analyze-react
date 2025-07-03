@@ -8,9 +8,9 @@ import {
   FormMessage,
 } from '@components/Ui/Form';
 import { Label } from '@components/Ui/Label';
-import { ANALYSIS_TYPES } from './analysisTypes';
+import { ANALYSIS_TYPES } from '@shared/constants/analysisTypes';
 import type { Control } from 'react-hook-form';
-import type { FormData } from './analysisSchema';
+import type { FormData } from '@shared/schemas/analysis';
 
 interface AnalysisTypeSelectorProps {
   control: Control<FormData>;

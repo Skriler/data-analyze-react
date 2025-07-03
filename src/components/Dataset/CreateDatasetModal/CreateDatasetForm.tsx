@@ -1,5 +1,5 @@
 import { Form } from '@components/Ui/Form';
-import { useCreateDatasetForm } from '@hooks/datasets/useCreateDatasetForm';
+import { useCreateDatasetForm } from '@hooks/features/datasets/useCreateDatasetForm';
 import { DatasetNameField } from './DatasetNameField';
 import { ParametersSection } from './ParametersSection';
 import { DataObjectsTable } from './DataObjectsTable';

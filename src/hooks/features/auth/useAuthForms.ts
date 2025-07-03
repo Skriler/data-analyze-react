@@ -1,41 +1,13 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
 import { useLogin, useRegister } from '@hooks/api/useAuth';
-import type { LoginDto, RegisterDto, AuthResult } from '@api-types/auth';
-
-const loginSchema = z.object({
-  username: z.string().min(3, 'Username must be at least 3 characters').max(50),
-  password: z.string().min(6, 'Password must be at least 6 characters').max(50),
-});
-
-const registerSchema = z
-  .object({
-    username: z
-      .string()
-      .min(3, 'Username must be at least 3 characters')
-      .max(50),
-    email: z.string().email('Invalid email address').max(80),
-    password: z
-      .string()
-      .min(6, 'Password must be at least 6 characters')
-      .max(50),
-    confirmPassword: z.string(),
-    firstName: z
-      .string()
-      .min(3, 'First name must be at least 3 characters')
-      .max(50)
-      .optional(),
-    lastName: z
-      .string()
-      .min(3, 'Last name must be at least 3 characters')
-      .max(50)
-      .optional(),
-  })
-  .refine(data => data.password === data.confirmPassword, {
-    message: "Passwords don't match",
-    path: ['ConfirmPassword'],
-  });
+import type { LoginDto, AuthResult } from '@api-types/auth';
+import {
+  loginSchema,
+  registerSchema,
+  type LoginFormData,
+  type RegisterFormData,
+} from '@shared/schemas/auth';
 
 interface UseAuthFormsProps {
   onLoginSuccess: (result: AuthResult) => void;
@@ -60,8 +32,6 @@ export const useAuthForms = ({
       password: '',
     },
   });
-
-  type RegisterFormData = RegisterDto & { confirmPassword: string };
 
   const registerForm = useForm<RegisterFormData>({
     resolver: zodResolver(registerSchema),

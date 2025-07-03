@@ -11,12 +11,12 @@ import {
   DialogTitle,
 } from '@components/Ui/Dialog';
 import type { DatasetDto } from '@api-types/dataset';
-import type { ParameterSetting } from './analysis';
+import type { ParameterSettingsDto } from '@api-types/analysis';
 import { AnalysisTypeSelector } from './AnalysisTypeSelector';
 import { ParameterSettings } from './ParameterSettings';
 import { AlgorithmSettings } from './AlgorithmSettings';
-import { analysisSchema, type FormData } from './analysisSchema';
-import { useAnalysisSubmit } from './useAnalysisSubmit';
+import { analysisSchema, type FormData } from '@shared/schemas/analysis';
+import { useAnalysisSubmit } from '@hooks/features/analysis/useAnalysisSubmit';
 
 interface AnalysisModalProps {
   open: boolean;
@@ -30,7 +30,7 @@ const AnalysisModal: React.FC<AnalysisModalProps> = ({
   dataset,
 }) => {
   const [parameterSettings, setParameterSettings] = useState<
-    ParameterSetting[]
+    ParameterSettingsDto[]
   >(
     dataset.parameters.map(param => ({
       parameterId: param.id,

@@ -5,7 +5,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@components/Ui/Card';
-import type { AnalysisType } from './types';
+import type { AnalysisType } from '@shared/types/analysisType';
 
 interface AnalysisTypeCardProps {
   analysisType: AnalysisType;

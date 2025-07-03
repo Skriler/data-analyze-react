@@ -3,7 +3,7 @@ import { AnalysisTypeGrid } from './AnalysisTypeGrid';
 import { AnalysisTypeDetails } from './AnalysisTypeDetails';
 import { DatasetSection } from './DatasetSection';
 import { AnalysisModal } from '../Modal';
-import { analysisTypes } from './analysisTypes';
+import { ANALYSIS_TYPES } from '@shared/constants/analysisTypes';
 import type { DatasetDto } from '@api-types/dataset';
 
 interface AnalysisContentProps {
@@ -27,7 +27,7 @@ export const AnalysisContent: React.FC<AnalysisContentProps> = ({
   setShowAnalysisModal,
   handleAnalyzeDataset,
 }) => {
-  const currentAnalysisType = analysisTypes.find(
+  const currentAnalysisType = ANALYSIS_TYPES.find(
     t => t.id === selectedAnalysisType
   );
 

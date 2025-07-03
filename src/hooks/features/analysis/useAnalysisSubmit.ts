@@ -6,8 +6,8 @@ import {
   useAgglomerativeClustering,
 } from '@hooks/api/useAnalysis';
 import type { DatasetDto } from '@api-types/dataset';
-import type { FormData } from './analysisSchema';
-import type { ParameterSetting } from './analysis';
+import type { FormData } from '@shared/schemas/analysis';
+import type { ParameterSettingsDto } from '@api-types/analysis';
 
 export const useAnalysisSubmit = (dataset: DatasetDto, onClose: () => void) => {
   const similarityAnalysis = useSimilarityAnalysis();
@@ -24,7 +24,7 @@ export const useAnalysisSubmit = (dataset: DatasetDto, onClose: () => void) => {
 
   const submitAnalysis = async (
     data: FormData,
-    parameterSettings: ParameterSetting[]
+    parameterSettings: ParameterSettingsDto[]
   ) => {
     try {
       const baseRequest = {

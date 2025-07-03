@@ -3,11 +3,11 @@ import { Checkbox } from '@components/Ui/Checkbox';
 import { Label } from '@components/Ui/Label';
 import { Slider } from '@components/Ui/Slider';
 import type { DatasetDto } from '@api-types/dataset';
-import type { ParameterSetting } from './analysis';
+import type { ParameterSettingsDto } from '@api-types/analysis';
 
 interface ParameterSettingsProps {
   dataset: DatasetDto;
-  parameterSettings: ParameterSetting[];
+  parameterSettings: ParameterSettingsDto[];
   onUpdateSetting: (
     parameterId: number,
     field: 'isActive' | 'weight',

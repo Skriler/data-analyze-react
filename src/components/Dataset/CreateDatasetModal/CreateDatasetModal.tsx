@@ -6,7 +6,7 @@ import {
 } from '@components/Ui/Dialog';
 import { Form } from '@components/Ui/Form';
 import { Button } from '@components/Ui/Button';
-import { useCreateDatasetForm } from '@hooks/datasets/useCreateDatasetForm';
+import { useCreateDatasetForm } from '@hooks/features/datasets/useCreateDatasetForm';
 import { DatasetNameField } from './DatasetNameField';
 import { ParametersSection } from './ParametersSection';
 import { DataObjectsTable } from './DataObjectsTable';

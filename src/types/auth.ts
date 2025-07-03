@@ -17,6 +17,7 @@ export interface AuthResult {
   username: string;
   roles: UserRole[];
 }
+
 /**
  * DTO used for user registration.
  */
