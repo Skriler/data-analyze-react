@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import React from 'react';
 import { Play } from 'lucide-react';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@components/Ui/Button';
 import { Form } from '@components/Ui/Form';
 import {
@@ -10,13 +8,13 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@components/Ui/Dialog';
-import type { DatasetDto } from '@api-types/dataset';
-import type { ParameterSettingsDto } from '@api-types/analysis';
 import { AnalysisTypeSelector } from './AnalysisTypeSelector';
 import { ParameterSettings } from './ParameterSettings';
 import { AlgorithmSettings } from './AlgorithmSettings';
-import { analysisSchema, type FormData } from '@shared/schemas/analysis';
 import { useAnalysisSubmit } from '@hooks/features/analysis/useAnalysisSubmit';
+import { useParameterSettings } from '@hooks/features/analysis/useParameterSettings';
+import { useAnalysisForm } from '@hooks/features/analysis/useAnalysisForm';
+import type { DatasetDto } from '@api-types/dataset';
 
 interface AnalysisModalProps {
   open: boolean;
@@ -29,61 +27,21 @@ const AnalysisModal: React.FC<AnalysisModalProps> = ({
   onOpenChange,
   dataset,
 }) => {
-  const [parameterSettings, setParameterSettings] = useState<
-    ParameterSettingsDto[]
-  >(
-    dataset.parameters.map(param => ({
-      parameterId: param.id,
-      isActive: true,
-      weight: 1,
-    }))
-  );
+  const { parameterSettings, updateParameterSetting } =
+    useParameterSettings(dataset);
 
-  const form = useForm({
-    resolver: zodResolver(analysisSchema),
-    defaultValues: {
-      type: 'similarity' as const,
-      includeParameters: true,
-      parameterSettings,
-      numberOfClusters: 3,
-      maxIterations: 300,
-      epsilon: 0.5,
-      minPoints: 5,
-      threshold: 1.5,
-      numericMetric: 'Euclidean' as const,
-      categoricalMetric: 'Hamming' as const,
-    },
-  });
+  const { form, analysisType, updateFormParameterSettings } =
+    useAnalysisForm(parameterSettings);
 
   const { submitAnalysis, isLoading } = useAnalysisSubmit(dataset, () =>
     onOpenChange(false)
   );
 
-  const analysisType = form.watch('type') as FormData['type'];
+  React.useEffect(() => {
+    updateFormParameterSettings(parameterSettings);
+  }, [parameterSettings, updateFormParameterSettings]);
 
-  const updateParameterSetting = (
-    parameterId: number,
-    field: 'isActive' | 'weight',
-    value: boolean | number
-  ) => {
-    setParameterSettings(prev =>
-      prev.map(setting =>
-        setting.parameterId === parameterId
-          ? { ...setting, [field]: value }
-          : setting
-      )
-    );
-
-    const updatedSettings = parameterSettings.map(setting =>
-      setting.parameterId === parameterId
-        ? { ...setting, [field]: value }
-        : setting
-    );
-    form.setValue('parameterSettings', updatedSettings);
-  };
-
-  const handleSubmit = (data: any) => {
-    const formData = data as FormData;
+  const handleSubmit = (formData: any) => {
     submitAnalysis(formData, parameterSettings);
   };
 

@@ -31,3 +31,52 @@ export const normalizeWeights = (
     weight: setting.isActive ? setting.weight / totalWeight : setting.weight,
   }));
 };
+
+export const getActiveParameterSettings = (
+  settings: ParameterSettingsDto[]
+): ParameterSettingsDto[] => {
+  return settings.filter(s => s.isActive);
+};
+
+export const updateParameterSetting = (
+  settings: ParameterSettingsDto[],
+  parameterId: number,
+  updates: Partial<Pick<ParameterSettingsDto, 'isActive' | 'weight'>>
+): ParameterSettingsDto[] => {
+  return settings.map(setting =>
+    setting.parameterId === parameterId ? { ...setting, ...updates } : setting
+  );
+};
+
+export const toggleParameterActive = (
+  settings: ParameterSettingsDto[],
+  parameterId: number
+): ParameterSettingsDto[] => {
+  return settings.map(setting =>
+    setting.parameterId === parameterId
+      ? { ...setting, isActive: !setting.isActive }
+      : setting
+  );
+};
+
+export const setParameterWeight = (
+  settings: ParameterSettingsDto[],
+  parameterId: number,
+  weight: number
+): ParameterSettingsDto[] => {
+  return settings.map(setting =>
+    setting.parameterId === parameterId
+      ? { ...setting, weight: Math.max(0, weight) }
+      : setting
+  );
+};
+
+export const resetParameterWeights = (
+  settings: ParameterSettingsDto[],
+  defaultWeight: number = 1
+): ParameterSettingsDto[] => {
+  return settings.map(setting => ({
+    ...setting,
+    weight: defaultWeight,
+  }));
+};

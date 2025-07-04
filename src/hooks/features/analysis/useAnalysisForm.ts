@@ -1,25 +1,34 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { analysisSchema, type FormData } from '@shared/schemas/analysis';
+import { analysisSchema, type FormData } from '@shared/analysis';
+import {
+  DEFAULT_VALUES,
+  ANALYSIS_TYPE_DEFAULTS,
+  type AnalysisType,
+} from '@shared/analysis/constants';
 import type { ParameterSettingsDto } from '@api-types/analysis';
 
-export const useAnalysisForm = (
-  initialParameterSettings: ParameterSettingsDto[]
-) => {
-  const form = useForm({
-    resolver: zodResolver(analysisSchema),
-    defaultValues: {
-      type: 'similarity' as const,
-      includeParameters: true,
+interface UseAnalysisFormProps {
+  initialParameterSettings: ParameterSettingsDto[];
+  initialType?: AnalysisType;
+}
+
+export const useAnalysisForm = ({
+  initialParameterSettings,
+  initialType = DEFAULT_VALUES.type,
+}: UseAnalysisFormProps) => {
+  const getDefaultValues = (type: AnalysisType) => {
+    const baseDefaults = ANALYSIS_TYPE_DEFAULTS[type];
+
+    return {
+      ...baseDefaults,
       parameterSettings: initialParameterSettings,
-      numberOfClusters: 3,
-      maxIterations: 300,
-      epsilon: 0.5,
-      minPoints: 5,
-      threshold: 1.5,
-      numericMetric: 'Euclidean' as const,
-      categoricalMetric: 'Hamming' as const,
-    },
+    };
+  };
+
+  const form = useForm<FormData>({
+    resolver: zodResolver(analysisSchema),
+    defaultValues: getDefaultValues(initialType),
   });
 
   const analysisType = form.watch('type') as FormData['type'];
@@ -30,9 +39,36 @@ export const useAnalysisForm = (
     form.setValue('parameterSettings', parameterSettings);
   };
 
+  const resetToDefaults = (type?: AnalysisType) => {
+    const targetType = type || analysisType;
+    const defaultValues = getDefaultValues(targetType);
+
+    form.reset(defaultValues);
+  };
+
+  const changeAnalysisType = (newType: AnalysisType) => {
+    const currentValues = form.getValues();
+    const newDefaults = getDefaultValues(newType);
+
+    const mergedValues = {
+      ...newDefaults,
+      includeParameters: currentValues.includeParameters,
+      parameterSettings: currentValues.parameterSettings,
+    };
+
+    form.reset(mergedValues);
+  };
+
+  const getCurrentDefaults = () => {
+    return ANALYSIS_TYPE_DEFAULTS[analysisType];
+  };
+
   return {
     form,
     analysisType,
     updateFormParameterSettings,
+    resetToDefaults,
+    changeAnalysisType,
+    getCurrentDefaults,
   };
 };

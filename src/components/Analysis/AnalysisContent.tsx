@@ -1,10 +1,9 @@
 import React from 'react';
-import { AnalysisTypeGrid } from './AnalysisTypeGrid';
-import { AnalysisTypeDetails } from './AnalysisTypeDetails';
-import { DatasetSection } from './DatasetSection';
-import { AnalysisModal } from '../Modal';
-import { ANALYSIS_TYPES } from '@shared/constants/analysisTypes';
+import { ANALYSIS_TYPES } from '@shared/analysis';
 import type { DatasetDto } from '@api-types/dataset';
+import { AnalysisTypeDetails, AnalysisTypeGrid } from './AnalysisTypeGrid';
+import { DatasetSection } from './DatasetGrid';
+import { AnalysisModal } from './Modal';
 
 interface AnalysisContentProps {
   datasets: DatasetDto[] | undefined;
