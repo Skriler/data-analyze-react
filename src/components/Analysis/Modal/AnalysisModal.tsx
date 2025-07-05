@@ -11,7 +11,6 @@ import {
 import { AnalysisTypeSelector } from './AnalysisTypeSelector';
 import { ParameterSettings } from './ParameterSettings';
 import { AlgorithmSettings } from './AlgorithmSettings';
-import { useAnalysisSubmit } from '@hooks/features/analysis/useAnalysisSubmit';
 import { useParameterSettings } from '@hooks/features/analysis/useParameterSettings';
 import { useAnalysisForm } from '@hooks/features/analysis/useAnalysisForm';
 import type { DatasetDto } from '@api-types/dataset';
@@ -27,15 +26,19 @@ const AnalysisModal: React.FC<AnalysisModalProps> = ({
   onOpenChange,
   dataset,
 }) => {
-  const { parameterSettings, updateParameterSetting } =
-    useParameterSettings(dataset);
+  const { parameterSettings, updateSetting } = useParameterSettings(dataset);
 
-  const { form, analysisType, updateFormParameterSettings } =
-    useAnalysisForm(parameterSettings);
-
-  const { submitAnalysis, isLoading } = useAnalysisSubmit(dataset, () =>
-    onOpenChange(false)
-  );
+  const {
+    form,
+    analysisType,
+    isLoading,
+    updateFormParameterSettings,
+    submitAnalysis,
+  } = useAnalysisForm({
+    dataset,
+    initialParameterSettings: parameterSettings,
+    onClose: () => onOpenChange(false),
+  });
 
   React.useEffect(() => {
     updateFormParameterSettings(parameterSettings);
@@ -63,7 +66,7 @@ const AnalysisModal: React.FC<AnalysisModalProps> = ({
                 <ParameterSettings
                   dataset={dataset}
                   parameterSettings={parameterSettings}
-                  onUpdateSetting={updateParameterSetting}
+                  onUpdateSetting={updateSetting}
                 />
                 <AlgorithmSettings
                   control={form.control as any}

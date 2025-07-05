@@ -1,82 +1,116 @@
 import type { ParameterSettingsDto } from '@api-types/analysis';
 import {
-  ANALYSIS_TYPE_CONFIGS,
-  ANALYSIS_TYPE_DEFAULTS,
+  VALIDATION_LIMITS,
   type FormData,
-  type AnalysisType,
-  type AnalysisTypeConfig,
+  type ValidationResult,
 } from '@shared/analysis';
 
+const ANALYSIS_TYPE_DISPLAY_NAMES = {
+  similarity: 'Similarity Analysis',
+  kmeans: 'K-Means Clustering',
+  dbscan: 'DBSCAN Clustering',
+  agglomerative: 'Agglomerative Clustering',
+} as const;
+
 export const getAnalysisTypeDisplayName = (type: FormData['type']): string => {
-  const displayNames = {
-    similarity: 'Similarity Analysis',
-    kmeans: 'K-Means Clustering',
-    dbscan: 'DBSCAN Clustering',
-    agglomerative: 'Agglomerative Clustering',
-  };
-  return displayNames[type] || type;
+  return ANALYSIS_TYPE_DISPLAY_NAMES[type] || type;
 };
 
-export const getAnalysisTypeConfig = (
-  type: AnalysisType
-): AnalysisTypeConfig | undefined => {
-  return ANALYSIS_TYPE_CONFIGS.find(config => config.id === type);
+const validateNumericField = (
+  value: number | undefined,
+  min: number,
+  max: number,
+  fieldName: string
+): string[] => {
+  if (value === undefined) return [];
+
+  const errors: string[] = [];
+  if (value < min) {
+    errors.push(`${fieldName} must be at least ${min}`);
+  }
+  if (value > max) {
+    errors.push(`${fieldName} must be at most ${max}`);
+  }
+  return errors;
 };
 
-export const getAnalysisTypeDefaults = (type: AnalysisType) => {
-  return ANALYSIS_TYPE_DEFAULTS[type];
-};
-
-export const validateAnalysisForm = (
-  formData: FormData,
-  parameterSettings: ParameterSettingsDto[]
-): { isValid: boolean; errors: string[] } => {
+const validateAlgorithmSettings = (formData: FormData): string[] => {
   const errors: string[] = [];
 
+  switch (formData.type) {
+    case 'kmeans':
+      errors.push(
+        ...validateNumericField(
+          formData.numberOfClusters,
+          VALIDATION_LIMITS.clusters.min,
+          VALIDATION_LIMITS.clusters.max,
+          'Number of clusters'
+        )
+      );
+      errors.push(
+        ...validateNumericField(
+          formData.maxIterations,
+          VALIDATION_LIMITS.iterations.min,
+          VALIDATION_LIMITS.iterations.max,
+          'Max iterations'
+        )
+      );
+      break;
+
+    case 'dbscan':
+      errors.push(
+        ...validateNumericField(
+          formData.epsilon,
+          VALIDATION_LIMITS.epsilon.min,
+          VALIDATION_LIMITS.epsilon.max,
+          'Epsilon'
+        )
+      );
+      errors.push(
+        ...validateNumericField(
+          formData.minPoints,
+          VALIDATION_LIMITS.minPoints.min,
+          VALIDATION_LIMITS.minPoints.max,
+          'Min points'
+        )
+      );
+      break;
+
+    case 'agglomerative':
+      errors.push(
+        ...validateNumericField(
+          formData.threshold,
+          VALIDATION_LIMITS.threshold.min,
+          VALIDATION_LIMITS.threshold.max,
+          'Threshold'
+        )
+      );
+      break;
+  }
+
+  return errors;
+};
+
+export const validateFormData = (
+  formData: FormData,
+  parameterSettings: ParameterSettingsDto[]
+): ValidationResult => {
+  const errors: string[] = [];
+
+  // Validate parameter settings
   const activeParameters = parameterSettings.filter(p => p.isActive);
   if (activeParameters.length === 0) {
     errors.push('At least one parameter must be active');
   }
 
-  if (
-    formData.type === 'kmeans' &&
-    (formData.numberOfClusters === undefined || formData.numberOfClusters < 2)
-  ) {
-    errors.push('Number of clusters must be at least 2');
+  // Validate weights
+  const invalidWeights = activeParameters.filter(p => p.weight <= 0);
+  if (invalidWeights.length > 0) {
+    errors.push('All active parameters must have positive weights');
   }
 
-  if (
-    formData.type === 'dbscan' &&
-    (formData.epsilon === undefined || formData.epsilon <= 0)
-  ) {
-    errors.push('Epsilon must be greater than 0');
-  }
+  // Validate algorithm-specific settings
+  errors.push(...validateAlgorithmSettings(formData));
 
-  if (
-    formData.type === 'agglomerative' &&
-    (formData.threshold === undefined || formData.threshold <= 0)
-  ) {
-    errors.push('Threshold must be greater than 0');
-  }
-
-  return {
-    isValid: errors.length === 0,
-    errors,
-  };
-};
-
-export const createFormDataFromDefaults = (
-  type: AnalysisType,
-  parameterSettings: ParameterSettingsDto[]
-): FormData => {
-  const defaults = getAnalysisTypeDefaults(type);
-
-  return {
-    ...defaults,
-    parameterSettings,
-  } as FormData;
-};
-
-export const isAnalysisTypeValid = (type: string): type is AnalysisType => {
-  return ANALYSIS_TYPE_CONFIGS.some(config => config.id === type);
+  return { isValid: errors.length === 0, errors };
 };

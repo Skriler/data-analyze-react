@@ -1,27 +1,18 @@
-import { Plus } from 'lucide-react';
-import { Button } from '@components/Ui/Button';
+import { Database } from 'lucide-react';
 
-interface DatasetGridEmptyProps {
-  onCreateDataset: () => void;
-}
-
-function DatasetGridEmpty({ onCreateDataset }: DatasetGridEmptyProps) {
+function DatasetGridEmpty() {
   return (
-    <div className="text-center py-16">
-      <div className="mx-auto w-24 h-24 bg-gray-50 rounded-full flex items-center justify-center mb-6">
-        <div className="text-4xl">📊</div>
+    <div className="text-center py-20">
+      <div className="mx-auto w-24 h-24 bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl flex items-center justify-center mb-8">
+        <Database className="h-12 w-12 text-blue-600" />
       </div>
-      <h3 className="text-xl font-semibold text-gray-900 mb-3">
+      <h3 className="text-2xl font-semibold text-gray-900 mb-4">
         No datasets found
       </h3>
-      <p className="text-gray-500 mb-8 max-w-md mx-auto">
+      <p className="text-gray-500 mb-8 max-w-md mx-auto text-lg">
         Get started by creating your first dataset. Add your data and start
         analyzing patterns.
       </p>
-      <Button onClick={onCreateDataset} className="flex items-center space-x-2">
-        <Plus className="h-4 w-4" />
-        <span>Create Dataset</span>
-      </Button>
     </div>
   );
 }

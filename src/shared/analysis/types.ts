@@ -71,3 +71,8 @@ export interface AnalysisState {
   errors: FormFieldError[];
   isValid: boolean;
 }
+
+export interface ValidationResult {
+  isValid: boolean;
+  errors: string[];
+}

@@ -12,14 +12,17 @@ function DatasetActionButtons({
 }: DatasetActionButtonsProps) {
   return (
     <div className="flex items-center space-x-3">
-      <Button onClick={onCreateDataset} className="flex items-center space-x-2">
+      <Button
+        onClick={onCreateDataset}
+        className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white shadow-sm"
+      >
         <Plus className="h-4 w-4" />
         <span>Create Dataset</span>
       </Button>
 
       <Button
         variant="outline"
-        className="flex items-center space-x-2"
+        className="flex items-center space-x-2 bg-white border-gray-200 text-gray-700 hover:bg-gray-50 shadow-sm"
         onClick={onImportDataset}
       >
         <Upload className="h-4 w-4" />

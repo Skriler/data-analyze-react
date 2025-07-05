@@ -1,7 +1,7 @@
 import { useSetLayout } from '@components/Layout';
-import { useAnalysis } from '@hooks/features/useAnalysis';
+import { useAnalysis } from '@hooks/features/analysis/useAnalysis';
 import { useDatasets } from '@hooks/api/useDatasets';
-import { AnalysisContent } from '@components/Analysis/Base';
+import { AnalysisContent } from '@components/Analysis';
 
 export default function Analysis() {
   const analysisState = useAnalysis();

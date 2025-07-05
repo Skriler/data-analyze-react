@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import type { DatasetDto } from '@api-types/dataset';
 import { DatasetGridEmpty } from './DatasetGridEmpty';
 import { DatasetGridSkeleton } from './DatasetGridSkeleton';
@@ -11,6 +12,8 @@ interface DatasetGridProps {
 }
 
 function DatasetGrid({ datasets, isLoading }: DatasetGridProps) {
+  const navigate = useNavigate();
+
   const [selectedDataset, setSelectedDataset] = useState<DatasetDto | null>(
     null
   );
@@ -18,8 +21,7 @@ function DatasetGrid({ datasets, isLoading }: DatasetGridProps) {
   const [showAnalysisModal, setShowAnalysisModal] = useState(false);
 
   const handleView = (dataset: DatasetDto) => {
-    setSelectedDataset(dataset);
-    console.log('View dataset:', dataset);
+    navigate(`/datasets/${dataset.id}`);
   };
 
   const handleAnalyze = (dataset: DatasetDto) => {
@@ -32,9 +34,7 @@ function DatasetGrid({ datasets, isLoading }: DatasetGridProps) {
   }
 
   if (datasets.length === 0) {
-    return (
-      <DatasetGridEmpty onCreateDataset={() => setShowCreateModal(true)} />
-    );
+    return <DatasetGridEmpty />;
   }
 
   return (

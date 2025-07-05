@@ -1,4 +1,5 @@
 import React from 'react';
+import type { Control } from 'react-hook-form';
 import { RadioGroup, RadioGroupItem } from '@components/Ui/RadioGroup';
 import {
   FormControl,
@@ -8,9 +9,7 @@ import {
   FormMessage,
 } from '@components/Ui/Form';
 import { Label } from '@components/Ui/Label';
-import { ANALYSIS_TYPES } from '@shared/constants/analysisTypes';
-import type { Control } from 'react-hook-form';
-import type { FormData } from '@shared/schemas/analysis';
+import { ANALYSIS_TYPE_CONFIGS, type FormData } from '@shared/analysis';
 
 interface AnalysisTypeSelectorProps {
   control: Control<FormData>;
@@ -32,7 +31,7 @@ const AnalysisTypeSelector: React.FC<AnalysisTypeSelectorProps> = ({
               onValueChange={field.onChange}
               className="space-y-3"
             >
-              {ANALYSIS_TYPES.map(type => (
+              {ANALYSIS_TYPE_CONFIGS.map(type => (
                 <div
                   key={type.id}
                   className="flex items-center space-x-3 p-4 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer"

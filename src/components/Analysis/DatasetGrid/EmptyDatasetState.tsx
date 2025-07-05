@@ -1,22 +1,52 @@
 import React from 'react';
+import { Database, FileText, Plus, Upload } from 'lucide-react';
 import { Button } from '@components/Ui/Button';
 import { Card, CardContent } from '@components/Ui/Card';
-import { BarChart3 } from 'lucide-react';
 
 export const EmptyDatasetState: React.FC = () => {
   return (
-    <Card>
-      <CardContent className="text-center py-12">
-        <div className="mx-auto w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-4">
-          <BarChart3 className="w-12 h-12 text-gray-400" />
+    <Card className="border-2 border-dashed border-gray-300 hover:border-blue-400 transition-all duration-300 bg-gradient-to-br from-gray-50 to-white">
+      <CardContent className="text-center py-16">
+        <div className="mx-auto w-24 h-24 bg-gradient-to-br from-gray-200 to-gray-300 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+          <Database className="w-12 h-12 text-gray-500" />
         </div>
-        <h3 className="text-lg font-medium text-gray-900 mb-2">
+
+        <h3 className="text-2xl font-bold text-gray-900 mb-3">
           No datasets available
         </h3>
-        <p className="text-gray-500 mb-6">
-          Create a dataset first to run analysis.
+        <p className="text-gray-600 mb-8 max-w-md mx-auto leading-relaxed">
+          Create your first dataset to start running analysis. Upload your data
+          and begin discovering valuable insights from your information.
         </p>
-        <Button variant="outline">Go to Datasets</Button>
+
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <Button className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition-all duration-200 hover:shadow-xl flex items-center space-x-2">
+            <Plus className="h-5 w-5" />
+            <span>Create Dataset</span>
+          </Button>
+
+          <Button
+            variant="outline"
+            className="border-2 border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 py-3 px-6 rounded-lg transition-all duration-200 flex items-center space-x-2"
+          >
+            <Upload className="h-5 w-5" />
+            <span>Upload Data</span>
+          </Button>
+        </div>
+
+        <div className="mt-8 pt-6 border-t border-gray-200">
+          <p className="text-sm text-gray-500 mb-3">
+            Need help getting started?
+          </p>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="text-blue-600 hover:text-blue-700 hover:bg-blue-50 flex items-center space-x-1"
+          >
+            <FileText className="h-4 w-4" />
+            <span>View Documentation</span>
+          </Button>
+        </div>
       </CardContent>
     </Card>
   );

@@ -5,9 +5,8 @@ import type { LoginDto, AuthResult } from '@api-types/auth';
 import {
   loginSchema,
   registerSchema,
-  type LoginFormData,
   type RegisterFormData,
-} from '@shared/schemas/auth';
+} from '@shared/auth';
 
 interface UseAuthFormsProps {
   onLoginSuccess: (result: AuthResult) => void;

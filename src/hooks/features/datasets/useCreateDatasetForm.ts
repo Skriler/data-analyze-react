@@ -6,7 +6,7 @@ import { useToast } from '@hooks/toast/useToast';
 import {
   createDatasetSchema,
   type CreateDatasetFormData,
-} from '@shared/schemas/dataset';
+} from '@shared/dataset';
 import type { DatasetCreateDto } from '@api-types/dataset';
 
 interface UseCreateDatasetFormProps {

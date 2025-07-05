@@ -1,4 +1,5 @@
 import React from 'react';
+import type { Control } from 'react-hook-form';
 import {
   FormControl,
   FormField,
@@ -7,8 +8,7 @@ import {
   FormMessage,
 } from '@components/Ui/Form';
 import { Input } from '@components/Ui/Input';
-import type { Control } from 'react-hook-form';
-import type { FormData } from 'shared/schemas/analysis';
+import type { FormData } from '@shared/analysis';
 
 interface AlgorithmSettingsProps {
   control: Control<FormData>;

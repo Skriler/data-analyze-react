@@ -14,24 +14,24 @@ function DatasetCardStats({ dataset }: DatasetCardStatsProps) {
   };
 
   return (
-    <div className="space-y-3 mb-4">
-      <div className="flex items-center justify-between text-sm">
-        <span className="text-gray-600">Parameters:</span>
-        <span className="font-medium text-gray-900">
+    <div className="grid grid-cols-3 gap-4 mb-6">
+      <div className="text-center">
+        <div className="text-2xl font-bold text-gray-900">
           {dataset.parameters.length}
-        </span>
+        </div>
+        <div className="text-sm text-gray-500">Parameters</div>
       </div>
-      <div className="flex items-center justify-between text-sm">
-        <span className="text-gray-600">Objects:</span>
-        <span className="font-medium text-gray-900">
+      <div className="text-center">
+        <div className="text-2xl font-bold text-gray-900">
           {dataset.objects.length.toLocaleString()}
-        </span>
+        </div>
+        <div className="text-sm text-gray-500">Objects</div>
       </div>
-      <div className="flex items-center justify-between text-sm">
-        <span className="text-gray-600">Size:</span>
-        <span className="font-medium text-gray-900">
+      <div className="text-center">
+        <div className="text-2xl font-bold text-gray-900">
           {formatSize(dataset.objects.length, dataset.parameters.length)}
-        </span>
+        </div>
+        <div className="text-sm text-gray-500">Size</div>
       </div>
     </div>
   );

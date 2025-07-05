@@ -8,6 +8,7 @@ export type {
   AlgorithmConfig,
   FormFieldError,
   AnalysisState,
+  ValidationResult,
 } from './types';
 
 // Constants and their derived types

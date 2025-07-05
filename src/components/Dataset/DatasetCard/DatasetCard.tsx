@@ -15,21 +15,21 @@ interface DatasetCardProps {
 }
 
 const gradientColors = [
-  'from-primary-100 to-accent-100',
-  'from-green-100 to-emerald-100',
-  'from-purple-100 to-violet-100',
-  'from-orange-100 to-amber-100',
-  'from-pink-100 to-rose-100',
-  'from-blue-100 to-cyan-100',
+  'from-blue-50 to-blue-100',
+  'from-green-50 to-green-100',
+  'from-purple-50 to-purple-100',
+  'from-orange-50 to-orange-100',
+  'from-pink-50 to-pink-100',
+  'from-cyan-50 to-cyan-100',
 ];
 
 const iconColors = [
-  'text-primary-600',
+  'text-blue-600',
   'text-green-600',
   'text-purple-600',
   'text-orange-600',
   'text-pink-600',
-  'text-blue-600',
+  'text-cyan-600',
 ];
 
 function DatasetCard({ dataset, onView, onAnalyze }: DatasetCardProps) {
@@ -67,7 +67,7 @@ function DatasetCard({ dataset, onView, onAnalyze }: DatasetCardProps) {
   };
 
   return (
-    <Card className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-all duration-200">
+    <Card className="bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden">
       <CardContent className="p-6">
         <DatasetCardHeader
           dataset={dataset}

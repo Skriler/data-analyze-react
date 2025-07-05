@@ -11,11 +11,20 @@ export const createInitialParameterSettings = (
   }));
 };
 
-export const validateParameterSettings = (
+export const updateParameterSetting = (
+  settings: ParameterSettingsDto[],
+  parameterId: number,
+  updates: Partial<Pick<ParameterSettingsDto, 'isActive' | 'weight'>>
+): ParameterSettingsDto[] => {
+  return settings.map(setting =>
+    setting.parameterId === parameterId ? { ...setting, ...updates } : setting
+  );
+};
+
+export const getActiveParameterSettings = (
   settings: ParameterSettingsDto[]
-): boolean => {
-  const activeSettings = settings.filter(s => s.isActive);
-  return activeSettings.length > 0 && activeSettings.every(s => s.weight > 0);
+): ParameterSettingsDto[] => {
+  return settings.filter(s => s.isActive);
 };
 
 export const normalizeWeights = (
@@ -30,45 +39,6 @@ export const normalizeWeights = (
     ...setting,
     weight: setting.isActive ? setting.weight / totalWeight : setting.weight,
   }));
-};
-
-export const getActiveParameterSettings = (
-  settings: ParameterSettingsDto[]
-): ParameterSettingsDto[] => {
-  return settings.filter(s => s.isActive);
-};
-
-export const updateParameterSetting = (
-  settings: ParameterSettingsDto[],
-  parameterId: number,
-  updates: Partial<Pick<ParameterSettingsDto, 'isActive' | 'weight'>>
-): ParameterSettingsDto[] => {
-  return settings.map(setting =>
-    setting.parameterId === parameterId ? { ...setting, ...updates } : setting
-  );
-};
-
-export const toggleParameterActive = (
-  settings: ParameterSettingsDto[],
-  parameterId: number
-): ParameterSettingsDto[] => {
-  return settings.map(setting =>
-    setting.parameterId === parameterId
-      ? { ...setting, isActive: !setting.isActive }
-      : setting
-  );
-};
-
-export const setParameterWeight = (
-  settings: ParameterSettingsDto[],
-  parameterId: number,
-  weight: number
-): ParameterSettingsDto[] => {
-  return settings.map(setting =>
-    setting.parameterId === parameterId
-      ? { ...setting, weight: Math.max(0, weight) }
-      : setting
-  );
 };
 
 export const resetParameterWeights = (

@@ -1,86 +1,118 @@
 import React from 'react';
+import { TrendingUp, Target, Zap, ArrowRight } from 'lucide-react';
 import { Badge } from '@components/Ui/Badge';
 import type { SimilarityResult } from '@api-types/analysis';
+import { ResultsProcessor } from '@libs/utils/results/utils';
+import { FormattingUtils } from '@libs/utils/formatting';
 
 interface SimilarityResultDisplayProps {
   result: SimilarityResult;
+  showDetails?: boolean;
 }
 
 export const SimilarityResultDisplay: React.FC<
   SimilarityResultDisplayProps
-> = ({ result }) => {
-  const avgSimilarity =
-    result.similarities.length > 0
-      ? Math.round(
-          result.similarities.reduce(
-            (acc, s) => acc + s.similarityPercentage,
-            0
-          ) / result.similarities.length
-        )
-      : 0;
-
-  const maxSimilarity =
-    result.similarities.length > 0
-      ? Math.round(
-          Math.max(...result.similarities.map(s => s.similarityPercentage))
-        )
-      : 0;
+> = ({ result, showDetails = true }) => {
+  const stats = ResultsProcessor.calculateSimilarityStats(result);
+  const topPairs = ResultsProcessor.getTopSimilarityPairs(result, 5);
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
+      {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="text-center p-4 bg-blue-50 rounded-lg border border-blue-100">
-          <div className="text-2xl font-bold text-blue-600">
-            {result.similarities.length}
-          </div>
-          <div className="text-sm text-blue-600 font-medium">
-            Similarity Pairs
+        <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-4 border border-blue-200">
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center">
+              <Target className="w-5 h-5 text-white" />
+            </div>
+            <div>
+              <div className="text-2xl font-bold text-blue-900">
+                {FormattingUtils.formatNumber(stats.totalPairs)}
+              </div>
+              <div className="text-sm font-medium text-blue-700">
+                Similarity Pairs
+              </div>
+            </div>
           </div>
         </div>
-        <div className="text-center p-4 bg-emerald-50 rounded-lg border border-emerald-100">
-          <div className="text-2xl font-bold text-emerald-600">
-            {avgSimilarity}%
-          </div>
-          <div className="text-sm text-emerald-600 font-medium">
-            Avg Similarity
+
+        <div className="bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-xl p-4 border border-emerald-200">
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 bg-emerald-500 rounded-lg flex items-center justify-center">
+              <TrendingUp className="w-5 h-5 text-white" />
+            </div>
+            <div>
+              <div className="text-2xl font-bold text-emerald-900">
+                {FormattingUtils.formatPercentage(stats.avgSimilarity, 0)}
+              </div>
+              <div className="text-sm font-medium text-emerald-700">
+                Avg Similarity
+              </div>
+            </div>
           </div>
         </div>
-        <div className="text-center p-4 bg-purple-50 rounded-lg border border-purple-100">
-          <div className="text-2xl font-bold text-purple-600">
-            {maxSimilarity}%
-          </div>
-          <div className="text-sm text-purple-600 font-medium">
-            Max Similarity
+
+        <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-4 border border-purple-200">
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 bg-purple-500 rounded-lg flex items-center justify-center">
+              <Zap className="w-5 h-5 text-white" />
+            </div>
+            <div>
+              <div className="text-2xl font-bold text-purple-900">
+                {FormattingUtils.formatPercentage(stats.maxSimilarity, 0)}
+              </div>
+              <div className="text-sm font-medium text-purple-700">
+                Max Similarity
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      {result.similarities.length > 0 && (
-        <div className="bg-gray-50 rounded-lg p-4">
-          <h4 className="font-semibold mb-3 text-gray-900">
-            Top Similarity Pairs
-          </h4>
-          <div className="space-y-2">
-            {result.similarities.slice(0, 5).map((similarity, index) => (
+      {/* Top Pairs */}
+      {showDetails && topPairs.length > 0 && (
+        <div className="bg-gray-50 rounded-xl p-6 border border-gray-200">
+          <div className="flex items-center space-x-3 mb-4">
+            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
+              <Target className="w-4 h-4 text-white" />
+            </div>
+            <h4 className="font-semibold text-gray-900">
+              Top Similarity Pairs
+            </h4>
+          </div>
+          <div className="space-y-3">
+            {topPairs.map((similarity, index) => (
               <div
                 key={index}
-                className="flex items-center justify-between p-3 bg-white rounded-lg border border-gray-200 hover:border-gray-300 transition-colors"
+                className="flex items-center justify-between p-4 bg-white rounded-lg border border-gray-200 hover:border-gray-300 transition-all duration-200 hover:shadow-sm"
               >
-                <div className="flex items-center space-x-3">
-                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-xs font-semibold text-blue-600">
+                <div className="flex items-center space-x-4">
+                  <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-xs font-bold text-white shadow-sm">
                     {index + 1}
                   </div>
-                  <div>
-                    <div className="font-medium text-sm text-gray-900">
-                      {similarity.objectA.name} ↔ {similarity.objectB.name}
-                    </div>
+                  <div className="flex items-center space-x-3 text-sm">
+                    <span className="font-medium text-gray-900 bg-gray-100 px-3 py-1 rounded-full">
+                      {FormattingUtils.truncateText(
+                        similarity.objectA.name,
+                        20
+                      )}
+                    </span>
+                    <ArrowRight className="w-4 h-4 text-gray-400" />
+                    <span className="font-medium text-gray-900 bg-gray-100 px-3 py-1 rounded-full">
+                      {FormattingUtils.truncateText(
+                        similarity.objectB.name,
+                        20
+                      )}
+                    </span>
                   </div>
                 </div>
                 <Badge
                   variant="secondary"
-                  className="bg-blue-100 text-blue-700 hover:bg-blue-200"
+                  className="bg-gradient-to-r from-blue-100 to-blue-200 text-blue-800 border-blue-300 hover:from-blue-200 hover:to-blue-300 font-bold text-sm px-3 py-1"
                 >
-                  {similarity.similarityPercentage.toFixed(1)}%
+                  {FormattingUtils.formatPercentage(
+                    similarity.similarityPercentage
+                  )}
                 </Badge>
               </div>
             ))}
