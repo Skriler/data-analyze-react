@@ -4,9 +4,7 @@ interface ResultsListHeaderProps {
   count: number;
 }
 
-export const ResultsListHeader: React.FC<ResultsListHeaderProps> = ({
-  count,
-}) => {
+const ResultsListHeader: React.FC<ResultsListHeaderProps> = ({ count }) => {
   return (
     <div className="flex items-center justify-between">
       <div>
@@ -20,3 +18,5 @@ export const ResultsListHeader: React.FC<ResultsListHeaderProps> = ({
     </div>
   );
 };
+
+export { ResultsListHeader };

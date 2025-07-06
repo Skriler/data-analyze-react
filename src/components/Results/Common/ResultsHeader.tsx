@@ -1,7 +1,7 @@
 import React from 'react';
 import { BarChart3 } from 'lucide-react';
 
-export const ResultsHeader: React.FC = () => {
+const ResultsHeader: React.FC = () => {
   return (
     <div className="text-center space-y-4">
       <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-2xl shadow-lg">
@@ -19,3 +19,5 @@ export const ResultsHeader: React.FC = () => {
     </div>
   );
 };
+
+export { ResultsHeader };

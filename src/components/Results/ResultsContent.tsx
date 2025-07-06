@@ -1,20 +1,24 @@
 import React from 'react';
-import { ResultsFilters } from './filters/ResultsFilters';
-import { ResultCard } from './card/ResultCard';
-import { EmptyResultsState } from './empty/EmptyResultsState';
-import { SummaryStats } from './summary/SummaryStats';
-import { LoadingSkeleton } from './skeleton/LoadingSkeleton';
-import { ResultsHeader } from './header/ResultsHeader';
+import { ResultsFilters } from './Filters';
+import { ResultCard } from './Card';
+import { SummaryStats } from './Summary';
+import {
+  EmptyResultsState,
+  LoadingSkeleton,
+  ResultsHeader,
+  ResultsListHeader,
+} from './Common';
 import type { DatasetDto } from '@api-types/dataset';
 import type { AnalysisResultItem, ResultsFiltersType } from '@shared/results';
-import { ResultsProcessor } from '@libs/utils/results';
 
 interface ResultsContentProps {
   datasets: DatasetDto[] | undefined;
-  results: AnalysisResultItem[] | undefined;
+  isDatasetsLoading: boolean;
+  results: AnalysisResultItem[];
+  summaryStats: any;
   filters: ResultsFiltersType;
   isLoading: boolean;
-  isDatasetsLoading: boolean;
+  error: any;
   onFiltersChange: (filters: ResultsFiltersType) => void;
   onViewDetails: (id: string) => void;
   onExport: (id: string) => void;
@@ -22,30 +26,36 @@ interface ResultsContentProps {
   onRefresh: () => void;
 }
 
-export const ResultsContent: React.FC<ResultsContentProps> = ({
+const ResultsContent: React.FC<ResultsContentProps> = ({
   datasets,
+  isDatasetsLoading,
   results,
+  summaryStats,
   filters,
   isLoading,
+  error,
   onFiltersChange,
   onViewDetails,
   onExport,
   onGoToAnalysis,
   onRefresh,
 }) => {
-  const processedResults = React.useMemo(() => {
-    if (!results) return [];
-    const filteredResults = ResultsProcessor.applyFilters(results, filters);
-    return ResultsProcessor.sortResultsByDate(filteredResults);
-  }, [results, filters]);
-
-  const summaryStats = React.useMemo(() => {
-    if (!processedResults.length) return null;
-    return ResultsProcessor.calculateSummaryStats(processedResults);
-  }, [processedResults]);
-
   if (isLoading) {
     return <LoadingSkeleton />;
+  }
+
+  if (error) {
+    return (
+      <div className="text-center py-8">
+        <p className="text-red-600">Ошибка загрузки результатов</p>
+        <button
+          onClick={onRefresh}
+          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        >
+          Попробовать снова
+        </button>
+      </div>
+    );
   }
 
   return (
@@ -62,13 +72,13 @@ export const ResultsContent: React.FC<ResultsContentProps> = ({
       {summaryStats && <SummaryStats stats={summaryStats} />}
 
       <div className="space-y-6">
-        {processedResults.length === 0 ? (
+        {results.length === 0 ? (
           <EmptyResultsState onGoToAnalysis={onGoToAnalysis} />
         ) : (
           <>
-            <ResultsListHeader count={processedResults.length} />
+            <ResultsListHeader count={results.length} />
             <div className="space-y-6">
-              {processedResults.map(resultItem => (
+              {results.map(resultItem => (
                 <ResultCard
                   key={resultItem.id}
                   resultItem={resultItem}
@@ -83,3 +93,5 @@ export const ResultsContent: React.FC<ResultsContentProps> = ({
     </div>
   );
 };
+
+export { ResultsContent };

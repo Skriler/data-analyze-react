@@ -4,8 +4,8 @@ import { Button } from '@components/Ui/Button';
 import { FilterSection } from './FilterSection';
 import { DatasetFilter } from './DatasetFilter';
 import { TypeFilter } from './TypeFilter';
-import type { DatasetDto } from '@api-types/dataset';
 import type { ResultsFiltersType } from '@shared/results';
+import type { DatasetDto } from '@api-types/dataset';
 
 interface ResultsFiltersProps {
   filters: ResultsFiltersType;

@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { ResultsProcessor } from '@libs/utils/results';
@@ -16,6 +16,7 @@ export const useResults = () => {
     data: results,
     refetch,
     isLoading,
+    error,
   } = useQuery({
     queryKey: ['analysis', 'results', filters],
     queryFn: async (): Promise<AnalysisResultItem[]> => {
@@ -45,47 +46,54 @@ export const useResults = () => {
         },
       ];
 
-      return ResultsProcessor.applyFilters(mockResults, filters);
+      return mockResults;
     },
+    staleTime: 5 * 60 * 1000,
   });
 
   const processedResults = useMemo(() => {
     if (!results) return [];
-    return ResultsProcessor.sortResultsByDate(results);
-  }, [results]);
+    const filteredResults = ResultsProcessor.applyFilters(results, filters);
+    return ResultsProcessor.sortResultsByDate(filteredResults);
+  }, [results, filters]);
 
   const summaryStats = useMemo(() => {
     if (!processedResults.length) return null;
     return ResultsProcessor.calculateSummaryStats(processedResults);
   }, [processedResults]);
 
-  const onFiltersChange = (newFilters: ResultsFiltersType) => {
+  const onFiltersChange = useCallback((newFilters: ResultsFiltersType) => {
     setFilters(newFilters);
-  };
+  }, []);
 
-  const onViewDetails = (id: string) => {
+  const onViewDetails = useCallback((id: string) => {
     console.log('View details for result:', id);
-  };
+    // TODO: Implement actual view details logic
+  }, []);
 
-  const onExport = (id: string) => {
+  const onExport = useCallback((id: string) => {
     console.log('Export result:', id);
-  };
+    // TODO: Implement actual export logic
+  }, []);
 
-  const onGoToAnalysis = (datasetId?: string) => {
-    const path = datasetId ? `/analysis/${datasetId}` : '/analysis';
-    navigate(path);
-  };
+  const onGoToAnalysis = useCallback(
+    (datasetId?: string) => {
+      const path = datasetId ? `/analysis/${datasetId}` : '/analysis';
+      navigate(path);
+    },
+    [navigate]
+  );
 
-  const onRefresh = () => {
+  const onRefresh = useCallback(() => {
     refetch();
-  };
+  }, [refetch]);
 
   return {
-    results,
-    processedResults,
+    results: processedResults,
     summaryStats,
     filters,
     isLoading,
+    error,
     onFiltersChange,
     onViewDetails,
     onExport,

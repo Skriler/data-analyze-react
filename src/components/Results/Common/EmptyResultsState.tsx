@@ -7,7 +7,7 @@ interface EmptyResultsStateProps {
   onGoToAnalysis: () => void;
 }
 
-export const EmptyResultsState: React.FC<EmptyResultsStateProps> = ({
+const EmptyResultsState: React.FC<EmptyResultsStateProps> = ({
   onGoToAnalysis,
 }) => {
   return (
@@ -47,3 +47,5 @@ export const EmptyResultsState: React.FC<EmptyResultsStateProps> = ({
     </Card>
   );
 };
+
+export { EmptyResultsState };

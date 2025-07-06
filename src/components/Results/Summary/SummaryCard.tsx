@@ -8,45 +8,55 @@ interface SummaryCardProps {
   bgColor: 'blue' | 'emerald' | 'purple';
 }
 
-export const SummaryCard: React.FC<SummaryCardProps> = ({
+const SummaryCard: React.FC<SummaryCardProps> = ({
   icon: Icon,
   value,
   label,
   bgColor,
 }) => {
-  const colorClasses = {
-    blue: 'from-blue-50 to-blue-100 border-blue-200 bg-blue-500 text-blue-900 text-blue-700',
-    emerald:
-      'from-emerald-50 to-emerald-100 border-emerald-200 bg-emerald-500 text-emerald-900 text-emerald-700',
-    purple:
-      'from-purple-50 to-purple-100 border-purple-200 bg-purple-500 text-purple-900 text-purple-700',
+  const COLOR_CLASSES = {
+    blue: {
+      gradient: 'from-blue-50 to-blue-100',
+      border: 'border-blue-200',
+      iconBg: 'bg-blue-500',
+      value: 'text-blue-900',
+      label: 'text-blue-700',
+    },
+    emerald: {
+      gradient: 'from-emerald-50 to-emerald-100',
+      border: 'border-emerald-200',
+      iconBg: 'bg-emerald-500',
+      value: 'text-emerald-900',
+      label: 'text-emerald-700',
+    },
+    purple: {
+      gradient: 'from-purple-50 to-purple-100',
+      border: 'border-purple-200',
+      iconBg: 'bg-purple-500',
+      value: 'text-purple-900',
+      label: 'text-purple-700',
+    },
   };
 
-  const colors = colorClasses[bgColor];
-  const [
-    gradientFrom,
-    gradientTo,
-    borderColor,
-    iconBg,
-    valueColor,
-    labelColor,
-  ] = colors.split(' ');
+  const colors = COLOR_CLASSES[bgColor];
 
   return (
     <div
-      className={`bg-gradient-to-br ${gradientFrom} ${gradientTo} rounded-xl p-6 border ${borderColor}`}
+      className={`bg-gradient-to-br ${colors.gradient} rounded-xl p-6 border ${colors.border}`}
     >
       <div className="flex items-center space-x-4">
         <div
-          className={`w-12 h-12 ${iconBg} rounded-lg flex items-center justify-center`}
+          className={`w-12 h-12 ${colors.iconBg} rounded-lg flex items-center justify-center`}
         >
           <Icon className="w-6 h-6 text-white" />
         </div>
         <div>
-          <div className={`text-2xl font-bold ${valueColor}`}>{value}</div>
-          <div className={`text-sm font-medium ${labelColor}`}>{label}</div>
+          <div className={`text-2xl font-bold ${colors.value}`}>{value}</div>
+          <div className={`text-sm font-medium ${colors.label}`}>{label}</div>
         </div>
       </div>
     </div>
   );
 };
+
+export { SummaryCard };

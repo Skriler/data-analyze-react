@@ -30,16 +30,3 @@ export const ANALYSIS_CONFIG = {
 export const ANALYSIS_TYPES = Object.keys(ANALYSIS_CONFIG) as Array<
   keyof typeof ANALYSIS_CONFIG
 >;
-
-// Backward compatibility
-export const analysisTypeIcons = Object.fromEntries(
-  Object.entries(ANALYSIS_CONFIG).map(([key, value]) => [key, value.icon])
-);
-
-export const analysisTypeColors = Object.fromEntries(
-  Object.entries(ANALYSIS_CONFIG).map(([key, value]) => [key, value.color])
-);
-
-export const analysisTypeNames = Object.fromEntries(
-  Object.entries(ANALYSIS_CONFIG).map(([key, value]) => [key, value.name])
-);
