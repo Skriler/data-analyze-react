@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
+import { ResultsProcessor } from '@libs/utils/results';
 import type { AnalysisResultItem, ResultsFiltersType } from '@shared/results';
 
 export const useResults = () => {
@@ -18,15 +19,14 @@ export const useResults = () => {
   } = useQuery({
     queryKey: ['analysis', 'results', filters],
     queryFn: async (): Promise<AnalysisResultItem[]> => {
-      // TODO: Replace with actual API call to get cached results
-      // Mock data for demonstration
+      // TODO: Replace with actual API call
       const mockResults: AnalysisResultItem[] = [
         {
           id: '1',
           type: 'similarity',
           datasetId: '1',
           datasetName: 'Customer Analysis Data',
-          timestamp: Date.now() - 2 * 60 * 60 * 1000, // 2 hours ago
+          timestamp: Date.now() - 2 * 60 * 60 * 1000,
           result: {
             datasetId: 1,
             similarities: [
@@ -45,36 +45,29 @@ export const useResults = () => {
         },
       ];
 
-      // Apply filters
-      let filteredResults = mockResults;
-
-      if (filters.selectedDataset !== 'all') {
-        filteredResults = filteredResults.filter(
-          result => result.datasetId === filters.selectedDataset
-        );
-      }
-
-      if (filters.selectedType !== 'all') {
-        filteredResults = filteredResults.filter(
-          result => result.type === filters.selectedType
-        );
-      }
-
-      return filteredResults;
+      return ResultsProcessor.applyFilters(mockResults, filters);
     },
   });
+
+  const processedResults = useMemo(() => {
+    if (!results) return [];
+    return ResultsProcessor.sortResultsByDate(results);
+  }, [results]);
+
+  const summaryStats = useMemo(() => {
+    if (!processedResults.length) return null;
+    return ResultsProcessor.calculateSummaryStats(processedResults);
+  }, [processedResults]);
 
   const onFiltersChange = (newFilters: ResultsFiltersType) => {
     setFilters(newFilters);
   };
 
   const onViewDetails = (id: string) => {
-    // TODO: Implement view details functionality
     console.log('View details for result:', id);
   };
 
   const onExport = (id: string) => {
-    // TODO: Implement export functionality
     console.log('Export result:', id);
   };
 
@@ -89,6 +82,8 @@ export const useResults = () => {
 
   return {
     results,
+    processedResults,
+    summaryStats,
     filters,
     isLoading,
     onFiltersChange,

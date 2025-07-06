@@ -12,7 +12,7 @@ import { Badge } from '@components/Ui/Badge';
 import { SimilarityResultDisplay } from './SimilarityResultDisplay';
 import { ClusteringResultDisplay } from './ClusteringResultDisplay';
 import { ANALYSIS_CONFIG, type AnalysisResultItem } from '@shared/results';
-import { FormattingUtils } from '@libs/utils/formatting';
+import { ResultsFormatter } from '@libs/utils/results';
 import type { SimilarityResult, ClusteringResult } from '@api-types/analysis';
 
 interface ResultCardProps {
@@ -107,11 +107,11 @@ export const ResultCard: React.FC<ResultCardProps> = ({
                   <Clock className="w-4 h-4" />
                   <span className="font-medium">Completed:</span>
                   <span>
-                    {FormattingUtils.formatDate(resultItem.timestamp)}
+                    {ResultsFormatter.formatDate(resultItem.timestamp)}
                   </span>
                   <span className="text-gray-400">•</span>
                   <span className="text-gray-500">
-                    {FormattingUtils.getRelativeTime(resultItem.timestamp)}
+                    {ResultsFormatter.getRelativeTime(resultItem.timestamp)}
                   </span>
                 </div>
               </CardDescription>

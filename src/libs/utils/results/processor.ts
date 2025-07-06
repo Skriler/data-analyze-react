@@ -3,6 +3,7 @@ import type {
   AnalysisResultItem,
   ClusterStats,
   SimilarityStats,
+  ResultsFiltersType,
 } from '@shared/results';
 
 export class ResultsProcessor {
@@ -67,9 +68,9 @@ export class ResultsProcessor {
       .slice(0, limit);
   }
 
-  static filterResults(
+  static applyFilters(
     results: AnalysisResultItem[],
-    filters: { selectedDataset: string; selectedType: string }
+    filters: ResultsFiltersType
   ): AnalysisResultItem[] {
     return results.filter(result => {
       const matchesDataset =
@@ -89,5 +90,17 @@ export class ResultsProcessor {
     return [...results].sort((a, b) =>
       ascending ? a.timestamp - b.timestamp : b.timestamp - a.timestamp
     );
+  }
+
+  static calculateSummaryStats(results: AnalysisResultItem[]) {
+    const totalAnalyses = results.length;
+    const uniqueDatasets = new Set(results.map(r => r.datasetId)).size;
+    const analysisTypes = new Set(results.map(r => r.type)).size;
+
+    return {
+      totalAnalyses,
+      uniqueDatasets,
+      analysisTypes,
+    };
   }
 }

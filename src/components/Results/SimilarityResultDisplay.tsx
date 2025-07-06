@@ -2,8 +2,7 @@ import React from 'react';
 import { TrendingUp, Target, Zap, ArrowRight } from 'lucide-react';
 import { Badge } from '@components/Ui/Badge';
 import type { SimilarityResult } from '@api-types/analysis';
-import { ResultsProcessor } from '@libs/utils/results/utils';
-import { FormattingUtils } from '@libs/utils/formatting';
+import { ResultsProcessor, ResultsFormatter } from '@libs/utils/results';
 
 interface SimilarityResultDisplayProps {
   result: SimilarityResult;
@@ -27,7 +26,7 @@ export const SimilarityResultDisplay: React.FC<
             </div>
             <div>
               <div className="text-2xl font-bold text-blue-900">
-                {FormattingUtils.formatNumber(stats.totalPairs)}
+                {ResultsFormatter.formatNumber(stats.totalPairs)}
               </div>
               <div className="text-sm font-medium text-blue-700">
                 Similarity Pairs
@@ -43,7 +42,7 @@ export const SimilarityResultDisplay: React.FC<
             </div>
             <div>
               <div className="text-2xl font-bold text-emerald-900">
-                {FormattingUtils.formatPercentage(stats.avgSimilarity, 0)}
+                {ResultsFormatter.formatPercentage(stats.avgSimilarity, 0)}
               </div>
               <div className="text-sm font-medium text-emerald-700">
                 Avg Similarity
@@ -59,7 +58,7 @@ export const SimilarityResultDisplay: React.FC<
             </div>
             <div>
               <div className="text-2xl font-bold text-purple-900">
-                {FormattingUtils.formatPercentage(stats.maxSimilarity, 0)}
+                {ResultsFormatter.formatPercentage(stats.maxSimilarity, 0)}
               </div>
               <div className="text-sm font-medium text-purple-700">
                 Max Similarity
@@ -92,14 +91,14 @@ export const SimilarityResultDisplay: React.FC<
                   </div>
                   <div className="flex items-center space-x-3 text-sm">
                     <span className="font-medium text-gray-900 bg-gray-100 px-3 py-1 rounded-full">
-                      {FormattingUtils.truncateText(
+                      {ResultsFormatter.truncateText(
                         similarity.objectA.name,
                         20
                       )}
                     </span>
                     <ArrowRight className="w-4 h-4 text-gray-400" />
                     <span className="font-medium text-gray-900 bg-gray-100 px-3 py-1 rounded-full">
-                      {FormattingUtils.truncateText(
+                      {ResultsFormatter.truncateText(
                         similarity.objectB.name,
                         20
                       )}
@@ -110,7 +109,7 @@ export const SimilarityResultDisplay: React.FC<
                   variant="secondary"
                   className="bg-gradient-to-r from-blue-100 to-blue-200 text-blue-800 border-blue-300 hover:from-blue-200 hover:to-blue-300 font-bold text-sm px-3 py-1"
                 >
-                  {FormattingUtils.formatPercentage(
+                  {ResultsFormatter.formatPercentage(
                     similarity.similarityPercentage
                   )}
                 </Badge>
