@@ -2,15 +2,11 @@ import { EmptyObjectsState } from './EmptyObjectsState';
 import { ObjectsTableHeader } from './ObjectsTableHeader';
 import { ObjectsTableRow } from './ObjectsTableRow';
 import { AddObjectButton } from './AddObjectButton';
-
-interface DataObject {
-  name: string;
-  values: string[];
-}
+import type { DataObjectCreateDto } from '@api-types/dataset';
 
 interface DataObjectsTableProps {
   parameters: string[];
-  objects: DataObject[];
+  objects: DataObjectCreateDto[];
   onAddObject: () => void;
   onRemoveObject: (index: number) => void;
   onUpdateObject: (

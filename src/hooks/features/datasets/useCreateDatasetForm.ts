@@ -7,7 +7,8 @@ import {
   createDatasetSchema,
   type CreateDatasetFormData,
 } from '@shared/dataset';
-import type { DatasetCreateDto } from '@api-types/dataset';
+import type { DatasetCreateDto, DataObjectCreateDto } from '@api-types/dataset';
+import { ApiError } from '@api/types';
 
 interface UseCreateDatasetFormProps {
   onSuccess: () => void;
@@ -17,7 +18,7 @@ export const useCreateDatasetForm = ({
   onSuccess,
 }: UseCreateDatasetFormProps) => {
   const [parameters, setParameters] = useState<string[]>(['']);
-  const [objects, setObjects] = useState<{ name: string; values: string[] }[]>([
+  const [objects, setObjects] = useState<DataObjectCreateDto[]>([
     { name: '', values: [''] },
   ]);
 
@@ -33,14 +34,33 @@ export const useCreateDatasetForm = ({
     },
   });
 
+  const syncParametersWithForm = (newParams: string[]) => {
+    form.setValue('parameters', newParams);
+  };
+
+  const syncObjectsWithForm = (newObjects: DataObjectCreateDto[]) => {
+    form.setValue('objects', newObjects);
+  };
+
+  const syncAllWithForm = (
+    newParams: string[],
+    newObjects: DataObjectCreateDto[]
+  ) => {
+    form.setValue('parameters', newParams);
+    form.setValue('objects', newObjects);
+  };
+
   const addParameter = () => {
     const newParams = [...parameters, ''];
     setParameters(newParams);
+
     const newObjects = objects.map(obj => ({
       ...obj,
       values: [...obj.values, ''],
     }));
     setObjects(newObjects);
+
+    syncAllWithForm(newParams, newObjects);
   };
 
   const removeParameter = (index: number) => {
@@ -48,29 +68,41 @@ export const useCreateDatasetForm = ({
 
     const newParams = parameters.filter((_, i) => i !== index);
     setParameters(newParams);
+
     const newObjects = objects.map(obj => ({
       ...obj,
       values: obj.values.filter((_, i) => i !== index),
     }));
     setObjects(newObjects);
+
+    syncAllWithForm(newParams, newObjects);
   };
 
   const updateParameter = (index: number, value: string) => {
     const newParams = [...parameters];
     newParams[index] = value;
     setParameters(newParams);
+
+    syncParametersWithForm(newParams);
   };
 
   const addObject = () => {
-    setObjects([
+    const newObjects = [
       ...objects,
       { name: '', values: new Array(parameters.length).fill('') },
-    ]);
+    ];
+    setObjects(newObjects);
+
+    syncObjectsWithForm(newObjects);
   };
 
   const removeObject = (index: number) => {
     if (objects.length <= 1) return;
-    setObjects(objects.filter((_, i) => i !== index));
+
+    const newObjects = objects.filter((_, i) => i !== index);
+    setObjects(newObjects);
+
+    syncObjectsWithForm(newObjects);
   };
 
   const updateObject = (
@@ -85,6 +117,8 @@ export const useCreateDatasetForm = ({
       newObjects[index].values = value as string[];
     }
     setObjects(newObjects);
+
+    syncObjectsWithForm(newObjects);
   };
 
   const updateObjectValue = (
@@ -95,6 +129,8 @@ export const useCreateDatasetForm = ({
     const newObjects = [...objects];
     newObjects[objIndex].values[valueIndex] = value;
     setObjects(newObjects);
+
+    syncObjectsWithForm(newObjects);
   };
 
   const resetForm = () => {
@@ -121,12 +157,22 @@ export const useCreateDatasetForm = ({
         title: 'Dataset created',
         description: `${datasetData.name} has been successfully created.`,
       });
+
       onSuccess();
       resetForm();
-    } catch (error) {
+    } catch (error: any) {
+      let errorMessage = 'An error occurred while creating the dataset.';
+
+      if (error instanceof ApiError && error.data?.errors) {
+        const errors = error.data.errors;
+        if (Array.isArray(errors) && errors.length > 0) {
+          errorMessage = errors.join(', ');
+        }
+      }
+
       toast({
         title: 'Creation failed',
-        description: 'An error occurred while creating the dataset.',
+        description: errorMessage,
         variant: 'destructive',
       });
     }

@@ -68,7 +68,7 @@ const transformAxiosError = (error: AxiosError): ApiError => {
     }
   }
 
-  return new ApiError(status, statusText, message);
+  return new ApiError(status, statusText, message, error.response?.data);
 };
 
 /**

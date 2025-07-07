@@ -1,3 +1,5 @@
+import { useFormContext } from 'react-hook-form';
+import { AlertCircle } from 'lucide-react';
 import { SectionCard, SectionHeader } from '../Common';
 import { DataObjectsTable } from './DataObjectsTable';
 
@@ -9,6 +11,10 @@ function ObjectsCard({
   updateObject,
   updateObjectValue,
 }: any) {
+  const {
+    formState: { errors },
+  } = useFormContext();
+
   return (
     <div className="space-y-4">
       <SectionHeader
@@ -28,6 +34,14 @@ function ObjectsCard({
           onUpdateObjectValue={updateObjectValue}
         />
       </SectionCard>
+
+      {/* General objects validation error */}
+      {errors.objects && typeof errors.objects.message === 'string' && (
+        <div className="flex items-center gap-2 text-red-600 text-sm bg-red-50 p-3 rounded-lg">
+          <AlertCircle className="h-4 w-4" />
+          <span>{errors.objects.message}</span>
+        </div>
+      )}
     </div>
   );
 }
