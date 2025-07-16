@@ -8,14 +8,14 @@ interface DatasetSectionProps {
   datasets: DatasetDto[] | undefined;
   isLoading: boolean;
   analysisTypeName: string;
-  onAnalyzeDataset: (dataset: DatasetDto) => void;
+  onRunAnalysis: (dataset: DatasetDto) => void;
 }
 
 export const DatasetSection: React.FC<DatasetSectionProps> = ({
   datasets,
   isLoading,
   analysisTypeName,
-  onAnalyzeDataset,
+  onRunAnalysis,
 }) => {
   return (
     <div className="space-y-6">
@@ -61,7 +61,7 @@ export const DatasetSection: React.FC<DatasetSectionProps> = ({
         datasets={datasets}
         isLoading={isLoading}
         analysisTypeName={analysisTypeName}
-        onAnalyzeDataset={onAnalyzeDataset}
+        onRunAnalysis={onRunAnalysis}
       />
     </div>
   );

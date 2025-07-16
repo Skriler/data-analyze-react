@@ -1,10 +1,10 @@
 import React from 'react';
 import { SimilarityStats } from './SimilarityStats';
 import { TopSimilarityPairs } from './TopSimilarityPairs';
-import type { SimilarityResult } from '@api-types/analysis';
+import type { SimilarityAnalysisResult } from '@api-types/analysis';
 
 interface SimilarityResultDisplayProps {
-  result: SimilarityResult;
+  result: SimilarityAnalysisResult;
   showDetails?: boolean;
 }
 

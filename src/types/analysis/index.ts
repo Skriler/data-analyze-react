@@ -1,11 +1,24 @@
-export type { SimilarityRequest, SimilarityResult } from './similarity';
-
 export type {
-  KMeansClusteringRequest,
-  DBSCANClusteringRequest,
-  AgglomerativeClusteringRequest,
-  ClusteringResult,
+  SimilarityRequest,
+  SimilarityPairDto,
+  SimilarityAnalysisResult,
+} from './similarity';
+
+export {
+  NumericMetric,
+  CategoricalMetric,
   ClusteringAlgorithm,
+  type BaseClusteringRequest,
+  type KMeansClusteringRequest,
+  type DBSCANClusteringRequest,
+  type AgglomerativeClusteringRequest,
+  type ClusterDto,
+  type ClusteringAnalysisResult,
 } from './clustering';
 
-export type { ParameterSettingsDto, DataObjectAnalysisDto } from './common';
+export type {
+  ParameterSettingsDto,
+  DataObjectAnalysisDto,
+  BaseAnalysisRequest,
+  BaseAnalysisResult,
+} from './common';

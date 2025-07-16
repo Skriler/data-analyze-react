@@ -25,12 +25,8 @@ const validateNumericField = (
   if (value === undefined) return [];
 
   const errors: string[] = [];
-  if (value < min) {
-    errors.push(`${fieldName} must be at least ${min}`);
-  }
-  if (value > max) {
-    errors.push(`${fieldName} must be at most ${max}`);
-  }
+  if (value < min) errors.push(`${fieldName} must be at least ${min}`);
+  if (value > max) errors.push(`${fieldName} must be at most ${max}`);
   return errors;
 };
 

@@ -12,7 +12,7 @@ export const useAnalysis = () => {
   );
   const [showAnalysisModal, setShowAnalysisModal] = useState(false);
 
-  const handleAnalyzeDataset = (dataset: DatasetDto, analysisType: string) => {
+  const handleRunAnalysis = (dataset: DatasetDto, analysisType: string) => {
     setSelectedDataset(dataset);
     setSelectedAnalysisType(analysisType);
     setShowAnalysisModal(true);
@@ -24,6 +24,6 @@ export const useAnalysis = () => {
     showAnalysisModal,
     setSelectedAnalysisType,
     setShowAnalysisModal,
-    handleAnalyzeDataset,
+    handleRunAnalysis,
   };
 };

@@ -4,7 +4,10 @@ import {
   ClusteringResultDisplay,
 } from '../ResultDisplay';
 import type { AnalysisResultItem } from '@shared/results';
-import type { SimilarityResult, ClusteringResult } from '@api-types/analysis';
+import type {
+  SimilarityAnalysisResult,
+  ClusteringAnalysisResult,
+} from '@api-types/analysis';
 
 interface ResultCardContentProps {
   resultItem: AnalysisResultItem;
@@ -16,7 +19,7 @@ const ResultCardContent: React.FC<ResultCardContentProps> = ({
   if (resultItem.type === 'similarity') {
     return (
       <SimilarityResultDisplay
-        result={resultItem.result as SimilarityResult}
+        result={resultItem.result as SimilarityAnalysisResult}
         showDetails={true}
       />
     );
@@ -24,7 +27,7 @@ const ResultCardContent: React.FC<ResultCardContentProps> = ({
 
   return (
     <ClusteringResultDisplay
-      result={resultItem.result as ClusteringResult}
+      result={resultItem.result as ClusteringAnalysisResult}
       showDetails={true}
     />
   );

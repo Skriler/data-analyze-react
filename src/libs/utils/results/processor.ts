@@ -1,4 +1,7 @@
-import type { ClusteringResult, SimilarityResult } from '@api-types/analysis';
+import type {
+  ClusteringAnalysisResult,
+  SimilarityAnalysisResult,
+} from '@api-types/analysis';
 import type {
   AnalysisResultItem,
   ClusterStats,
@@ -7,7 +10,7 @@ import type {
 } from '@shared/results';
 
 export class ResultsProcessor {
-  static calculateClusterStats(result: ClusteringResult): ClusterStats {
+  static calculateClusterStats(result: ClusteringAnalysisResult): ClusterStats {
     const totalObjects = result.clusters.reduce(
       (acc, cluster) => acc + cluster.objects.length,
       0
@@ -31,7 +34,9 @@ export class ResultsProcessor {
     };
   }
 
-  static calculateSimilarityStats(result: SimilarityResult): SimilarityStats {
+  static calculateSimilarityStats(
+    result: SimilarityAnalysisResult
+  ): SimilarityStats {
     if (result.similarities.length === 0) {
       return {
         totalPairs: 0,
@@ -56,13 +61,16 @@ export class ResultsProcessor {
     };
   }
 
-  static getTopSimilarityPairs(result: SimilarityResult, limit: number = 5) {
+  static getTopSimilarityPairs(
+    result: SimilarityAnalysisResult,
+    limit: number = 5
+  ) {
     return result.similarities
       .sort((a, b) => b.similarityPercentage - a.similarityPercentage)
       .slice(0, limit);
   }
 
-  static getTopClusters(result: ClusteringResult, limit: number = 10) {
+  static getTopClusters(result: ClusteringAnalysisResult, limit: number = 10) {
     return result.clusters
       .sort((a, b) => b.objects.length - a.objects.length)
       .slice(0, limit);

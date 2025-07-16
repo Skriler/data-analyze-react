@@ -2,11 +2,11 @@ import type { UserInfo } from '@api-types/auth';
 import type { DatasetCreateDto } from '@api-types/dataset';
 import type {
   AgglomerativeClusteringRequest,
-  ClusteringResult,
+  ClusteringAnalysisResult,
   DBSCANClusteringRequest,
   KMeansClusteringRequest,
   SimilarityRequest,
-  SimilarityResult,
+  SimilarityAnalysisResult,
 } from '@api-types/analysis';
 
 // ============================
@@ -66,7 +66,7 @@ export type ClusteringMutationVariables = {
  */
 export type SimilarityCache = {
   isLoading: boolean;
-  result: SimilarityResult | null;
+  result: SimilarityAnalysisResult | null;
   timestamp?: number;
   error?: string;
 };
@@ -76,7 +76,7 @@ export type SimilarityCache = {
  */
 export type ClusteringCache = {
   isLoading: boolean;
-  result: ClusteringResult | null;
+  result: ClusteringAnalysisResult | null;
   timestamp?: number;
   error?: string;
 };

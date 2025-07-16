@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { analysisApi } from '@api/endpoints/analysis';
-import type {
+import {
   ClusteringAlgorithm,
-  SimilarityResult,
-  ClusteringResult,
+  type SimilarityAnalysisResult,
+  type ClusteringAnalysisResult,
 } from '@api-types/analysis';
 import type {
   ClusteringMutationVariables,
@@ -58,7 +58,11 @@ const createErrorState = <T>(errorMessage: string): T =>
 export const useSimilarityAnalysis = () => {
   const queryClient = useQueryClient();
 
-  return useMutation<SimilarityResult, Error, SimilarityMutationVariables>({
+  return useMutation<
+    SimilarityAnalysisResult,
+    Error,
+    SimilarityMutationVariables
+  >({
     mutationFn: ({ datasetId, request }: SimilarityMutationVariables) =>
       analysisApi.runSimilarityAnalysis(datasetId, request),
 
@@ -68,7 +72,7 @@ export const useSimilarityAnalysis = () => {
     },
 
     onSuccess: (
-      result: SimilarityResult,
+      result: SimilarityAnalysisResult,
       { datasetId }: SimilarityMutationVariables
     ) => {
       const queryKey = ANALYSIS_QUERY_KEYS.similarity(datasetId);
@@ -100,14 +104,18 @@ const useClustering = (algorithm: ClusteringAlgorithm) => {
   const queryClient = useQueryClient();
 
   const clusteringApiMap = {
-    KMeans: analysisApi.runKMeansClustering,
-    DBSCAN: analysisApi.runDBSCANClustering,
-    Agglomerative: analysisApi.runAgglomerativeClustering,
+    [ClusteringAlgorithm.KMeans]: analysisApi.runKMeansClustering,
+    [ClusteringAlgorithm.DBSCAN]: analysisApi.runDBSCANClustering,
+    [ClusteringAlgorithm.Agglomerative]: analysisApi.runAgglomerativeClustering,
   } as const;
 
   const apiFunction = clusteringApiMap[algorithm];
 
-  return useMutation<ClusteringResult, Error, ClusteringMutationVariables>({
+  return useMutation<
+    ClusteringAnalysisResult,
+    Error,
+    ClusteringMutationVariables
+  >({
     mutationFn: ({ datasetId, request }: ClusteringMutationVariables) =>
       apiFunction(datasetId, request as any),
 
@@ -117,7 +125,7 @@ const useClustering = (algorithm: ClusteringAlgorithm) => {
     },
 
     onSuccess: (
-      result: ClusteringResult,
+      result: ClusteringAnalysisResult,
       { datasetId }: ClusteringMutationVariables
     ) => {
       const queryKey = ANALYSIS_QUERY_KEYS.clustering(datasetId, algorithm);
@@ -147,14 +155,17 @@ const useClustering = (algorithm: ClusteringAlgorithm) => {
 /**
  * Run KMeans clustering analysis.
  */
-export const useKMeansClustering = () => useClustering('KMeans');
+export const useKMeansClustering = () =>
+  useClustering(ClusteringAlgorithm.KMeans);
 
 /**
  * Run DBSCAN clustering analysis.
  */
-export const useDBSCANClustering = () => useClustering('DBSCAN');
+export const useDBSCANClustering = () =>
+  useClustering(ClusteringAlgorithm.DBSCAN);
 
 /**
  * Run Agglomerative clustering analysis.
  */
-export const useAgglomerativeClustering = () => useClustering('Agglomerative');
+export const useAgglomerativeClustering = () =>
+  useClustering(ClusteringAlgorithm.Agglomerative);

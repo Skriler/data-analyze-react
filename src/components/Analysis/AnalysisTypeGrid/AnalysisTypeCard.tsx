@@ -13,7 +13,7 @@ interface AnalysisTypeCardProps {
   onSelect: (id: string) => void;
 }
 
-const getCardColorClasses = (id: string, isSelected: boolean) => {
+const getCardColorClasses = (id: string) => {
   const colorMaps = {
     similarity: {
       gradient: 'from-blue-500 to-blue-600',
@@ -69,7 +69,7 @@ export const AnalysisTypeCard: React.FC<AnalysisTypeCardProps> = ({
   isSelected,
   onSelect,
 }) => {
-  const colors = getCardColorClasses(analysisType.id, isSelected);
+  const colors = getCardColorClasses(analysisType.id);
 
   return (
     <Card

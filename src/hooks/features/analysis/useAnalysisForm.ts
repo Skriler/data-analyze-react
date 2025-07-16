@@ -38,13 +38,10 @@ export const useAnalysisForm = ({
   const dbscanAnalysis = useDBSCANClustering();
   const agglomerativeAnalysis = useAgglomerativeClustering();
 
-  const getDefaultValues = (type: AnalysisType) => {
-    const baseDefaults = ANALYSIS_TYPE_DEFAULTS[type];
-    return {
-      ...baseDefaults,
-      parameterSettings: initialParameterSettings,
-    };
-  };
+  const getDefaultValues = (type: AnalysisType) => ({
+    ...ANALYSIS_TYPE_DEFAULTS[type],
+    parameterSettings: initialParameterSettings,
+  });
 
   const form = useForm<FormData>({
     resolver: zodResolver(analysisSchema),
@@ -107,67 +104,39 @@ export const useAnalysisForm = ({
           break;
 
         case 'kmeans':
-          if (
-            data.numberOfClusters === undefined ||
-            data.maxIterations === undefined ||
-            data.numericMetric === undefined ||
-            data.categoricalMetric === undefined
-          ) {
-            throw new Error('Missing required fields for K-means analysis');
-          }
-
           await kmeansAnalysis.mutateAsync({
             datasetId: dataset.id,
             request: {
               ...baseRequest,
-              numberOfClusters: data.numberOfClusters,
-              maxIterations: data.maxIterations,
-              numericMetric: data.numericMetric,
-              categoricalMetric: data.categoricalMetric,
+              numberOfClusters: data.numberOfClusters!,
+              maxIterations: data.maxIterations!,
+              numericMetric: data.numericMetric!,
+              categoricalMetric: data.categoricalMetric!,
             },
           });
           break;
 
         case 'dbscan':
-          if (
-            data.epsilon === undefined ||
-            data.minPoints === undefined ||
-            data.numericMetric === undefined ||
-            data.categoricalMetric === undefined
-          ) {
-            throw new Error('Missing required fields for DBSCAN analysis');
-          }
-
           await dbscanAnalysis.mutateAsync({
             datasetId: dataset.id,
             request: {
               ...baseRequest,
-              epsilon: data.epsilon,
-              minPoints: data.minPoints,
-              numericMetric: data.numericMetric,
-              categoricalMetric: data.categoricalMetric,
+              epsilon: data.epsilon!,
+              minPoints: data.minPoints!,
+              numericMetric: data.numericMetric!,
+              categoricalMetric: data.categoricalMetric!,
             },
           });
           break;
 
         case 'agglomerative':
-          if (
-            data.threshold === undefined ||
-            data.numericMetric === undefined ||
-            data.categoricalMetric === undefined
-          ) {
-            throw new Error(
-              'Missing required fields for Agglomerative analysis'
-            );
-          }
-
           await agglomerativeAnalysis.mutateAsync({
             datasetId: dataset.id,
             request: {
               ...baseRequest,
-              threshold: data.threshold,
-              numericMetric: data.numericMetric,
-              categoricalMetric: data.categoricalMetric,
+              threshold: data.threshold!,
+              numericMetric: data.numericMetric!,
+              categoricalMetric: data.categoricalMetric!,
             },
           });
           break;

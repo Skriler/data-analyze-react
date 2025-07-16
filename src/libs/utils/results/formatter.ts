@@ -3,8 +3,8 @@ export class ResultsFormatter {
     return new Intl.NumberFormat().format(value);
   }
 
-  static formatPercentage(value: number, decimals: number = 1): string {
-    return `${value.toFixed(decimals)}%`;
+  static formatPercentage(value: number, decimals: number = 2): string {
+    return `${(value * 100).toFixed(decimals)}%`;
   }
 
   static truncateText(text: string, maxLength: number): string {

@@ -7,13 +7,13 @@ import type { DatasetDto } from '@api-types/dataset';
 interface DatasetCardProps {
   dataset: DatasetDto;
   analysisTypeName: string;
-  onAnalyze: (dataset: DatasetDto) => void;
+  onRunAnalysis: (dataset: DatasetDto) => void;
 }
 
 export const DatasetCard: React.FC<DatasetCardProps> = ({
   dataset,
   analysisTypeName,
-  onAnalyze,
+  onRunAnalysis,
 }) => {
   return (
     <Card className="group hover:shadow-xl transition-all duration-300 hover:scale-[1.02] border-2 border-gray-200 hover:border-blue-300 bg-white">
@@ -78,7 +78,7 @@ export const DatasetCard: React.FC<DatasetCardProps> = ({
         <div className="border-t border-gray-100 pt-4">
           <Button
             className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold py-3 px-4 rounded-lg shadow-md transition-all duration-200 hover:shadow-lg flex items-center justify-center space-x-2"
-            onClick={() => onAnalyze(dataset)}
+            onClick={() => onRunAnalysis(dataset)}
           >
             <Play className="h-4 w-4" />
             <span>Run {analysisTypeName}</span>

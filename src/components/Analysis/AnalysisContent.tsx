@@ -13,7 +13,7 @@ interface AnalysisContentProps {
   showAnalysisModal: boolean;
   setSelectedAnalysisType: (type: string) => void;
   setShowAnalysisModal: (show: boolean) => void;
-  handleAnalyzeDataset: (dataset: DatasetDto, analysisType: string) => void;
+  handleRunAnalysis: (dataset: DatasetDto, analysisType: string) => void;
 }
 
 export const AnalysisContent: React.FC<AnalysisContentProps> = ({
@@ -24,14 +24,14 @@ export const AnalysisContent: React.FC<AnalysisContentProps> = ({
   showAnalysisModal,
   setSelectedAnalysisType,
   setShowAnalysisModal,
-  handleAnalyzeDataset,
+  handleRunAnalysis,
 }) => {
   const currentAnalysisType = ANALYSIS_TYPE_CONFIGS.find(
     config => config.id === selectedAnalysisType
   );
 
   const handleDatasetAnalysis = (dataset: DatasetDto) => {
-    handleAnalyzeDataset(dataset, selectedAnalysisType);
+    handleRunAnalysis(dataset, selectedAnalysisType);
   };
 
   return (
@@ -82,7 +82,7 @@ export const AnalysisContent: React.FC<AnalysisContentProps> = ({
               datasets={datasets}
               isLoading={isLoading}
               analysisTypeName={currentAnalysisType.name}
-              onAnalyzeDataset={handleDatasetAnalysis}
+              onRunAnalysis={handleDatasetAnalysis}
             />
           </div>
         )}

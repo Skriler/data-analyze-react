@@ -1,13 +1,41 @@
-import type { ParameterSettingsDto, DataObjectAnalysisDto } from './common';
+import type {
+  DataObjectAnalysisDto,
+  BaseAnalysisResult,
+  BaseAnalysisRequest,
+} from './common';
+
+/**
+ * Supported numeric distance metrics for clustering.
+ */
+export enum NumericMetric {
+  Euclidean = 0,
+  Manhattan = 1,
+  Cosine = 2,
+}
+
+/**
+ * Supported categorical distance metrics for clustering.
+ */
+export enum CategoricalMetric {
+  Hamming = 0,
+  Jaccard = 1,
+}
+
+/**
+ * Supported clustering algorithms.
+ */
+export enum ClusteringAlgorithm {
+  KMeans = 0,
+  DBSCAN = 1,
+  Agglomerative = 2,
+}
 
 /**
  * Request object containing common clustering parameters.
  */
-export interface BaseClusteringRequest {
-  parameterSettings: ParameterSettingsDto[];
+export interface BaseClusteringRequest extends BaseAnalysisRequest {
   numericMetric: NumericMetric;
   categoricalMetric: CategoricalMetric;
-  includeParameters: boolean;
 }
 
 /**
@@ -34,14 +62,6 @@ export interface AgglomerativeClusteringRequest extends BaseClusteringRequest {
 }
 
 /**
- * Result object returned after performing clustering analysis.
- */
-export interface ClusteringResult {
-  datasetId: number;
-  clusters: ClusterDto[];
-}
-
-/**
  * Represents a cluster containing a name and list of data objects.
  */
 export interface ClusterDto {
@@ -50,16 +70,9 @@ export interface ClusterDto {
 }
 
 /**
- * Supported numeric distance metrics for clustering.
+ * Result object returned after performing clustering analysis.
  */
-export type NumericMetric = 'Euclidean' | 'Manhattan' | 'Cosine';
-
-/**
- * Supported categorical distance metrics for clustering.
- */
-export type CategoricalMetric = 'Hamming' | 'Jaccard';
-
-/**
- * Supported clustering algorithms.
- */
-export type ClusteringAlgorithm = 'KMeans' | 'DBSCAN' | 'Agglomerative';
+export interface ClusteringAnalysisResult extends BaseAnalysisResult {
+  algorithm: ClusteringAlgorithm;
+  clusters: ClusterDto[];
+}

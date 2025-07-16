@@ -47,12 +47,12 @@ const ResultsContent: React.FC<ResultsContentProps> = ({
   if (error) {
     return (
       <div className="text-center py-8">
-        <p className="text-red-600">Ошибка загрузки результатов</p>
+        <p className="text-red-600">Error loading resultsв</p>
         <button
           onClick={onRefresh}
           className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
         >
-          Попробовать снова
+          Try again
         </button>
       </div>
     );

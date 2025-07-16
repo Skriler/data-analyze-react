@@ -2,11 +2,11 @@ import { httpClient } from '@api/client/base';
 import { HttpMethod } from '@api/types';
 import type {
   SimilarityRequest,
-  SimilarityResult,
+  SimilarityAnalysisResult,
   KMeansClusteringRequest,
   DBSCANClusteringRequest,
   AgglomerativeClusteringRequest,
-  ClusteringResult,
+  ClusteringAnalysisResult,
 } from '@api-types/analysis';
 
 export const analysisApi = {
@@ -22,8 +22,11 @@ export const analysisApi = {
   async runSimilarityAnalysis(
     datasetId: number,
     request?: SimilarityRequest
-  ): Promise<SimilarityResult> {
-    return httpClient.request<SimilarityResult, SimilarityRequest | null>({
+  ): Promise<SimilarityAnalysisResult> {
+    return httpClient.request<
+      SimilarityAnalysisResult,
+      SimilarityRequest | null
+    >({
       method: HttpMethod.POST,
       url: `${this.BASE_URL}/similarity/${datasetId}`,
       data: request ?? null,
@@ -41,8 +44,8 @@ export const analysisApi = {
   async runKMeansClustering(
     datasetId: number,
     request: KMeansClusteringRequest
-  ): Promise<ClusteringResult> {
-    return httpClient.request<ClusteringResult>({
+  ): Promise<ClusteringAnalysisResult> {
+    return httpClient.request<ClusteringAnalysisResult>({
       method: HttpMethod.POST,
       url: `${this.BASE_URL}/clustering/kmeans/${datasetId}`,
       data: request,
@@ -60,8 +63,8 @@ export const analysisApi = {
   async runDBSCANClustering(
     datasetId: number,
     request: DBSCANClusteringRequest
-  ): Promise<ClusteringResult> {
-    return httpClient.request<ClusteringResult>({
+  ): Promise<ClusteringAnalysisResult> {
+    return httpClient.request<ClusteringAnalysisResult>({
       method: HttpMethod.POST,
       url: `${this.BASE_URL}/clustering/dbscan/${datasetId}`,
       data: request,
@@ -79,8 +82,8 @@ export const analysisApi = {
   async runAgglomerativeClustering(
     datasetId: number,
     request: AgglomerativeClusteringRequest
-  ): Promise<ClusteringResult> {
-    return httpClient.request<ClusteringResult>({
+  ): Promise<ClusteringAnalysisResult> {
+    return httpClient.request<ClusteringAnalysisResult>({
       method: HttpMethod.POST,
       url: `${this.BASE_URL}/clustering/agglomerative/${datasetId}`,
       data: request,

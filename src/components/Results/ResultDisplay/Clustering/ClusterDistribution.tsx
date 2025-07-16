@@ -2,10 +2,10 @@ import React from 'react';
 import { Users } from 'lucide-react';
 import { ClusterItem } from './ClusterItem';
 import { ResultsProcessor } from '@libs/utils/results';
-import type { ClusteringResult } from '@api-types/analysis';
+import type { ClusteringAnalysisResult } from '@api-types/analysis';
 
 interface ClusterDistributionProps {
-  result: ClusteringResult;
+  result: ClusteringAnalysisResult;
 }
 
 const ClusterDistribution: React.FC<ClusterDistributionProps> = ({

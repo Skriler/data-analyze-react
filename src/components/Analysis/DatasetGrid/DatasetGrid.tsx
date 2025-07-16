@@ -8,14 +8,14 @@ interface DatasetGridProps {
   datasets: DatasetDto[] | undefined;
   isLoading: boolean;
   analysisTypeName: string;
-  onAnalyzeDataset: (dataset: DatasetDto) => void;
+  onRunAnalysis: (dataset: DatasetDto) => void;
 }
 
 export const DatasetGrid: React.FC<DatasetGridProps> = ({
   datasets,
   isLoading,
   analysisTypeName,
-  onAnalyzeDataset,
+  onRunAnalysis,
 }) => {
   if (isLoading) {
     return <DatasetLoadingSkeleton />;
@@ -32,7 +32,7 @@ export const DatasetGrid: React.FC<DatasetGridProps> = ({
           key={dataset.id}
           dataset={dataset}
           analysisTypeName={analysisTypeName}
-          onAnalyze={onAnalyzeDataset}
+          onRunAnalysis={onRunAnalysis}
         />
       ))}
     </div>

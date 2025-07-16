@@ -2,10 +2,10 @@ import React from 'react';
 import { Target } from 'lucide-react';
 import { SimilarityPairItem } from './SimilarityPairItem';
 import { ResultsProcessor } from '@libs/utils/results';
-import type { SimilarityResult } from '@api-types/analysis';
+import type { SimilarityAnalysisResult } from '@api-types/analysis';
 
 interface TopSimilarityPairsProps {
-  result: SimilarityResult;
+  result: SimilarityAnalysisResult;
 }
 
 const TopSimilarityPairs: React.FC<TopSimilarityPairsProps> = ({ result }) => {

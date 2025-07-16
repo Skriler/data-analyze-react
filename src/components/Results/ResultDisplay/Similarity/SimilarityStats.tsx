@@ -2,10 +2,10 @@ import React from 'react';
 import { TrendingUp, Target, Zap } from 'lucide-react';
 import { StatCard } from '../StatCard';
 import { ResultsProcessor, ResultsFormatter } from '@libs/utils/results';
-import type { SimilarityResult } from '@api-types/analysis';
+import type { SimilarityAnalysisResult } from '@api-types/analysis';
 
 interface SimilarityStatsProps {
-  result: SimilarityResult;
+  result: SimilarityAnalysisResult;
 }
 
 const SimilarityStats: React.FC<SimilarityStatsProps> = ({ result }) => {

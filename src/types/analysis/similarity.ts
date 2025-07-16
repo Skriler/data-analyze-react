@@ -1,19 +1,15 @@
-import type { ParameterSettingsDto, DataObjectAnalysisDto } from './common';
+import type {
+  DataObjectAnalysisDto,
+  BaseAnalysisRequest,
+  BaseAnalysisResult,
+} from './common';
 
 /**
  * Request object for similarity analysis.
  */
-export interface SimilarityRequest {
-  parameterSettings: ParameterSettingsDto[];
-  includeParameters: boolean;
-}
-
-/**
- * Result object returned after performing similarity analysis.
- */
-export interface SimilarityResult {
-  datasetId: number;
-  similarities: SimilarityPairDto[];
+export interface SimilarityRequest extends BaseAnalysisRequest {
+  // Marker type for similarity analysis requests.
+  // Contains only common analysis properties via BaseAnalysisRequest.
 }
 
 /**
@@ -23,4 +19,11 @@ export interface SimilarityPairDto {
   objectA: DataObjectAnalysisDto;
   objectB: DataObjectAnalysisDto;
   similarityPercentage: number;
+}
+
+/**
+ * Result object returned after performing similarity analysis.
+ */
+export interface SimilarityAnalysisResult extends BaseAnalysisResult {
+  similarities: SimilarityPairDto[];
 }
