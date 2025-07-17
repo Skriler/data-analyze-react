@@ -1,7 +1,7 @@
 import React from 'react';
-import { useLayout } from './LayoutContext';
 import { AppHeader } from '../AppHeader';
 import { AppSidebar } from '../AppSidebar';
+import { useLayoutContext } from './LayoutContext';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -9,7 +9,7 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children, className = '' }) => {
-  const { title, subtitle } = useLayout();
+  const { title, subtitle } = useLayoutContext();
 
   return (
     <div

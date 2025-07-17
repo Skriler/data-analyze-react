@@ -1,14 +1,10 @@
-import React, { createContext, useContext, useState } from 'react';
-
-interface LayoutContextType {
-  title: string;
-  subtitle?: string;
-  setLayoutInfo: (title: string, subtitle?: string) => void;
-}
+import React, { createContext, useContext } from 'react';
+import { DEFAULT_LAYOUT_TITLE, type LayoutContextType } from '@shared/layout';
+import { useLayout } from '@hooks/features/layout/useLayout';
 
 const LayoutContext = createContext<LayoutContextType | undefined>(undefined);
 
-const useLayout = () => {
+const useLayoutContext = () => {
   const context = useContext(LayoutContext);
   if (!context) {
     throw new Error('useLayout must be used within a LayoutProvider');
@@ -19,13 +15,7 @@ const useLayout = () => {
 const LayoutProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [title, setTitle] = useState('Data Analysis Platform');
-  const [subtitle, setSubtitle] = useState<string | undefined>();
-
-  const setLayoutInfo = (newTitle: string, newSubtitle?: string) => {
-    setTitle(newTitle);
-    setSubtitle(newSubtitle);
-  };
+  const { title, subtitle, setLayoutInfo } = useLayout();
 
   return (
     <LayoutContext.Provider value={{ title, subtitle, setLayoutInfo }}>
@@ -35,15 +25,15 @@ const LayoutProvider: React.FC<{ children: React.ReactNode }> = ({
 };
 
 const useSetLayout = (title: string, subtitle?: string) => {
-  const { setLayoutInfo } = useLayout();
+  const { setLayoutInfo } = useLayoutContext();
 
   React.useEffect(() => {
     setLayoutInfo(title, subtitle);
 
     return () => {
-      setLayoutInfo('Data Analysis Platform');
+      setLayoutInfo(DEFAULT_LAYOUT_TITLE);
     };
   }, [title, subtitle, setLayoutInfo]);
 };
 
-export { LayoutProvider, useLayout, useSetLayout };
+export { LayoutProvider, useLayoutContext, useSetLayout };

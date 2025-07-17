@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChevronDown, LogOut, Settings, User } from 'lucide-react';
+import { ChevronDown, LogOut } from 'lucide-react';
 import { Button } from '@components/Ui/Button';
 import {
   DropdownMenu,
@@ -8,46 +8,17 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@components/Ui/DropdownMenu';
-import { useAuthState, useLogout } from '@hooks/api/useAuth';
-import { useToast } from '@hooks/toast/useToast';
+import { useUserMenu } from '@hooks/features/layout/useUserMenu';
 
 interface UserMenuProps {
   className?: string;
 }
 
 const UserMenu: React.FC<UserMenuProps> = ({ className = '' }) => {
-  const { data: authState } = useAuthState();
-  const logout = useLogout();
-  const { toast } = useToast();
+  const { userInitials, isAuthenticated, username, isAdmin, handleLogout } =
+    useUserMenu();
 
-  const handleLogout = async () => {
-    try {
-      await logout.mutateAsync();
-      toast({
-        title: 'Logged out successfully',
-        description: 'You have been logged out of your account.',
-      });
-    } catch (error) {
-      toast({
-        title: 'Logout failed',
-        description: 'An error occurred while logging out.',
-        variant: 'destructive',
-      });
-    }
-  };
-
-  const userInitials = React.useMemo(() => {
-    if (!authState?.user?.username) return 'U';
-
-    return authState.user.username
-      .split('_')
-      .map((part: string) => part[0])
-      .join('')
-      .toUpperCase()
-      .slice(0, 2);
-  }, [authState?.user?.username]);
-
-  if (!authState?.isAuthenticated) {
+  if (!isAuthenticated) {
     return null;
   }
 
@@ -71,12 +42,12 @@ const UserMenu: React.FC<UserMenuProps> = ({ className = '' }) => {
             <div className="flex items-center space-x-2 text-left">
               <div className="hidden sm:block">
                 <p className="text-sm font-medium text-gray-900 group-hover:text-gray-700 transition-colors">
-                  {authState.user?.username || 'Unknown User'}
+                  {username}
                 </p>
                 <div className="flex items-center space-x-1">
                   <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
                   <p className="text-xs text-gray-500 font-medium">
-                    {authState.isAdmin ? 'Admin' : 'Active'}
+                    {isAdmin ? 'Admin' : 'Active'}
                   </p>
                 </div>
               </div>
@@ -98,12 +69,12 @@ const UserMenu: React.FC<UserMenuProps> = ({ className = '' }) => {
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-sm font-semibold text-gray-900 truncate">
-                {authState.user?.username || 'Unknown User'}
+                {username}
               </p>
               <div className="flex items-center space-x-1 mt-0.5">
                 <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                 <p className="text-xs text-gray-600 font-medium">
-                  {authState.isAdmin ? 'Administrator' : 'Active User'}
+                  {isAdmin ? 'Administrator' : 'Active User'}
                 </p>
               </div>
             </div>
@@ -111,27 +82,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ className = '' }) => {
 
           <DropdownMenuSeparator className="my-2" />
 
-          {/* Menu Items */}
-          <DropdownMenuItem className="cursor-pointer p-3 rounded-lg hover:bg-gray-50 transition-colors">
-            <User className="mr-3 h-4 w-4 text-gray-500" />
-            <div className="flex flex-col">
-              <span className="text-sm font-medium">Profile</span>
-              <span className="text-xs text-gray-500">Manage your account</span>
-            </div>
-          </DropdownMenuItem>
-
-          <DropdownMenuItem className="cursor-pointer p-3 rounded-lg hover:bg-gray-50 transition-colors">
-            <Settings className="mr-3 h-4 w-4 text-gray-500" />
-            <div className="flex flex-col">
-              <span className="text-sm font-medium">Settings</span>
-              <span className="text-xs text-gray-500">
-                Preferences and options
-              </span>
-            </div>
-          </DropdownMenuItem>
-
-          <DropdownMenuSeparator className="my-2" />
-
+          {/* Logout Menu Item */}
           <DropdownMenuItem
             onClick={handleLogout}
             className="cursor-pointer p-3 rounded-lg hover:bg-red-50 hover:text-red-600 transition-colors group"

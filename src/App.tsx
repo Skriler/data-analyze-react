@@ -11,10 +11,9 @@ import { Toaster } from '@components/Ui/Toast';
 import DashboardPage from '@pages/DashboardPage';
 import DatasetsPage from '@pages/datasets/DatasetsPage';
 import DatasetDetailsPage from '@pages/datasets/DatasetDetailsPage';
-import AnalysisPage from '@pages/analysis/AnalysisPage';
-import ResultsPage from '@pages/analysis/ResultsPage';
+import AnalysisPage from '@pages/AnalysisPage';
+import ResultsPage from '@pages/ResultsPage';
 import NotFoundPage from '@pages/NotFoundPage';
-import SettingsPage from '@pages/SettingsPage';
 
 function App() {
   return (
@@ -48,7 +47,6 @@ function App() {
                         element={<ResultsPage />}
                       />
 
-                      <Route path="/settings" element={<SettingsPage />} />
                       <Route path="*" element={<NotFoundPage />} />
                     </Routes>
                   </AuthGuard>

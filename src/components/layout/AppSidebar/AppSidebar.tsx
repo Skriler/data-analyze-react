@@ -1,32 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import {
-  BarChart3,
-  Database,
-  Home,
-  Search,
-  Settings,
-  type LucideIcon,
-} from 'lucide-react';
 import { SidebarNavItem } from './SidebarNavItem';
-
-interface NavigationItem {
-  name: string;
-  href: string;
-  icon: LucideIcon;
-  badge?: string;
-}
-
-const defaultNavigation: NavigationItem[] = [
-  { name: 'Dashboard', href: '/', icon: Home },
-  { name: 'Datasets', href: '/datasets', icon: Database, badge: '2' },
-  { name: 'Analysis', href: '/analysis', icon: BarChart3, badge: 'New' },
-  { name: 'Results', href: '/results', icon: Search },
-];
-
-const bottomNavigation: NavigationItem[] = [
-  { name: 'Settings', href: '/settings', icon: Settings },
-];
+import { DEFAULT_NAVIGATION, type NavigationItem } from '@shared/layout';
 
 interface AppSidebarProps {
   navigation?: NavigationItem[];
@@ -34,7 +9,7 @@ interface AppSidebarProps {
 }
 
 const AppSidebar: React.FC<AppSidebarProps> = ({
-  navigation = defaultNavigation,
+  navigation = DEFAULT_NAVIGATION,
   className = '',
 }) => {
   const location = useLocation();
@@ -54,17 +29,6 @@ const AppSidebar: React.FC<AppSidebarProps> = ({
             />
           ))}
         </nav>
-
-        {/* Bottom Navigation */}
-        <div className="px-4 py-4 border-t border-gray-100">
-          {bottomNavigation.map(item => (
-            <SidebarNavItem
-              key={item.href}
-              item={item}
-              isActive={location.pathname === item.href}
-            />
-          ))}
-        </div>
       </div>
     </aside>
   );

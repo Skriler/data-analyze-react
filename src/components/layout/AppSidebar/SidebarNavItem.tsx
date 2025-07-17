@@ -1,15 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '@libs/utils/cn';
-import type { LucideIcon } from 'lucide-react';
+import type { NavigationItem } from '@shared/layout';
 
 interface SidebarNavItemProps {
-  item: {
-    name: string;
-    href: string;
-    icon: LucideIcon;
-    badge?: string;
-  };
+  item: NavigationItem;
   isActive: boolean;
   className?: string;
 }

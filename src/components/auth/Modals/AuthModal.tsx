@@ -11,6 +11,7 @@ import { useToast } from '@hooks/toast/useToast';
 import { AuthModalHeader } from './AuthModalHeader';
 import { AuthModeTabs } from './AuthModeTabs';
 import { LoginForm, RegisterForm } from '../Forms';
+import { AUTH_MESSAGES } from '@shared/auth/constants';
 
 interface AuthModalProps {
   open: boolean;
@@ -25,29 +26,29 @@ const AuthModal: React.FC<AuthModalProps> = React.memo(
     const authForms = useAuthForms({
       onLoginSuccess: result => {
         toast({
-          title: 'Welcome back!',
-          description: `Successfully logged in as ${result.username}.`,
+          title: AUTH_MESSAGES.LOGIN.SUCCESS_TITLE,
+          description: AUTH_MESSAGES.LOGIN.SUCCESS_DESCRIPTION(result.username),
         });
         onOpenChange(false);
       },
       onLoginError: error => {
         toast({
-          title: 'Login failed',
-          description: error || 'Invalid credentials.',
+          title: AUTH_MESSAGES.LOGIN.ERROR_TITLE,
+          description: error || AUTH_MESSAGES.LOGIN.ERROR_DESCRIPTION,
           variant: 'destructive',
         });
       },
       onRegisterSuccess: () => {
         toast({
-          title: 'Registration successful!',
-          description: 'Your account has been created. You can now log in.',
+          title: AUTH_MESSAGES.REGISTER.SUCCESS_TITLE,
+          description: AUTH_MESSAGES.REGISTER.SUCCESS_DESCRIPTION,
         });
         modalState.handleModeChange(true);
       },
       onRegisterError: () => {
         toast({
-          title: 'Registration failed',
-          description: 'An error occurred while creating your account.',
+          title: AUTH_MESSAGES.REGISTER.ERROR_TITLE,
+          description: AUTH_MESSAGES.REGISTER.ERROR_DESCRIPTION,
           variant: 'destructive',
         });
       },
