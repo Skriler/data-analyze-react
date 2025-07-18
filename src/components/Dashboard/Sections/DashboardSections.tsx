@@ -1,37 +1,37 @@
 import React from 'react';
-import type { DatasetDto } from '@api-types/dataset';
-import type { DashboardActions } from '@hooks/features/useDashboard';
 import { MainContentSection } from './MainContentSection';
 import { ActivitySection } from './ActivitySection';
 import { DashboardStats } from '../Stats';
+import type { DashboardActions, DashboardData } from '@shared/dashboard';
 
 interface DashboardSectionsProps {
-  datasets: DatasetDto[];
+  data: DashboardData;
   isLoading: boolean;
   actions: DashboardActions;
 }
 
-const StatsSection: React.FC<
-  Pick<DashboardSectionsProps, 'datasets' | 'isLoading'>
-> = ({ datasets, isLoading }) => (
+const StatsSection: React.FC<{
+  datasets: DashboardData['datasets'];
+  isLoading: boolean;
+}> = ({ datasets, isLoading }) => (
   <div className="animate-fade-in">
     <DashboardStats datasets={datasets} isLoading={isLoading} />
   </div>
 );
 
 const DashboardSections: React.FC<DashboardSectionsProps> = ({
-  datasets,
+  data,
   isLoading,
   actions,
 }) => (
   <div className="space-y-6">
-    <StatsSection datasets={datasets} isLoading={isLoading} />
+    <StatsSection datasets={data.datasets} isLoading={isLoading} />
     <MainContentSection
-      datasets={datasets}
+      datasets={data.datasets}
       isLoading={isLoading}
       actions={actions}
     />
-    <ActivitySection />
+    <ActivitySection activities={data.activities} />
   </div>
 );
 

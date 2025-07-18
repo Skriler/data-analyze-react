@@ -1,9 +1,11 @@
 import React from 'react';
-import { AnalysisTypeDetails, AnalysisTypeGrid } from './AnalysisTypeGrid';
-import { DatasetSection } from './DatasetGrid';
-import { AnalysisModal } from './Modal';
+import { AnalysisHeader } from './AnalysisHeader';
+import { AnalysisTypeSection } from './AnalysisTypeSection';
+import { DatasetSection } from '../DatasetGrid';
+import { AnalysisModal } from '../Modal';
 import { ANALYSIS_TYPE_CONFIGS } from '@shared/analysis';
 import type { DatasetDto } from '@api-types/dataset';
+import { AnalysisTypeDetails } from '../TypeGrid';
 
 interface AnalysisContentProps {
   datasets: DatasetDto[] | undefined;
@@ -14,9 +16,11 @@ interface AnalysisContentProps {
   setSelectedAnalysisType: (type: string) => void;
   setShowAnalysisModal: (show: boolean) => void;
   handleRunAnalysis: (dataset: DatasetDto, analysisType: string) => void;
+  handleViewResults: () => void;
+  handleViewDocumentation: () => void;
 }
 
-export const AnalysisContent: React.FC<AnalysisContentProps> = ({
+const AnalysisContent: React.FC<AnalysisContentProps> = ({
   datasets,
   isLoading,
   selectedDataset,
@@ -25,6 +29,8 @@ export const AnalysisContent: React.FC<AnalysisContentProps> = ({
   setSelectedAnalysisType,
   setShowAnalysisModal,
   handleRunAnalysis,
+  handleViewResults,
+  handleViewDocumentation,
 }) => {
   const currentAnalysisType = ANALYSIS_TYPE_CONFIGS.find(
     config => config.id === selectedAnalysisType
@@ -37,45 +43,19 @@ export const AnalysisContent: React.FC<AnalysisContentProps> = ({
   return (
     <div className="min-h-screen bg-gray-50/50 p-6">
       <div className="max-w-7xl mx-auto space-y-8">
-        {/* Header Section */}
-        <div className="text-center space-y-4 mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">
-            Analysis Dashboard
-          </h1>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-            Select the type of analysis you want to run on your dataset and
-            discover insights
-          </p>
-        </div>
+        <AnalysisHeader />
 
-        {/* Analysis Type Selection */}
-        <div className="space-y-6">
-          <div className="flex items-center justify-between">
-            <h2 className="text-xl font-semibold text-gray-900">
-              Choose Analysis Type
-            </h2>
-            <div className="text-sm text-gray-500">
-              {ANALYSIS_TYPE_CONFIGS.length} analysis types available
-            </div>
-          </div>
+        <AnalysisTypeSection
+          selectedAnalysisType={selectedAnalysisType}
+          onAnalysisTypeSelect={setSelectedAnalysisType}
+        />
 
-          <AnalysisTypeGrid
-            selectedAnalysisType={selectedAnalysisType}
-            onAnalysisTypeSelect={setSelectedAnalysisType}
-          />
-        </div>
-
-        {/* Selected Analysis Details */}
         {currentAnalysisType && (
           <div className="animate-fade-in">
-            <AnalysisTypeDetails
-              analysisType={currentAnalysisType}
-              hasDatasets={Boolean(datasets && datasets.length > 0)}
-            />
+            <AnalysisTypeDetails analysisType={currentAnalysisType} />
           </div>
         )}
 
-        {/* Dataset Selection */}
         {currentAnalysisType && (
           <div className="animate-fade-in">
             <DatasetSection
@@ -83,11 +63,12 @@ export const AnalysisContent: React.FC<AnalysisContentProps> = ({
               isLoading={isLoading}
               analysisTypeName={currentAnalysisType.name}
               onRunAnalysis={handleDatasetAnalysis}
+              onViewResults={handleViewResults}
+              onViewDocumentation={handleViewDocumentation}
             />
           </div>
         )}
 
-        {/* Analysis Modal */}
         {selectedDataset && (
           <AnalysisModal
             open={showAnalysisModal}
@@ -99,3 +80,5 @@ export const AnalysisContent: React.FC<AnalysisContentProps> = ({
     </div>
   );
 };
+
+export { AnalysisContent };

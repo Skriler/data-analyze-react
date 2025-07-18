@@ -1,16 +1,6 @@
 import React from 'react';
-import type { LucideIcon } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@components/Ui/Card';
-
-export interface StatItem {
-  title: string;
-  value: number;
-  icon: LucideIcon;
-  description: string;
-  iconColor: string;
-  iconBg: string;
-  gradientBg: string;
-}
+import type { StatItem } from '@shared/dashboard';
 
 interface StatCardProps {
   stat: StatItem;

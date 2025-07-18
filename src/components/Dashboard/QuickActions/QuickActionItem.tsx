@@ -1,6 +1,6 @@
 import React from 'react';
 import { Plus } from 'lucide-react';
-import type { QuickAction } from './ActionTypes';
+import type { QuickAction } from '@shared/dashboard';
 
 interface QuickActionItemProps {
   action: QuickAction;
@@ -8,32 +8,12 @@ interface QuickActionItemProps {
 
 const QuickActionItem: React.FC<QuickActionItemProps> = ({ action }) => (
   <div
-    className={`
-      p-4 
-      ${action.gradientBg}
-      border-0
-      rounded-xl
-      hover:shadow-lg
-      hover:scale-105
-      cursor-pointer
-      transition-all
-      duration-200
-      group
-    `}
+    className={`p-4 ${action.gradientBg} border-0 rounded-xl hover:shadow-lg hover:scale-105 cursor-pointer transition-all duration-200 group`}
     onClick={action.onClick}
   >
     <div className="flex items-center space-x-4">
       <div
-        className={`
-        w-12 h-12 
-        rounded-xl 
-        flex items-center justify-center
-        ${action.iconBgColor}
-        group-hover:scale-110
-        transition-transform
-        duration-200
-        shadow-lg
-      `}
+        className={`w-12 h-12 rounded-xl flex items-center justify-center ${action.iconBgColor} group-hover:scale-110 transition-transform duration-200 shadow-lg`}
       >
         <action.icon className={`h-6 w-6 ${action.iconColor}`} />
       </div>
@@ -42,9 +22,6 @@ const QuickActionItem: React.FC<QuickActionItemProps> = ({ action }) => (
         <p className="text-sm text-gray-600 leading-relaxed">
           {action.description}
         </p>
-      </div>
-      <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-        <Plus className="h-5 w-5 text-gray-400" />
       </div>
     </div>
   </div>

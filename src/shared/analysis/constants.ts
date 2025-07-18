@@ -1,5 +1,6 @@
 import { Search, Network, Map, GitBranch } from 'lucide-react';
 import type { AnalysisTypeConfig } from './types';
+import { CategoricalMetric, NumericMetric } from '@api-types/analysis';
 
 export const SIMILARITY_TYPES = ['similarity'] as const;
 export const CLUSTERING_TYPES = ['kmeans', 'dbscan', 'agglomerative'] as const;
@@ -16,8 +17,22 @@ export type AnalysisType = (typeof ANALYSIS_TYPES)[number];
 export const NUMERIC_METRICS = ['Euclidean', 'Manhattan', 'Cosine'] as const;
 export const CATEGORICAL_METRICS = ['Hamming', 'Jaccard'] as const;
 
-export type NumericMetric = (typeof NUMERIC_METRICS)[number];
-export type CategoricalMetric = (typeof CATEGORICAL_METRICS)[number];
+export type NumericMetricLabel = (typeof NUMERIC_METRICS)[number];
+export type CategoricalMetricLabel = (typeof CATEGORICAL_METRICS)[number];
+
+export const NUMERIC_METRIC_MAP: Record<NumericMetricLabel, NumericMetric> = {
+  Euclidean: NumericMetric.Euclidean,
+  Manhattan: NumericMetric.Manhattan,
+  Cosine: NumericMetric.Cosine,
+};
+
+export const CATEGORICAL_METRIC_MAP: Record<
+  CategoricalMetricLabel,
+  CategoricalMetric
+> = {
+  Hamming: CategoricalMetric.Hamming,
+  Jaccard: CategoricalMetric.Jaccard,
+};
 
 export const VALIDATION_LIMITS = {
   clusters: { min: 2, max: 20, step: 1 },

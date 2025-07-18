@@ -3,11 +3,17 @@ import { Database, Folder } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@components/Ui/Card';
 import type { DatasetDto } from '@api-types/dataset';
 import { DatasetItem } from './DatasetItem';
+import { DASHBOARD_CONSTANTS } from '@shared/dashboard';
+import {
+  getDisplayDatasets,
+  isDatasetsEmpty,
+} from '@libs/utils/dashboard/utils';
 
 export interface RecentDatasetsProps {
   datasets?: DatasetDto[];
   isLoading: boolean;
   maxItems?: number;
+  onDatasetClick?: (datasetId: number) => void;
 }
 
 const LoadingSkeleton: React.FC = () => (
@@ -39,10 +45,11 @@ const EmptyState: React.FC = () => (
 const RecentDatasets: React.FC<RecentDatasetsProps> = ({
   datasets,
   isLoading,
-  maxItems = 5,
+  maxItems = DASHBOARD_CONSTANTS.MAX_RECENT_DATASETS,
+  onDatasetClick,
 }) => {
   const displayedDatasets = React.useMemo(() => {
-    return datasets?.slice(0, maxItems) || [];
+    return getDisplayDatasets(datasets, maxItems);
   }, [datasets, maxItems]);
 
   const renderContent = () => {
@@ -50,14 +57,18 @@ const RecentDatasets: React.FC<RecentDatasetsProps> = ({
       return <LoadingSkeleton />;
     }
 
-    if (!datasets || datasets.length === 0) {
+    if (isDatasetsEmpty(datasets)) {
       return <EmptyState />;
     }
 
     return (
       <div className="space-y-2">
         {displayedDatasets.map(dataset => (
-          <DatasetItem key={dataset.id} dataset={dataset} />
+          <DatasetItem
+            key={dataset.id}
+            dataset={dataset}
+            onItemClick={onDatasetClick}
+          />
         ))}
       </div>
     );

@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import type { DatasetDto } from '@api-types/dataset';
 
 export const useAnalysis = () => {
   const { type } = useParams<{ type?: string }>();
+  const navigate = useNavigate();
   const [selectedDataset, setSelectedDataset] = useState<DatasetDto | null>(
     null
   );
@@ -18,6 +19,14 @@ export const useAnalysis = () => {
     setShowAnalysisModal(true);
   };
 
+  const handleViewResults = () => {
+    navigate('/results');
+  };
+
+  const handleViewDocumentation = () => {
+    navigate('/analysis/documentation');
+  };
+
   return {
     selectedDataset,
     selectedAnalysisType,
@@ -25,5 +34,7 @@ export const useAnalysis = () => {
     setSelectedAnalysisType,
     setShowAnalysisModal,
     handleRunAnalysis,
+    handleViewResults,
+    handleViewDocumentation,
   };
 };

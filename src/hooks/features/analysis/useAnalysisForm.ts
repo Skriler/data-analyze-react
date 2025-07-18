@@ -16,6 +16,7 @@ import {
 } from '@hooks/api/useAnalysis';
 import type { ParameterSettingsDto } from '@api-types/analysis';
 import type { DatasetDto } from '@api-types/dataset';
+import { CATEGORICAL_METRIC_MAP, NUMERIC_METRIC_MAP } from '@shared/analysis';
 
 interface UseAnalysisFormProps {
   dataset: DatasetDto;
@@ -110,8 +111,8 @@ export const useAnalysisForm = ({
               ...baseRequest,
               numberOfClusters: data.numberOfClusters!,
               maxIterations: data.maxIterations!,
-              numericMetric: data.numericMetric!,
-              categoricalMetric: data.categoricalMetric!,
+              numericMetric: NUMERIC_METRIC_MAP[data.numericMetric],
+              categoricalMetric: CATEGORICAL_METRIC_MAP[data.categoricalMetric],
             },
           });
           break;
@@ -123,8 +124,8 @@ export const useAnalysisForm = ({
               ...baseRequest,
               epsilon: data.epsilon!,
               minPoints: data.minPoints!,
-              numericMetric: data.numericMetric!,
-              categoricalMetric: data.categoricalMetric!,
+              numericMetric: NUMERIC_METRIC_MAP[data.numericMetric],
+              categoricalMetric: CATEGORICAL_METRIC_MAP[data.categoricalMetric],
             },
           });
           break;
@@ -135,8 +136,8 @@ export const useAnalysisForm = ({
             request: {
               ...baseRequest,
               threshold: data.threshold!,
-              numericMetric: data.numericMetric!,
-              categoricalMetric: data.categoricalMetric!,
+              numericMetric: NUMERIC_METRIC_MAP[data.numericMetric],
+              categoricalMetric: CATEGORICAL_METRIC_MAP[data.categoricalMetric],
             },
           });
           break;

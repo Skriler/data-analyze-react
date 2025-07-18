@@ -1,1 +1,1 @@
-export { AnalysisContent } from './AnalysisContent';
+export { AnalysisContent } from './Sections';

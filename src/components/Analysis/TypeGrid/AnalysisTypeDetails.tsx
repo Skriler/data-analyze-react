@@ -12,7 +12,6 @@ import type { AnalysisTypeConfig } from '@shared/analysis';
 
 interface AnalysisTypeDetailsProps {
   analysisType: AnalysisTypeConfig;
-  hasDatasets: boolean;
 }
 
 const getAnalysisColors = (id: string) => {
@@ -56,7 +55,6 @@ const getAnalysisColors = (id: string) => {
 
 export const AnalysisTypeDetails: React.FC<AnalysisTypeDetailsProps> = ({
   analysisType,
-  hasDatasets,
 }) => {
   const colors = getAnalysisColors(analysisType.id);
 
@@ -87,51 +85,25 @@ export const AnalysisTypeDetails: React.FC<AnalysisTypeDetailsProps> = ({
       </CardHeader>
 
       <CardContent className="pt-0">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2">
-            <h4 className="font-semibold text-gray-900 mb-6 flex items-center space-x-2">
-              <CheckCircle className={`h-5 w-5 ${colors.accent}`} />
-              <span>Key Features</span>
-            </h4>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {analysisType.features.map((feature, index) => (
-                <div
-                  key={index}
-                  className={`flex items-start space-x-3 p-4 rounded-lg bg-white border-2 ${colors.featureBorder} shadow-sm hover:shadow-md transition-shadow duration-200`}
-                >
-                  <div
-                    className={`w-2 h-2 ${colors.iconBg} rounded-full mt-2 flex-shrink-0`}
-                  ></div>
-                  <span className="text-sm text-gray-700 font-medium leading-relaxed">
-                    {feature}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="flex flex-col justify-center">
-            <div className="bg-white rounded-xl p-6 border-2 border-gray-200 shadow-sm">
-              <div className="text-center mb-6">
-                <h5 className="font-semibold text-gray-900 mb-2">
-                  Ready to Start?
-                </h5>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  {hasDatasets
-                    ? `Select a dataset below to run ${analysisType.name.toLowerCase()}`
-                    : 'No datasets available. Create a dataset first to run analysis.'}
-                </p>
-              </div>
-
-              <Button
-                disabled={!hasDatasets}
-                size="lg"
-                className={`w-full flex items-center justify-center space-x-2 bg-gradient-to-r ${colors.gradient} hover:opacity-90 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition-all duration-200 hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed`}
+        <div className="space-y-6">
+          <h4 className="font-semibold text-gray-900 mb-6 flex items-center space-x-2">
+            <CheckCircle className={`h-5 w-5 ${colors.accent}`} />
+            <span>Key Features</span>
+          </h4>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
+            {analysisType.features.map((feature, index) => (
+              <div
+                key={index}
+                className={`flex items-start space-x-3 p-4 rounded-lg bg-white border-2 ${colors.featureBorder} shadow-sm hover:shadow-md transition-shadow duration-200`}
               >
-                <Play className="h-5 w-5" />
-                <span>Run Analysis</span>
-              </Button>
-            </div>
+                <div
+                  className={`w-2 h-2 ${colors.iconBg} rounded-full mt-2 flex-shrink-0`}
+                ></div>
+                <span className="text-sm text-gray-700 font-medium leading-relaxed">
+                  {feature}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
       </CardContent>

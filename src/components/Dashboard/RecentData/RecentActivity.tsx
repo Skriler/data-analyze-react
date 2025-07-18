@@ -1,45 +1,13 @@
 import React from 'react';
-import { Clock, Database, CheckCircle2, Activity } from 'lucide-react';
+import { Clock } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@components/Ui/Card';
-import { ActivityItem, type ActivityItemData } from './ActivityItem';
+import { ActivityItem } from './ActivityItem';
+import { DEFAULT_ACTIVITIES, type ActivityItemData } from '@shared/dashboard';
 
 export interface RecentActivityProps {
   activities?: ActivityItemData[];
   isLoading?: boolean;
 }
-
-// TODO: Replace with real data from API
-// TODO: Create useRecentActivity hook to fetch actual activity data
-// TODO: Connect to backend endpoint for user activities/logs
-const defaultActivities: ActivityItemData[] = [
-  {
-    id: 1,
-    type: 'dataset_created',
-    message: 'New dataset "Sales Q4" created',
-    time: '2 hours ago',
-    icon: Database,
-    iconColor: 'text-blue-600',
-    iconBg: 'bg-blue-100',
-  },
-  {
-    id: 2,
-    type: 'analysis_completed',
-    message: 'Analysis completed for "Customer Data"',
-    time: '4 hours ago',
-    icon: CheckCircle2,
-    iconColor: 'text-green-600',
-    iconBg: 'bg-green-100',
-  },
-  {
-    id: 3,
-    type: 'analysis_started',
-    message: 'Started analysis on "Product Performance"',
-    time: '6 hours ago',
-    icon: Activity,
-    iconColor: 'text-orange-600',
-    iconBg: 'bg-orange-100',
-  },
-];
 
 const LoadingSkeleton: React.FC = () => (
   <div className="space-y-4">
@@ -56,7 +24,7 @@ const LoadingSkeleton: React.FC = () => (
 );
 
 const RecentActivity: React.FC<RecentActivityProps> = ({
-  activities = defaultActivities,
+  activities = DEFAULT_ACTIVITIES,
   isLoading = false,
 }) => {
   const renderContent = () => {

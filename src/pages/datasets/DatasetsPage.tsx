@@ -1,6 +1,6 @@
 import { useSetLayout } from '@components/Layout';
 import { useDatasetsPage } from '@hooks/features/datasets/useDatasetsPage';
-import { DatasetsList } from '@components/Dataset';
+import { DatasetsList } from '@components/Datasets';
 
 export default function DatasetsPage() {
   const { filteredDatasets, isLoading, error, layoutSubtitle, actions } =

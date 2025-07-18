@@ -1,29 +1,16 @@
 import React from 'react';
 import { useAuthState } from '@hooks/api/useAuth';
+import { generateWelcomeMessage } from '@libs/utils/dashboard/utils';
 
 interface WelcomeSectionProps {
   className?: string;
 }
 
-const getGreeting = (hour = new Date().getHours()) => {
-  const greetings = [
-    { until: 5, message: 'Good night' },
-    { until: 12, message: 'Good morning' },
-    { until: 18, message: 'Good afternoon' },
-    { until: 24, message: 'Good evening' },
-  ];
-
-  return greetings.find(g => hour < g.until)?.message ?? 'Hello';
-};
-
 const WelcomeSection: React.FC<WelcomeSectionProps> = ({ className = '' }) => {
   const { data: authState } = useAuthState();
 
   const welcomeMessage = React.useMemo(() => {
-    const username = authState?.user?.username || 'User';
-    const greeting = getGreeting();
-
-    return `${greeting}, ${username}`;
+    return generateWelcomeMessage(authState?.user?.username);
   }, [authState?.user?.username]);
 
   return (

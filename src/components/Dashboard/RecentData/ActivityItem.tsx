@@ -1,15 +1,5 @@
 import React from 'react';
-import type { LucideIcon } from 'lucide-react';
-
-export interface ActivityItemData {
-  id: number;
-  type: 'dataset_created' | 'analysis_completed' | 'analysis_started';
-  message: string;
-  time: string;
-  icon: LucideIcon;
-  iconColor: string;
-  iconBg: string;
-}
+import type { ActivityItemData } from '@shared/dashboard';
 
 interface ActivityItemProps {
   activity: ActivityItemData;

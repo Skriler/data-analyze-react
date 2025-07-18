@@ -1,8 +1,9 @@
 import React from 'react';
-import { Database, Activity, TrendingUp, Plus } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@components/Ui/Card';
 import { QuickActionItem } from './QuickActionItem';
-import type { QuickAction, QuickActionsCallbacks } from './ActionTypes';
+import type { QuickActionsCallbacks } from '@shared/dashboard';
+import { createQuickActions } from '@libs/utils/dashboard/utils';
 
 export interface QuickActionsProps extends QuickActionsCallbacks {}
 
@@ -11,38 +12,13 @@ const QuickActions: React.FC<QuickActionsProps> = ({
   onRunAnalysis,
   onViewResults,
 }) => {
-  const actions: QuickAction[] = React.useMemo(
-    () => [
-      {
-        title: 'Create Dataset',
-        description: 'Add a new dataset for comprehensive analysis',
-        icon: Database,
-        iconBgColor: 'bg-blue-500',
-        iconColor: 'text-white',
-        gradientBg: 'bg-gradient-to-r from-blue-50 to-blue-100',
-        onClick: onCreateDataset,
-      },
-      {
-        title: 'Run Analysis',
-        description: 'Analyze existing datasets with advanced algorithms',
-        icon: Activity,
-        iconBgColor: 'bg-green-500',
-        iconColor: 'text-white',
-        gradientBg: 'bg-gradient-to-r from-green-50 to-green-100',
-        onClick: onRunAnalysis,
-      },
-      {
-        title: 'View Results',
-        description: 'Check analysis results and generate insights',
-        icon: TrendingUp,
-        iconBgColor: 'bg-purple-500',
-        iconColor: 'text-white',
-        gradientBg: 'bg-gradient-to-r from-purple-50 to-purple-100',
-        onClick: onViewResults,
-      },
-    ],
-    [onCreateDataset, onRunAnalysis, onViewResults]
-  );
+  const actions = React.useMemo(() => {
+    return createQuickActions({
+      onCreateDataset,
+      onRunAnalysis,
+      onViewResults,
+    });
+  }, [onCreateDataset, onRunAnalysis, onViewResults]);
 
   return (
     <Card className="bg-gradient-to-br from-white to-gray-50 border-0 shadow-lg">

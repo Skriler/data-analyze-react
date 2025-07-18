@@ -12,11 +12,13 @@ export {
   DEFAULT_VALUES,
   ANALYSIS_TYPE_DEFAULTS,
   ANALYSIS_TYPE_CONFIGS,
+  NUMERIC_METRIC_MAP,
+  CATEGORICAL_METRIC_MAP,
   type SimilarityType,
   type ClusteringType,
   type AnalysisType,
-  type NumericMetric,
-  type CategoricalMetric,
+  type NumericMetricLabel,
+  type CategoricalMetricLabel,
 } from './constants';
 
 // Schemas

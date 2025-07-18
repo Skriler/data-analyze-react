@@ -1,7 +1,10 @@
 import React from 'react';
 import type { DatasetDto } from '@api-types/dataset';
 import { StatCard } from './StatCard';
-import { getStatsFromDatasets } from './StatsCalculator';
+import {
+  calculateDashboardStats,
+  createStatItems,
+} from '@libs/utils/dashboard/utils';
 
 export interface DashboardStatsProps {
   datasets?: DatasetDto[];
@@ -12,7 +15,10 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({
   datasets,
   isLoading,
 }) => {
-  const stats = React.useMemo(() => getStatsFromDatasets(datasets), [datasets]);
+  const stats = React.useMemo(() => {
+    const dashboardStats = calculateDashboardStats(datasets);
+    return createStatItems(dashboardStats);
+  }, [datasets]);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

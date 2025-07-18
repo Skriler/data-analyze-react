@@ -1,8 +1,8 @@
 import React from 'react';
 import type { DatasetDto } from '@api-types/dataset';
-import type { DashboardActions } from '@hooks/features/useDashboard';
 import { RecentDatasets } from '../RecentData';
 import { QuickActions } from '../QuickActions';
+import { DASHBOARD_CONSTANTS, type DashboardActions } from '@shared/dashboard';
 
 interface MainContentSectionProps {
   datasets: DatasetDto[];
@@ -16,7 +16,12 @@ const MainContentSection: React.FC<MainContentSectionProps> = ({
   actions,
 }) => (
   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-    <RecentDatasets datasets={datasets} isLoading={isLoading} maxItems={5} />
+    <RecentDatasets
+      datasets={datasets}
+      isLoading={isLoading}
+      maxItems={DASHBOARD_CONSTANTS.MAX_RECENT_DATASETS}
+      onDatasetClick={actions.handleViewDataset}
+    />
     <QuickActions
       onCreateDataset={actions.handleCreateDataset}
       onRunAnalysis={actions.handleRunAnalysis}
