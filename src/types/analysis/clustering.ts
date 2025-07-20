@@ -62,11 +62,19 @@ export interface AgglomerativeClusteringRequest extends BaseClusteringRequest {
 }
 
 /**
+ * Analysis data object with coordinates for clustering.
+ */
+export interface DataObjectClusteringAnalysisDto extends DataObjectAnalysisDto {
+  x: number;
+  y: number;
+}
+
+/**
  * Represents a cluster containing a name and list of data objects.
  */
 export interface ClusterDto {
   name: string;
-  objects: DataObjectAnalysisDto[];
+  objects: DataObjectClusteringAnalysisDto[];
 }
 
 /**

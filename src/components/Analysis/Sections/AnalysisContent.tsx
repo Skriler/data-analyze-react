@@ -2,10 +2,10 @@ import React from 'react';
 import { AnalysisHeader } from './AnalysisHeader';
 import { AnalysisTypeSection } from './AnalysisTypeSection';
 import { DatasetSection } from '../DatasetGrid';
+import { AnalysisTypeDetails } from '../TypeGrid';
 import { AnalysisModal } from '../Modal';
 import { ANALYSIS_TYPE_CONFIGS } from '@shared/analysis';
 import type { DatasetDto } from '@api-types/dataset';
-import { AnalysisTypeDetails } from '../TypeGrid';
 
 interface AnalysisContentProps {
   datasets: DatasetDto[] | undefined;

@@ -8,11 +8,11 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@components/Ui/Dialog';
-import { AnalysisTypeSelector } from '../AnalysisTypeSelector';
+import { AnalysisTypeSelector } from '../TypeSelector';
 import { ParameterSettings } from '../ParameterSettings';
 import { AlgorithmSettings } from '../AlgorithmSettings';
-import { useParameterSettings } from '@hooks/features/analysis/useParameterSettings';
-import { useAnalysisForm } from '@hooks/features/analysis/useAnalysisForm';
+import { useParameterSettings } from '@hooks/features/analysis';
+import { useAnalysisModal } from '@hooks/features/analysis';
 import type { DatasetDto } from '@api-types/dataset';
 
 interface AnalysisModalProps {
@@ -34,7 +34,7 @@ const AnalysisModal: React.FC<AnalysisModalProps> = ({
     isLoading,
     updateFormParameterSettings,
     submitAnalysis,
-  } = useAnalysisForm({
+  } = useAnalysisModal({
     dataset,
     initialParameterSettings: parameterSettings,
     onClose: () => onOpenChange(false),

@@ -1,5 +1,9 @@
 // Types
-export type { AnalysisTypeConfig, ValidationResult } from './types';
+export type {
+  AlgorithmSettingField,
+  AnalysisTypeConfig,
+  ValidationResult,
+} from './types';
 
 // Constants and their derived types
 export {

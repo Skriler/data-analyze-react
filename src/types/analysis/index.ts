@@ -12,6 +12,7 @@ export {
   type KMeansClusteringRequest,
   type DBSCANClusteringRequest,
   type AgglomerativeClusteringRequest,
+  type DataObjectClusteringAnalysisDto,
   type ClusterDto,
   type ClusteringAnalysisResult,
 } from './clustering';

@@ -2,10 +2,10 @@ import React from 'react';
 import { Users, Package, BarChart3 } from 'lucide-react';
 import { StatCard } from '../StatCard';
 import { ResultsProcessor, ResultsFormatter } from '@libs/utils/results';
-import type { ClusteringResult } from '@api-types/analysis';
+import type { ClusteringAnalysisResult } from '@api-types/analysis';
 
 interface ClusteringStatsProps {
-  result: ClusteringResult;
+  result: ClusteringAnalysisResult;
 }
 
 const ClusteringStats: React.FC<ClusteringStatsProps> = ({ result }) => {

@@ -100,11 +100,6 @@ export const useResults = () => {
     setFilters(newFilters);
   }, []);
 
-  const onViewDetails = useCallback((id: string) => {
-    console.log('View details for result:', id);
-    // TODO: Implement actual view details logic
-  }, []);
-
   const onExport = useCallback((id: string) => {
     console.log('Export result:', id);
     // TODO: Implement actual export logic
@@ -130,7 +125,6 @@ export const useResults = () => {
     isLoading,
     error,
     onFiltersChange,
-    onViewDetails,
     onExport,
     onGoToAnalysis,
     onRefresh,

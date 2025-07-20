@@ -7,7 +7,7 @@ import {
   type AnalysisType,
   type FormData,
 } from '@shared/analysis';
-import { useToast } from '@hooks/toast/useToast';
+import { useToast } from '@hooks/toast';
 import {
   useSimilarityAnalysis,
   useKMeansClustering,
@@ -18,19 +18,19 @@ import type { ParameterSettingsDto } from '@api-types/analysis';
 import type { DatasetDto } from '@api-types/dataset';
 import { CATEGORICAL_METRIC_MAP, NUMERIC_METRIC_MAP } from '@shared/analysis';
 
-interface UseAnalysisFormProps {
+interface UseAnalysisModalProps {
   dataset: DatasetDto;
   initialParameterSettings: ParameterSettingsDto[];
   initialType?: AnalysisType;
   onClose: () => void;
 }
 
-export const useAnalysisForm = ({
+export const useAnalysisModal = ({
   dataset,
   initialParameterSettings,
   initialType = DEFAULT_VALUES.type,
   onClose,
-}: UseAnalysisFormProps) => {
+}: UseAnalysisModalProps) => {
   const { toast } = useToast();
 
   // API hooks

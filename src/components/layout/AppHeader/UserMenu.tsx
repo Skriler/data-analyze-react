@@ -8,7 +8,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@components/Ui/DropdownMenu';
-import { useUserMenu } from '@hooks/features/layout/useUserMenu';
+import { useUserMenu } from '@hooks/features/layout';
 
 interface UserMenuProps {
   className?: string;

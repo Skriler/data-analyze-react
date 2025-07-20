@@ -1,6 +1,6 @@
 import { useSetLayout } from '@components/Layout';
 import { useDatasets } from '@hooks/api/useDatasets';
-import { useResults } from '@hooks/features/results/useResults';
+import { useResults } from '@hooks/features/results';
 import { ResultsContent } from '@components/Results';
 
 export default function Results() {

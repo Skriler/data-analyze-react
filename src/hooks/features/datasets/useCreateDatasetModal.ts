@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useCreateDataset } from '@hooks/api/useDatasets';
-import { useToast } from '@hooks/toast/useToast';
+import { useToast } from '@hooks/toast';
 import {
   createDatasetSchema,
   type CreateDatasetFormData,
@@ -10,13 +10,13 @@ import {
 import type { DatasetCreateDto, DataObjectCreateDto } from '@api-types/dataset';
 import { ApiError } from '@api/types';
 
-interface UseCreateDatasetFormProps {
+interface UseCreateDatasetModalProps {
   onSuccess: () => void;
 }
 
-export const useCreateDatasetForm = ({
+export const useCreateDatasetModal = ({
   onSuccess,
-}: UseCreateDatasetFormProps) => {
+}: UseCreateDatasetModalProps) => {
   const [parameters, setParameters] = useState<string[]>(['']);
   const [objects, setObjects] = useState<DataObjectCreateDto[]>([
     { name: '', values: [''] },

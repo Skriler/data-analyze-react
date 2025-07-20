@@ -9,14 +9,7 @@ import {
 } from '@components/Ui/Form';
 import { Input } from '@components/Ui/Input';
 import { Badge } from '@components/Ui/Badge';
-import type { FormData } from '@shared/analysis';
-
-type NumericParamKeys =
-  | 'numberOfClusters'
-  | 'maxIterations'
-  | 'epsilon'
-  | 'minPoints'
-  | 'threshold';
+import type { AlgorithmSettingField, FormData } from '@shared/analysis';
 
 interface ParameterFieldsProps {
   control: Control<FormData>;
@@ -105,7 +98,7 @@ const ParameterFields: React.FC<ParameterFieldsProps> = ({
 
 interface ParameterFieldProps {
   control: Control<FormData>;
-  name: keyof FormData;
+  name: AlgorithmSettingField;
   label: string;
   placeholder: string;
   min: number;
@@ -129,32 +122,43 @@ const ParameterField: React.FC<ParameterFieldProps> = ({
   <FormField
     control={control}
     name={name}
-    render={({ field }) => (
-      <FormItem>
-        <FormLabel className="flex items-center justify-between text-slate-900 font-semibold">
-          <span>{label}</span>
-          <Badge
-            variant="outline"
-            className={`bg-${color}-50 border-${color}-200 text-${color}-800 font-mono`}
-          >
-            {field.value || defaultValue}
-          </Badge>
-        </FormLabel>
-        <FormControl>
-          <Input
-            type="number"
-            placeholder={placeholder}
-            className={`h-12 border-2 border-slate-200 focus:border-${color}-400 focus:ring-${color}-200 bg-white`}
-            min={min}
-            max={max}
-            step={step}
-            {...field}
-            onChange={e => field.onChange(parseFloat(e.target.value))}
-          />
-        </FormControl>
-        <FormMessage />
-      </FormItem>
-    )}
+    render={({ field }) => {
+      // Приводим значение к числу или используем defaultValue
+      const currentValue =
+        typeof field.value === 'number' ? field.value : defaultValue;
+
+      return (
+        <FormItem>
+          <FormLabel className="flex items-center justify-between text-slate-900 font-semibold">
+            <span>{label}</span>
+            <Badge
+              variant="outline"
+              className={`bg-${color}-50 border-${color}-200 text-${color}-800 font-mono`}
+            >
+              {currentValue}
+            </Badge>
+          </FormLabel>
+          <FormControl>
+            <Input
+              type="number"
+              placeholder={placeholder}
+              className={`h-12 border-2 border-slate-200 focus:border-${color}-400 focus:ring-${color}-200 bg-white`}
+              min={min}
+              max={max}
+              step={step}
+              value={currentValue}
+              onChange={e => {
+                const value = parseFloat(e.target.value);
+                field.onChange(isNaN(value) ? defaultValue : value);
+              }}
+              onBlur={field.onBlur}
+              ref={field.ref}
+            />
+          </FormControl>
+          <FormMessage />
+        </FormItem>
+      );
+    }}
   />
 );
 

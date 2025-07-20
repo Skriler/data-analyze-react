@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAuthState, useLogout } from '@hooks/api/useAuth';
-import { useToast } from '@hooks/toast/useToast';
+import { useToast } from '@hooks/toast';
 
 export const useUserMenu = () => {
   const { data: authState } = useAuthState();

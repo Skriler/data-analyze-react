@@ -1,5 +1,5 @@
 import React from 'react';
-import { useToast } from '@hooks/toast/useToast';
+import { useToast } from '@hooks/toast';
 import { ToastProvider, ToastViewport } from './ToastProvider';
 import { Toast } from './Toast';
 import { ToastTitle } from './Title';

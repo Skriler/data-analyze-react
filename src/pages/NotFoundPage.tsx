@@ -1,5 +1,5 @@
 import { useSetLayout } from '@components/Layout';
-import { useNotFound } from '@hooks/features/useNotFound';
+import { useNotFound } from '@hooks/features/notFound';
 import { NotFoundContent } from '@components/NotFound';
 
 export default function NotFound() {

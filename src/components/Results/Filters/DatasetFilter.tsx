@@ -27,13 +27,19 @@ const DatasetFilter: React.FC<DatasetFilterProps> = ({
         <span>Dataset</span>
       </label>
       <Select value={value} onValueChange={onChange}>
-        <SelectTrigger className="w-[200px] bg-white border-gray-300 hover:border-gray-400 focus:border-blue-500 focus:ring-blue-500">
+        <SelectTrigger className="w-[200px] bg-white border-gray-300 hover:border-gray-400 focus:border-blue-500 focus:ring-blue-500 hover:bg-gray-50">
           <SelectValue placeholder="Select dataset" />
         </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="all">All Datasets</SelectItem>
+        <SelectContent className="bg-white border-gray-300 shadow-lg">
+          <SelectItem value="all" className="hover:bg-gray-50">
+            All Datasets
+          </SelectItem>
           {datasets?.map(dataset => (
-            <SelectItem key={dataset.id} value={dataset.id.toString()}>
+            <SelectItem
+              key={dataset.id}
+              value={dataset.id.toString()}
+              className="hover:bg-gray-50"
+            >
               {dataset.name}
             </SelectItem>
           ))}

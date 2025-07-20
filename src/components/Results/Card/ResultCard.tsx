@@ -7,15 +7,11 @@ import { ANALYSIS_CONFIG, type AnalysisResultItem } from '@shared/results';
 
 interface ResultCardProps {
   resultItem: AnalysisResultItem;
-  onViewDetails: (id: string) => void;
-  onExport: (id: string) => void;
 }
 
-const ResultCard: React.FC<ResultCardProps> = ({
-  resultItem,
-  onViewDetails,
-  onExport,
-}) => {
+const ResultCard: React.FC<ResultCardProps> = ({ resultItem }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const COLOR_CLASSES = {
     blue: {
       bg: 'bg-blue-50 border-blue-200',
@@ -42,26 +38,42 @@ const ResultCard: React.FC<ResultCardProps> = ({
   const config = ANALYSIS_CONFIG[resultItem.type];
   const colorClasses = COLOR_CLASSES[config.color];
 
+  const handleViewDetails = () => {
+    setIsModalOpen(true);
+  };
+
   return (
-    <Card className="hover:shadow-lg transition-all duration-300 border-0 bg-white shadow-sm">
-      <CardHeader className={`rounded-t-lg ${colorClasses.bg}`}>
-        <div className="flex items-start justify-between">
-          <ResultCardHeader
-            resultItem={resultItem}
-            config={config}
-            colorClasses={colorClasses}
-          />
-          <ResultCardActions
-            resultItem={resultItem}
-            onViewDetails={onViewDetails}
-            onExport={onExport}
-          />
-        </div>
-      </CardHeader>
-      <CardContent className="p-6">
-        <ResultCardContent resultItem={resultItem} />
-      </CardContent>
-    </Card>
+    <>
+      <Card className="hover:shadow-lg transition-all duration-300 border-0 bg-white shadow-sm">
+        <CardHeader className={`rounded-t-lg ${colorClasses.bg}`}>
+          <div className="flex items-start justify-between">
+            <ResultCardHeader
+              resultItem={resultItem}
+              config={config}
+              colorClasses={colorClasses}
+            />
+            <ResultCardActions onViewDetails={handleViewDetails} />
+          </div>
+        </CardHeader>
+        <CardContent className="p-6">
+          <ResultCardContent resultItem={resultItem} />
+        </CardContent>
+      </Card>
+
+      {resultItem.type === 'similarity' ? (
+        <SimilarityResultModal
+          result={resultItem.result}
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+        />
+      ) : (
+        <ClusteringResultModal
+          result={resultItem.result}
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+        />
+      )}
+    </>
   );
 };
 

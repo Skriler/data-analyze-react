@@ -4,7 +4,7 @@ import { ModalHeader, ModalFooter } from './Modal';
 import { ParametersCard } from './Parameters';
 import { DatasetInfoSection } from './DatasetInfo';
 import { ObjectsCard } from './Objects';
-import { useCreateDatasetForm } from '@hooks/features/datasets/useCreateDatasetForm';
+import { useCreateDatasetModal } from '@hooks/features/datasets';
 
 interface CreateDatasetModalProps {
   open: boolean;
@@ -12,7 +12,7 @@ interface CreateDatasetModalProps {
 }
 
 function CreateDatasetModal({ open, onOpenChange }: CreateDatasetModalProps) {
-  const hookData = useCreateDatasetForm({
+  const hookData = useCreateDatasetModal({
     onSuccess: () => onOpenChange(false),
   });
 

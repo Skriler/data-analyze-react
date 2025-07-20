@@ -60,89 +60,76 @@ const ParameterCard: React.FC<ParameterCardProps> = ({
   return (
     <Card
       className={`
-        border-2 transition-all duration-300 group
+        border transition-all duration-300 hover:shadow-md
         ${
           isActive
-            ? 'border-blue-200 bg-gradient-to-r from-blue-50/50 to-purple-50/30 shadow-sm hover:shadow-md'
-            : 'border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50/50'
+            ? 'border-blue-300 bg-gradient-to-r from-blue-50 to-indigo-50 shadow-sm'
+            : 'border-slate-200 bg-white hover:border-slate-300'
         }
       `}
     >
-      <CardContent className="p-6">
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center space-x-4">
-            <Checkbox
-              checked={isActive}
-              onCheckedChange={checked =>
-                onUpdateSetting(parameter.id, 'isActive', !!checked)
+      <CardContent className="p-4">
+        <div className="flex items-center space-x-3">
+          <Checkbox
+            checked={isActive}
+            onCheckedChange={checked =>
+              onUpdateSetting(parameter.id, 'isActive', !!checked)
+            }
+            className={`
+              border-2 w-5 h-5 rounded
+              ${
+                isActive
+                  ? 'border-blue-500 data-[state=checked]:bg-blue-500'
+                  : 'border-slate-300'
               }
-              className="border-2 border-slate-300 data-[state=checked]:bg-blue-500 data-[state=checked]:border-blue-500"
+            `}
+          />
+
+          <div
+            className={`
+              w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-300
+              ${isActive ? `bg-${color}-500 shadow-sm` : `bg-${color}-100`}
+            `}
+          >
+            <IconComponent
+              className={`w-4 h-4 ${
+                isActive ? 'text-white' : `text-${color}-600`
+              }`}
             />
+          </div>
 
-            <div className="flex items-center space-x-3">
-              <div
-                className={`
-                  w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300
-                  ${
-                    isActive
-                      ? `bg-${color}-500 shadow-lg group-hover:shadow-xl`
-                      : `bg-${color}-100 group-hover:bg-${color}-200`
-                  }
-                `}
-              >
-                <IconComponent
-                  className={`w-5 h-5 transition-colors duration-300 ${
-                    isActive ? 'text-white' : `text-${color}-600`
-                  }`}
-                />
-              </div>
-
-              <div className="min-w-0">
-                <Label className="font-semibold text-slate-900 text-base block">
-                  {parameter.name}
-                </Label>
-                <div className="flex items-center space-x-2 mt-1">
-                  <Badge
-                    variant="secondary"
-                    className={`
-                      text-xs px-2 py-1 rounded-full font-medium
-                      ${
-                        isActive
-                          ? `bg-${color}-100 text-${color}-800 border border-${color}-200`
-                          : 'bg-slate-100 text-slate-600 border border-slate-200'
-                      }
-                    `}
-                  >
-                    {parameter.type}
-                  </Badge>
-                  <span className="text-xs text-slate-500">#{index + 1}</span>
-                </div>
-              </div>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center justify-between">
+              <Label className="font-medium text-slate-900 text-sm truncate">
+                {parameter.name}
+              </Label>
+              <span className="text-xs text-slate-500 ml-2">#{index + 1}</span>
             </div>
+            <Badge
+              variant="secondary"
+              className={`
+                text-xs px-2 py-0.5 rounded font-medium mt-1
+                ${
+                  isActive
+                    ? `bg-${color}-100 text-${color}-800 border-${color}-200`
+                    : 'bg-slate-100 text-slate-600'
+                }
+              `}
+            >
+              {parameter.type}
+            </Badge>
           </div>
         </div>
 
-        {showWeights && (
-          <div
-            className={`
-              transition-all duration-300 pt-4 border-t border-slate-200
-              ${isActive ? 'opacity-100' : 'opacity-40'}
-            `}
-          >
-            <div className="flex items-center justify-between mb-3">
-              <Label className="text-sm font-semibold text-slate-700">
+        {showWeights && isActive && (
+          <div className="mt-4 pt-3 border-t border-slate-200">
+            <div className="flex items-center justify-between mb-2">
+              <Label className="text-xs font-medium text-slate-700">
                 Weight
               </Label>
               <Badge
                 variant="outline"
-                className={`
-                  text-xs px-2 py-1 rounded-full font-mono
-                  ${
-                    isActive
-                      ? 'border-blue-300 text-blue-700'
-                      : 'border-slate-300 text-slate-600'
-                  }
-                `}
+                className="text-xs px-2 py-0.5 rounded font-mono border-blue-200 text-blue-700"
               >
                 {(setting?.weight ?? 1).toFixed(1)}
               </Badge>
@@ -157,13 +144,12 @@ const ParameterCard: React.FC<ParameterCardProps> = ({
               max={2}
               step={0.1}
               className="w-full"
-              disabled={!isActive}
             />
 
-            <div className="flex justify-between text-xs text-slate-500 mt-2">
-              <span className="font-medium">0</span>
-              <span className="font-medium">1</span>
-              <span className="font-medium">2</span>
+            <div className="flex justify-between text-xs text-slate-500 mt-1">
+              <span>0</span>
+              <span>1</span>
+              <span>2</span>
             </div>
           </div>
         )}

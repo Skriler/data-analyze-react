@@ -1,6 +1,6 @@
 import React, { createContext, useContext } from 'react';
 import { DEFAULT_LAYOUT_TITLE, type LayoutContextType } from '@shared/layout';
-import { useLayout } from '@hooks/features/layout/useLayout';
+import { useLayout } from '@hooks/features/layout';
 
 const LayoutContext = createContext<LayoutContextType | undefined>(undefined);
 

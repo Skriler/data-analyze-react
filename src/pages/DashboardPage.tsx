@@ -1,5 +1,5 @@
 import { useSetLayout } from '@components/Layout';
-import { useDashboard } from '@hooks/features/dashboard/useDashboard';
+import { useDashboard } from '@hooks/features/dashboard';
 import { DashboardSections } from '@components/Dashboard';
 
 export default function Dashboard() {

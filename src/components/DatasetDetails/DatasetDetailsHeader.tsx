@@ -12,7 +12,7 @@ import { formatDistanceToNow } from 'date-fns';
 import { useNavigate } from 'react-router-dom';
 import { useDeleteDataset } from '@hooks/api/useDatasets';
 import { useAuthState } from '@hooks/api/useAuth';
-import { useToast } from '@hooks/toast/useToast';
+import { useToast } from '@hooks/toast';
 
 interface DatasetDetailsHeaderProps {
   dataset: DatasetDto;

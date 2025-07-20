@@ -4,15 +4,15 @@ import { Card, CardContent } from '@components/Ui/Card';
 
 const EmptyState: React.FC = () => {
   return (
-    <Card className="border-2 border-dashed border-slate-200 bg-slate-50/50">
-      <CardContent className="text-center py-12">
-        <div className="w-16 h-16 mx-auto mb-4 bg-slate-100 rounded-2xl flex items-center justify-center">
-          <Hash className="w-8 h-8 text-slate-400" />
+    <Card className="border-2 border-dashed border-slate-300 bg-slate-50">
+      <CardContent className="text-center py-8">
+        <div className="w-12 h-12 mx-auto mb-3 bg-slate-200 rounded-xl flex items-center justify-center">
+          <Hash className="w-6 h-6 text-slate-500" />
         </div>
-        <h3 className="text-lg font-semibold text-slate-900 mb-2">
+        <h3 className="text-base font-semibold text-slate-900 mb-1">
           No Parameters Available
         </h3>
-        <p className="text-slate-600">
+        <p className="text-sm text-slate-600">
           This dataset doesn't have any parameters to configure.
         </p>
       </CardContent>

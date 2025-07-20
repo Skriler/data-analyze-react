@@ -1,6 +1,5 @@
 import React from 'react';
-import { Play, CheckCircle, Sparkles } from 'lucide-react';
-import { Button } from '@components/Ui/Button';
+import { CheckCircle, Sparkles } from 'lucide-react';
 import {
   Card,
   CardContent,

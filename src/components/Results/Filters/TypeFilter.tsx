@@ -21,15 +21,23 @@ const TypeFilter: React.FC<TypeFilterProps> = ({ value, onChange }) => {
         <span>Analysis Type</span>
       </label>
       <Select value={value} onValueChange={onChange}>
-        <SelectTrigger className="w-[200px] bg-white border-gray-300 hover:border-gray-400 focus:border-blue-500 focus:ring-blue-500">
+        <SelectTrigger className="w-[200px] bg-white border-gray-300 hover:border-gray-400 focus:border-blue-500 focus:ring-blue-500 hover:bg-gray-50">
           <SelectValue placeholder="Analysis type" />
         </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="all">All Types</SelectItem>
-          <SelectItem value="similarity">Similarity Analysis</SelectItem>
-          <SelectItem value="KMeans">K-Means Clustering</SelectItem>
-          <SelectItem value="DBSCAN">DBSCAN Clustering</SelectItem>
-          <SelectItem value="Agglomerative">
+        <SelectContent className="bg-white border-gray-300 shadow-lg">
+          <SelectItem value="all" className="hover:bg-gray-50">
+            All Types
+          </SelectItem>
+          <SelectItem value="similarity" className="hover:bg-gray-50">
+            Similarity Analysis
+          </SelectItem>
+          <SelectItem value="KMeans" className="hover:bg-gray-50">
+            K-Means Clustering
+          </SelectItem>
+          <SelectItem value="DBSCAN" className="hover:bg-gray-50">
+            DBSCAN Clustering
+          </SelectItem>
+          <SelectItem value="Agglomerative" className="hover:bg-gray-50">
             Agglomerative Clustering
           </SelectItem>
         </SelectContent>

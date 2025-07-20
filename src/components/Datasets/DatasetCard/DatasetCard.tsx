@@ -2,7 +2,7 @@ import { Card, CardContent } from '@components/Ui/Card';
 import type { DatasetDto } from '@api-types/dataset';
 import { useAuthState } from '@hooks/api/useAuth';
 import { useDeleteDataset } from '@hooks/api/useDatasets';
-import { useToast } from '@hooks/toast/useToast';
+import { useToast } from '@hooks/toast';
 import { DatasetCardHeader } from './DatasetCardHeader';
 import { DatasetCardStats } from './DatasetCardStats';
 import { DatasetCardTags } from './DatasetCardTags';

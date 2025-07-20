@@ -20,7 +20,6 @@ interface ResultsContentProps {
   isLoading: boolean;
   error: any;
   onFiltersChange: (filters: ResultsFiltersType) => void;
-  onViewDetails: (id: string) => void;
   onExport: (id: string) => void;
   onGoToAnalysis: () => void;
   onRefresh: () => void;
@@ -35,7 +34,6 @@ const ResultsContent: React.FC<ResultsContentProps> = ({
   isLoading,
   error,
   onFiltersChange,
-  onViewDetails,
   onExport,
   onGoToAnalysis,
   onRefresh,
@@ -78,11 +76,10 @@ const ResultsContent: React.FC<ResultsContentProps> = ({
           <>
             <ResultsListHeader count={results.length} />
             <div className="space-y-6">
-              {results.map(resultItem => (
+              {results.map((resultItem, index) => (
                 <ResultCard
-                  key={resultItem.id}
+                  key={`${resultItem.id}-${index}`}
                   resultItem={resultItem}
-                  onViewDetails={onViewDetails}
                   onExport={onExport}
                 />
               ))}

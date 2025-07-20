@@ -1,9 +1,9 @@
 import React from 'react';
 import { ResultsFormatter } from '@libs/utils/results';
-import type { DataObjectAnalysisDto } from '@api-types/analysis';
+import type { DataObjectClusteringAnalysisDto } from '@api-types/analysis';
 
 interface ClusterObjectTagProps {
-  object: DataObjectAnalysisDto;
+  object: DataObjectClusteringAnalysisDto;
   onClick?: () => void;
 }
 

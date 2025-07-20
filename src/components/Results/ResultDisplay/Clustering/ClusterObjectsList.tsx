@@ -1,10 +1,10 @@
 import React from 'react';
 import { ClusterObjectTag } from './ClusterObjectTag';
 import { ResultsFormatter } from '@libs/utils/results';
-import type { DataObjectAnalysisDto } from '@api-types/analysis';
+import type { DataObjectClusteringAnalysisDto } from '@api-types/analysis';
 
 interface ClusterObjectsListProps {
-  objects: DataObjectAnalysisDto[];
+  objects: DataObjectClusteringAnalysisDto[];
   maxVisible?: number;
 }
 

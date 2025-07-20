@@ -1,0 +1,1 @@
+export { useNotFound } from './useNotFound';

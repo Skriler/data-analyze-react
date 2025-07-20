@@ -1,5 +1,5 @@
 import { useSetLayout } from '@components/Layout';
-import { useDatasetsPage } from '@hooks/features/datasets/useDatasetsPage';
+import { useDatasetsPage } from '@hooks/features/datasets';
 import { DatasetsList } from '@components/Datasets';
 
 export default function DatasetsPage() {
