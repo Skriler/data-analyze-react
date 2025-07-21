@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
-import { Eye } from 'lucide-react';
+import React from 'react';
 import { ClusteringStats } from './ClusteringStats';
 import { ClusterDistribution } from './ClusterDistribution';
-import { ClusteringResultModal } from '@components/Results/ClusteringResultModal';
 import type { ClusteringAnalysisResult } from '@api-types/analysis';
 
 interface ClusteringResultDisplayProps {

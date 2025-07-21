@@ -1,5 +1,5 @@
 import React from 'react';
-import { Database } from 'lucide-react';
+import { ChevronRight, Database } from 'lucide-react';
 import type { DatasetDto } from '@api-types/dataset';
 
 interface DatasetItemProps {
@@ -42,19 +42,7 @@ const DatasetItem: React.FC<DatasetItemProps> = ({ dataset, onItemClick }) => {
         </p>
       </div>
       <div className="text-gray-400 group-hover:text-gray-600 transition-colors">
-        <svg
-          className="w-5 h-5"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M9 5l7 7-7 7"
-          />
-        </svg>
+        <ChevronRight className="w-5 h-5" />
       </div>
     </div>
   );

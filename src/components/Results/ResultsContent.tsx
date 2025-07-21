@@ -10,6 +10,7 @@ import {
 } from './Common';
 import type { DatasetDto } from '@api-types/dataset';
 import type { AnalysisResultItem, ResultsFiltersType } from '@shared/results';
+import { AlertCircle, RefreshCw } from 'lucide-react';
 
 interface ResultsContentProps {
   datasets: DatasetDto[] | undefined;
@@ -20,7 +21,6 @@ interface ResultsContentProps {
   isLoading: boolean;
   error: any;
   onFiltersChange: (filters: ResultsFiltersType) => void;
-  onExport: (id: string) => void;
   onGoToAnalysis: () => void;
   onRefresh: () => void;
 }
@@ -34,7 +34,6 @@ const ResultsContent: React.FC<ResultsContentProps> = ({
   isLoading,
   error,
   onFiltersChange,
-  onExport,
   onGoToAnalysis,
   onRefresh,
 }) => {
@@ -45,13 +44,20 @@ const ResultsContent: React.FC<ResultsContentProps> = ({
   if (error) {
     return (
       <div className="text-center py-8">
-        <p className="text-red-600">Error loading resultsв</p>
-        <button
-          onClick={onRefresh}
-          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-        >
-          Try again
-        </button>
+        <div className="flex flex-col items-center space-y-6">
+          <div className="inline-flex items-center gap-2 px-6 py-3 text-white font-semibold rounded-xl bg-red-400 hover:bg-red-500 shadow-lg transition-all duration-200">
+            <AlertCircle className="h-5 w-5" />
+            Error loading results
+          </div>
+
+          <button
+            onClick={onRefresh}
+            className="inline-flex items-center gap-2 px-6 py-3 text-white font-semibold rounded-xl bg-blue-500 hover:bg-blue-600 shadow-lg transition-all duration-200"
+          >
+            <RefreshCw className="h-5 w-5" />
+            Try again
+          </button>
+        </div>
       </div>
     );
   }
@@ -64,7 +70,6 @@ const ResultsContent: React.FC<ResultsContentProps> = ({
         filters={filters}
         datasets={datasets}
         onFiltersChange={onFiltersChange}
-        onRefresh={onRefresh}
       />
 
       {summaryStats && <SummaryStats stats={summaryStats} />}
@@ -80,7 +85,6 @@ const ResultsContent: React.FC<ResultsContentProps> = ({
                 <ResultCard
                   key={`${resultItem.id}-${index}`}
                   resultItem={resultItem}
-                  onExport={onExport}
                 />
               ))}
             </div>

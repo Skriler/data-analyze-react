@@ -31,7 +31,7 @@ export function DatasetsList({
   };
 
   if (error) {
-    return <DatasetsListError error={error} />;
+    return <DatasetsListError />;
   }
 
   return (

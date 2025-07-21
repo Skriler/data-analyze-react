@@ -1,0 +1,1 @@
+export { SimilarityResultModal } from './SimilarityResultModal';

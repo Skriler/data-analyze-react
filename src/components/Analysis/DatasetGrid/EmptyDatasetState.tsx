@@ -25,27 +25,15 @@ export const EmptyDatasetState: React.FC = () => {
             <span>Create Dataset</span>
           </Button>
 
+          {/* TODO: Implement import functionality
           <Button
             variant="outline"
             className="border-2 border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 py-3 px-6 rounded-lg transition-all duration-200 flex items-center space-x-2"
           >
             <Upload className="h-5 w-5" />
-            <span>Upload Data</span>
+            <span>Import</span>
           </Button>
-        </div>
-
-        <div className="mt-8 pt-6 border-t border-gray-200">
-          <p className="text-sm text-gray-500 mb-3">
-            Need help getting started?
-          </p>
-          <Button
-            variant="ghost"
-            size="sm"
-            className="text-blue-600 hover:text-blue-700 hover:bg-blue-50 flex items-center space-x-1"
-          >
-            <FileText className="h-4 w-4" />
-            <span>View Documentation</span>
-          </Button>
+          */}
         </div>
       </CardContent>
     </Card>

@@ -58,8 +58,8 @@ export const useResults = () => {
           id: `clustering_${algorithmType}_${result.datasetId}_${Date.now()}`,
           type: algorithmType,
           datasetId: result.datasetId.toString(),
-          datasetName: `Dataset ${result.datasetId}`, // TODO: get real dataset name from datasets
-          timestamp: Date.now(), // TODO: add timestamp to API results
+          datasetName: `Dataset ${result.datasetId}`,
+          timestamp: Date.now(),
           result: result,
         });
       });
@@ -72,8 +72,8 @@ export const useResults = () => {
           id: `similarity_${result.datasetId}_${Date.now()}`,
           type: 'similarity',
           datasetId: result.datasetId.toString(),
-          datasetName: `Dataset ${result.datasetId}`, // TODO: get real dataset name from datasets
-          timestamp: Date.now(), // TODO: add timestamp to API results
+          datasetName: `Dataset ${result.datasetId}`,
+          timestamp: Date.now(),
           result: result,
         });
       });
@@ -100,11 +100,6 @@ export const useResults = () => {
     setFilters(newFilters);
   }, []);
 
-  const onExport = useCallback((id: string) => {
-    console.log('Export result:', id);
-    // TODO: Implement actual export logic
-  }, []);
-
   const onGoToAnalysis = useCallback(
     (datasetId?: string) => {
       const path = datasetId ? `/analysis/${datasetId}` : '/analysis';
@@ -125,7 +120,6 @@ export const useResults = () => {
     isLoading,
     error,
     onFiltersChange,
-    onExport,
     onGoToAnalysis,
     onRefresh,
   };

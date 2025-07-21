@@ -1,2 +1,10 @@
 export { useResults } from './useResults';
-export { useClusteringResult } from './useClusteringResult';
+export {
+  useSimilarityResult,
+  useFilteredSimilarityPairs,
+  usePaginatedSimilarityPairs,
+} from './similarityResultModal';
+export {
+  useClusteringResult,
+  usePaginatedClusters,
+} from './clusteringResultModal';

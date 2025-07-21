@@ -20,21 +20,3 @@ export interface ClusteringStats {
  * View modes for clustering details modal
  */
 export type ClusteringViewMode = 'visualization' | 'list';
-
-/**
- * Cluster distribution data for charts
- */
-export interface ClusterDistributionData {
-  cluster: ProcessedCluster;
-  percentage: number;
-}
-
-/**
- * Coordinate bounds for visualization
- */
-export interface CoordinateBounds {
-  minX: number;
-  maxX: number;
-  minY: number;
-  maxY: number;
-}

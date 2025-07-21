@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { ClusteringResultsProcessor } from '@libs/utils/results/clusteringResultsProcessor';
+import { ClusteringResultsProcessor } from '@libs/utils/results';
 import type { ClusteringAnalysisResult } from '@api-types/analysis';
 import type {
   ProcessedCluster,
@@ -9,7 +9,6 @@ import type {
 interface UseClusteringResultReturn {
   processedClusters: ProcessedCluster[];
   stats: ClusteringStats;
-  topClusters: ProcessedCluster[];
 }
 
 export const useClusteringResult = (
@@ -23,13 +22,8 @@ export const useClusteringResult = (
     return ClusteringResultsProcessor.calculateStats(processedClusters);
   }, [processedClusters]);
 
-  const topClusters = useMemo(() => {
-    return ClusteringResultsProcessor.getTopClusters(processedClusters, 10);
-  }, [processedClusters]);
-
   return {
     processedClusters,
     stats,
-    topClusters,
   };
 };

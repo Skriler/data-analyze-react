@@ -1,4 +1,7 @@
-import type { SimilarityResult, ClusteringResult } from '@api-types/analysis';
+import type {
+  SimilarityAnalysisResult,
+  ClusteringAnalysisResult,
+} from '@api-types/analysis';
 
 export interface AnalysisResultItem {
   id: string;
@@ -6,7 +9,7 @@ export interface AnalysisResultItem {
   datasetId: string;
   datasetName: string;
   timestamp: number;
-  result: SimilarityResult | ClusteringResult;
+  result: SimilarityAnalysisResult | ClusteringAnalysisResult;
 }
 
 export interface ResultsFiltersType {

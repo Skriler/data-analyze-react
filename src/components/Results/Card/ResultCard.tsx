@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent, CardHeader } from '@components/Ui/Card';
 import { ResultCardActions } from './ResultCardActions';
 import { ResultCardHeader } from './ResultCardHeader';
 import { ResultCardContent } from './ResultCardContent';
 import { ANALYSIS_CONFIG, type AnalysisResultItem } from '@shared/results';
+import { ClusteringResultModal } from '../ClusteringResultModal';
+import { SimilarityResultModal } from '../SimilarityResultModal';
+import type {
+  ClusteringAnalysisResult,
+  SimilarityAnalysisResult,
+} from '@api-types/analysis';
 
 interface ResultCardProps {
   resultItem: AnalysisResultItem;
@@ -62,13 +68,13 @@ const ResultCard: React.FC<ResultCardProps> = ({ resultItem }) => {
 
       {resultItem.type === 'similarity' ? (
         <SimilarityResultModal
-          result={resultItem.result}
+          result={resultItem.result as SimilarityAnalysisResult}
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
         />
       ) : (
         <ClusteringResultModal
-          result={resultItem.result}
+          result={resultItem.result as ClusteringAnalysisResult}
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
         />

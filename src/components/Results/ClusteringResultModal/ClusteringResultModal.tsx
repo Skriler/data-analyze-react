@@ -1,9 +1,15 @@
+import ReactDOM from 'react-dom';
 import React, { useState } from 'react';
-import { X, BarChart3, Grid3x3 } from 'lucide-react';
-import { ClusteringVisualization } from './ClusteringVisualization';
-import { ClusteringDetailsList } from './ClusteringDetailsList';
-import { useClusteringResult } from '@hooks/features/results';
+import { PaginationFooter } from '@components/Ui/Pagination';
+import { ClusteringChart } from './Charts';
+import { ClusteringList } from './List';
+import { Header, ActiveFilters, QuickStats } from './Sections';
 import type { ClusteringAnalysisResult } from '@api-types/analysis';
+import type { ClusteringViewMode } from '@shared/results/clusteringResultModal';
+import {
+  useClusteringResult,
+  usePaginatedClusters,
+} from '@hooks/features/results';
 
 interface ClusteringResultModalProps {
   result: ClusteringAnalysisResult;
@@ -11,84 +17,67 @@ interface ClusteringResultModalProps {
   onClose: () => void;
 }
 
-type ViewMode = 'visualization' | 'list';
-
-const ClusteringResultModal: React.FC<ClusteringResultModalProps> = ({
+export const ClusteringResultModal: React.FC<ClusteringResultModalProps> = ({
   result,
   isOpen,
   onClose,
 }) => {
-  const [viewMode, setViewMode] = useState<ViewMode>('visualization');
+  const [viewMode, setViewMode] = useState<ClusteringViewMode>('list');
+  const [searchTerm, setSearchTerm] = useState('');
   const { processedClusters, stats } = useClusteringResult(result);
+
+  const filteredClusters = searchTerm
+    ? processedClusters.filter(cluster =>
+        cluster.objects.some(obj =>
+          obj.name.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+      )
+    : processedClusters;
+
+  const { paginatedClusters, pagination, goToPage, nextPage, prevPage } =
+    usePaginatedClusters(filteredClusters);
 
   if (!isOpen) return null;
 
-  return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-xl shadow-2xl w-full max-w-6xl max-h-[90vh] flex flex-col">
-        {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-200">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-lg flex items-center justify-center">
-              <Grid3x3 className="w-5 h-5 text-white" />
-            </div>
-            <div>
-              <h2 className="text-xl font-semibold text-gray-900">
-                Clustering Analysis Details
-              </h2>
-              <p className="text-sm text-gray-500">
-                {stats.totalClusters} clusters • {stats.totalObjects} objects
-              </p>
-            </div>
-          </div>
+  return ReactDOM.createPortal(
+    <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+      <div className="bg-white rounded-xl shadow-2xl w-full max-w-[88vw] max-h-[88vh] flex flex-col overflow-hidden">
+        <Header
+          viewMode={viewMode}
+          onViewModeChange={setViewMode}
+          onClose={onClose}
+        />
 
-          <div className="flex items-center space-x-3">
-            {/* View Mode Toggle */}
-            <div className="flex bg-gray-100 rounded-lg p-1">
-              <button
-                onClick={() => setViewMode('visualization')}
-                className={`px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 flex items-center space-x-2 ${
-                  viewMode === 'visualization'
-                    ? 'bg-white text-gray-900 shadow-sm'
-                    : 'text-gray-600 hover:text-gray-900'
-                }`}
-              >
-                <BarChart3 className="w-4 h-4" />
-                <span>Chart</span>
-              </button>
-              <button
-                onClick={() => setViewMode('list')}
-                className={`px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 flex items-center space-x-2 ${
-                  viewMode === 'list'
-                    ? 'bg-white text-gray-900 shadow-sm'
-                    : 'text-gray-600 hover:text-gray-900'
-                }`}
-              >
-                <Grid3x3 className="w-4 h-4" />
-                <span>List</span>
-              </button>
-            </div>
+        {viewMode === 'list' && (
+          <ActiveFilters
+            searchTerm={searchTerm}
+            onSearchChange={setSearchTerm}
+          />
+        )}
 
-            <button
-              onClick={onClose}
-              className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
-            >
-              <X className="w-5 h-5" />
-            </button>
-          </div>
-        </div>
+        {viewMode === 'list' && !searchTerm && <QuickStats stats={stats} />}
 
-        {/* Content */}
-        <div className="flex-1 overflow-hidden">
+        <div className="flex-1 overflow-y-auto min-h-0">
           {viewMode === 'visualization' ? (
-            <ClusteringVisualization clusters={processedClusters} />
+            <ClusteringChart clusters={processedClusters} />
           ) : (
-            <ClusteringDetailsList clusters={processedClusters} />
+            <ClusteringList
+              clusters={paginatedClusters}
+              searchTerm={searchTerm}
+            />
           )}
         </div>
+
+        {viewMode === 'list' && pagination.totalPages > 1 && (
+          <PaginationFooter
+            pagination={pagination}
+            goToPage={goToPage}
+            nextPage={nextPage}
+            prevPage={prevPage}
+          />
+        )}
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
-
-export { ClusteringResultModal };

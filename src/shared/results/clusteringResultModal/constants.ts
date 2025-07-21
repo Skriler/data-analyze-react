@@ -26,21 +26,8 @@ export const CLUSTER_COLORS = [
 ];
 
 /**
- * Default configuration for clustering visualization
+ * Default configuration for clustering display
  */
 export const CLUSTERING_CONFIG = {
-  DEFAULT_POINT_RADIUS: 6,
-  HOVER_POINT_RADIUS: 8,
-  MAX_VISIBLE_OBJECTS_IN_CARD: 20,
-  MAX_VISIBLE_PARAMETERS: 3,
-  CHART_ANIMATION_DURATION: 300,
-} as const;
-
-/**
- * Modal configuration
- */
-export const MODAL_CONFIG = {
-  MAX_WIDTH: '6xl',
-  MAX_HEIGHT: '90vh',
-  ANIMATION_DURATION: 200,
-} as const;
+  ITEMS_PER_PAGE: 8,
+};

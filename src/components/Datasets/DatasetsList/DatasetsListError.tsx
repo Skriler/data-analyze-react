@@ -1,21 +1,14 @@
-interface DatasetsListErrorProps {
-  error: unknown;
-}
+import { AlertCircle } from 'lucide-react';
 
-function DatasetsListError({ error }: DatasetsListErrorProps) {
+function DatasetsListError() {
   return (
-    <div className="text-center py-16">
-      <div className="mx-auto w-24 h-24 bg-red-50 rounded-full flex items-center justify-center mb-6">
-        <div className="text-4xl">⚠️</div>
+    <div className="text-center py-8">
+      <div className="flex flex-col items-center space-y-6">
+        <div className="inline-flex items-center gap-2 px-6 py-3 text-white font-semibold rounded-xl bg-red-400 hover:bg-red-500 shadow-lg transition-all duration-200">
+          <AlertCircle className="h-5 w-5" />
+          Failed to load datasets
+        </div>
       </div>
-      <h3 className="text-xl font-semibold text-gray-900 mb-3">
-        Failed to load datasets
-      </h3>
-      <p className="text-gray-500 mb-8 max-w-md mx-auto">
-        {error instanceof Error
-          ? error.message
-          : 'An error occurred while loading datasets. Please try again.'}
-      </p>
     </div>
   );
 }

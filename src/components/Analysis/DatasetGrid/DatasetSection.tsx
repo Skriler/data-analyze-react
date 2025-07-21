@@ -51,15 +51,6 @@ export const DatasetSection: React.FC<DatasetSectionProps> = ({
             <FileText className="h-4 w-4" />
             <span>View Documentation</span>
           </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            className="flex items-center space-x-2 border-2 border-blue-200 text-blue-700 hover:bg-blue-50 hover:border-blue-300 transition-all duration-200"
-            onClick={onViewResults}
-          >
-            <TrendingUp className="h-4 w-4" />
-            <span>View All Results</span>
-          </Button>
         </div>
       </div>
 
