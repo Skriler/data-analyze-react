@@ -2,8 +2,9 @@ import { useSetLayout } from '@components/Layout';
 import { useDatasets } from '@hooks/api/useDatasets';
 import { useResults } from '@hooks/features/results';
 import { ResultsContent } from '@components/Results';
+import type { DatasetDto } from '@api-types/dataset';
 
-export default function Results() {
+export default function ResultsPage() {
   const { data: datasets, isLoading: isDatasetsLoading } = useDatasets();
   const resultsState = useResults();
 
@@ -11,7 +12,7 @@ export default function Results() {
 
   return (
     <ResultsContent
-      datasets={datasets}
+      datasets={datasets as DatasetDto[]}
       isDatasetsLoading={isDatasetsLoading}
       {...resultsState}
     />

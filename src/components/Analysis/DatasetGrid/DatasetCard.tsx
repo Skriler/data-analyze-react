@@ -1,5 +1,5 @@
 import React from 'react';
-import { BarChart3, Clock, Database, Play, Settings } from 'lucide-react';
+import { BarChart3, Database, Play, Settings } from 'lucide-react';
 import { Button } from '@components/Ui/Button';
 import { Card, CardContent } from '@components/Ui/Card';
 import type { DatasetDto } from '@api-types/dataset';
@@ -38,10 +38,6 @@ export const DatasetCard: React.FC<DatasetCardProps> = ({
                 </div>
               </div>
             </div>
-          </div>
-          <div className="flex items-center space-x-1 text-xs text-gray-400">
-            <Clock className="h-3 w-3" />
-            <span>Ready</span>
           </div>
         </div>
 

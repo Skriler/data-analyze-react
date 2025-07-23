@@ -104,9 +104,12 @@ const useClustering = (algorithm: ClusteringAlgorithm) => {
   const queryClient = useQueryClient();
 
   const clusteringApiMap = {
-    [ClusteringAlgorithm.KMeans]: analysisApi.runKMeansClustering,
-    [ClusteringAlgorithm.DBSCAN]: analysisApi.runDBSCANClustering,
-    [ClusteringAlgorithm.Agglomerative]: analysisApi.runAgglomerativeClustering,
+    [ClusteringAlgorithm.KMeans]:
+      analysisApi.runKMeansClustering.bind(analysisApi),
+    [ClusteringAlgorithm.DBSCAN]:
+      analysisApi.runDBSCANClustering.bind(analysisApi),
+    [ClusteringAlgorithm.Agglomerative]:
+      analysisApi.runAgglomerativeClustering.bind(analysisApi),
   } as const;
 
   const apiFunction = clusteringApiMap[algorithm];

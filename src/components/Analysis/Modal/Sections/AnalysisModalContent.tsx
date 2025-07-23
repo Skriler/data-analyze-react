@@ -1,8 +1,8 @@
 import React from 'react';
+import type { UseFormReturn } from 'react-hook-form';
 import { AnalysisTypeSelector } from '../TypeSelector';
 import { ParameterSettings } from '../ParameterSettings';
 import { AlgorithmSettings } from '../AlgorithmSettings';
-import type { UseFormReturn } from 'react-hook-form';
 import type { DatasetDto } from '@api-types/dataset';
 import type { ParameterSettingsDto } from '@api-types/analysis';
 import type { FormData } from '@shared/analysis';

@@ -2,7 +2,7 @@ import ReactDOM from 'react-dom';
 import React, { useState } from 'react';
 import { Loader2 } from 'lucide-react';
 import { PaginationFooter } from '@components/Ui/Pagination';
-import { Header, ActiveFilters, QuickStats, EmptyState } from './Sections';
+import { Header, QuickStats, EmptyState } from './Sections';
 import { SimilarityList } from './List';
 import { SimilarityChart } from './Charts';
 import type {
@@ -64,15 +64,12 @@ const SimilarityResultModal: React.FC<SimilarityResultModalProps> = ({
         />
 
         {viewMode === 'list' && (
-          <>
-            <ActiveFilters searchTerm={searchTerm} filter={filter} />
-            <QuickStats
-              stats={stats}
-              exactMatches={exactMatches}
-              filter={filter}
-              searchTerm={searchTerm}
-            />
-          </>
+          <QuickStats
+            stats={stats}
+            exactMatches={exactMatches}
+            filter={filter}
+            searchTerm={searchTerm}
+          />
         )}
 
         <div className="flex-1 overflow-y-auto min-h-0">

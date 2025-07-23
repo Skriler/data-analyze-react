@@ -6,9 +6,7 @@ import type {
 export interface AnalysisResultItem {
   id: string;
   type: 'similarity' | 'KMeans' | 'DBSCAN' | 'Agglomerative';
-  datasetId: string;
-  datasetName: string;
-  timestamp: number;
+  datasetId: number;
   result: SimilarityAnalysisResult | ClusteringAnalysisResult;
 }
 

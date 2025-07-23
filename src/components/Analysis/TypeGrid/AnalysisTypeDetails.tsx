@@ -16,12 +16,12 @@ interface AnalysisTypeDetailsProps {
 const getAnalysisColors = (id: string) => {
   const colorMaps = {
     similarity: {
-      gradient: 'from-blue-500 to-blue-600',
-      lightGradient: 'from-blue-50 to-blue-100',
-      iconBg: 'bg-blue-500',
-      featureBg: 'bg-blue-50',
-      featureBorder: 'border-blue-200',
-      accent: 'text-blue-600',
+      gradient: 'from-rose-500 to-rose-600',
+      lightGradient: 'from-rose-50 to-rose-100',
+      iconBg: 'bg-rose-500',
+      featureBg: 'bg-rose-50',
+      featureBorder: 'border-rose-200',
+      accent: 'text-rose-600',
     },
     kmeans: {
       gradient: 'from-green-500 to-green-600',

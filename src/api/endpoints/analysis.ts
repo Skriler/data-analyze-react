@@ -10,7 +10,7 @@ import type {
 } from '@api-types/analysis';
 
 export const analysisApi = {
-  BASE_URL: '/analyse',
+  BASE_URL: '/analysis',
 
   /**
    * Run similarity analysis on a dataset.

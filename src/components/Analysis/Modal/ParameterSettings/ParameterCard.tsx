@@ -5,6 +5,7 @@ import { Label } from '@components/Ui/Label';
 import { Slider } from '@components/Ui/Slider';
 import { Badge } from '@components/Ui/Badge';
 import { Card, CardContent } from '@components/Ui/Card';
+import { Input } from '@components/Ui/Input';
 import type { DatasetDto } from '@api-types/dataset';
 import type { ParameterSettingsDto } from '@api-types/analysis';
 
@@ -56,6 +57,14 @@ const ParameterCard: React.FC<ParameterCardProps> = ({
   const IconComponent = getParameterIcon(parameter.type);
   const color = getParameterColor(parameter.type);
   const isActive = setting?.isActive ?? true;
+  const currentWeight = setting?.weight ?? 1;
+
+  const handleWeightChange = (value: string) => {
+    const numValue = parseFloat(value);
+    if (!isNaN(numValue) && numValue >= 0 && numValue <= 2) {
+      onUpdateSetting(parameter.id, 'weight', numValue);
+    }
+  };
 
   return (
     <Card
@@ -123,33 +132,40 @@ const ParameterCard: React.FC<ParameterCardProps> = ({
 
         {showWeights && isActive && (
           <div className="mt-4 pt-3 border-t border-slate-200">
-            <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center justify-between mb-3">
               <Label className="text-xs font-medium text-slate-700">
                 Weight
               </Label>
-              <Badge
-                variant="outline"
-                className="text-xs px-2 py-0.5 rounded font-mono border-blue-200 text-blue-700"
-              >
-                {(setting?.weight ?? 1).toFixed(1)}
-              </Badge>
+              <div className="flex items-center space-x-2">
+                <Input
+                  type="number"
+                  min="0"
+                  max="2"
+                  step="0.1"
+                  value={currentWeight}
+                  onChange={e => handleWeightChange(e.target.value)}
+                  className="w-16 h-7 text-xs text-center border-blue-200 focus:border-blue-400"
+                />
+              </div>
             </div>
 
-            <Slider
-              value={[setting?.weight ?? 1]}
-              onValueChange={([value]) =>
-                onUpdateSetting(parameter.id, 'weight', value)
-              }
-              min={0}
-              max={2}
-              step={0.1}
-              className="w-full"
-            />
+            <div className="px-1">
+              <Slider
+                value={[currentWeight]}
+                onValueChange={([value]) =>
+                  onUpdateSetting(parameter.id, 'weight', value)
+                }
+                min={0}
+                max={2}
+                step={0.1}
+                className="w-full [&>span:first-child]:h-2 [&>span:first-child]:bg-blue-100 [&_[role=slider]]:h-4 [&_[role=slider]]:w-4 [&_[role=slider]]:border-2 [&_[role=slider]]:border-blue-500 [&_[role=slider]]:bg-white [&>span>span]:bg-blue-500"
+              />
+            </div>
 
-            <div className="flex justify-between text-xs text-slate-500 mt-1">
-              <span>0</span>
-              <span>1</span>
-              <span>2</span>
+            <div className="flex justify-between text-xs text-slate-500 mt-1 px-1">
+              <span>0.0</span>
+              <span>1.0</span>
+              <span>2.0</span>
             </div>
           </div>
         )}

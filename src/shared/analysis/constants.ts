@@ -96,7 +96,7 @@ export const ANALYSIS_TYPE_CONFIGS: AnalysisTypeConfig[] = [
     longDescription:
       'Similarity analysis helps you identify objects that share common characteristics. This is useful for finding patterns, detecting anomalies, or grouping similar items.',
     icon: Search,
-    color: 'blue',
+    color: 'rose',
     features: [
       'Configurable parameter weights',
       'Multiple similarity metrics',

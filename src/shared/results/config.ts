@@ -3,7 +3,7 @@ import { Search, Network, Map, GitBranch } from 'lucide-react';
 export const ANALYSIS_CONFIG = {
   similarity: {
     icon: Search,
-    color: 'blue',
+    color: 'rose',
     name: 'Similarity Analysis',
     description: 'Analyze similarity between objects',
   },

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Plus } from 'lucide-react';
 import type { QuickAction } from '@shared/dashboard';
 
 interface QuickActionItemProps {

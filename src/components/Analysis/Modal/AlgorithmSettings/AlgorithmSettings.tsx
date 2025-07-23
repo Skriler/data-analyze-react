@@ -54,27 +54,29 @@ const AlgorithmSettings: React.FC<AlgorithmSettingsProps> = ({
   if (!config) return null;
 
   return (
-    <Card className="border-2 border-slate-200 bg-gradient-to-br from-white to-slate-50/50 shadow-sm">
-      <CardContent className="p-6 space-y-8">
+    <Card className="border-2 border-slate-200 bg-gradient-to-br from-white to-slate-50/50 shadow-sm flex flex-col">
+      <CardContent className="p-6 space-y-8 flex-1 flex flex-col">
         <AlgorithmHeader config={config} />
 
-        <ParameterFields
-          control={control}
-          analysisType={analysisType}
-          color={config.color}
-        />
+        <div className="flex-1 flex flex-col">
+          <ParameterFields
+            control={control}
+            analysisType={analysisType}
+            color={config.color}
+          />
 
-        <div className="space-y-4 border-t pt-6">
-          <div className="flex items-center space-x-2 text-slate-700">
-            <Settings className="w-5 h-5 text-slate-500" />
-            <span className="text-sm font-semibold uppercase tracking-wide">
-              Distance Metrics
-            </span>
-          </div>
+          <div className="space-y-4 border-t pt-6 mt-6">
+            <div className="flex items-center space-x-2 text-slate-700">
+              <Settings className="w-5 h-5 text-slate-500" />
+              <span className="text-sm font-semibold uppercase tracking-wide">
+                Distance Metrics
+              </span>
+            </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <NumericMetricSelector control={control} />
-            <CategoricalMetricSelector control={control} />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <NumericMetricSelector control={control} />
+              <CategoricalMetricSelector control={control} />
+            </div>
           </div>
         </div>
       </CardContent>

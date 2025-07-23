@@ -29,4 +29,5 @@ export interface BaseAnalysisRequest {
  */
 export interface BaseAnalysisResult {
   datasetId: number;
+  createdAt: string;
 }

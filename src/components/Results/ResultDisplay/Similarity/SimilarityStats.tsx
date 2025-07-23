@@ -24,7 +24,7 @@ const SimilarityStats: React.FC<SimilarityStatsProps> = ({ result }) => {
       />
       <StatCard
         icon={TrendingUp}
-        value={ResultsFormatter.formatPercentage(stats.avgSimilarity, 0)}
+        value={ResultsFormatter.formatNumber(stats.avgSimilarity) + '%'}
         label="Avg Similarity"
         bgColor="from-emerald-50 to-emerald-100"
         iconColor="bg-emerald-500"
@@ -33,7 +33,7 @@ const SimilarityStats: React.FC<SimilarityStatsProps> = ({ result }) => {
       />
       <StatCard
         icon={Zap}
-        value={ResultsFormatter.formatPercentage(stats.maxSimilarity, 0)}
+        value={ResultsFormatter.formatNumber(stats.maxSimilarity) + '%'}
         label="Max Similarity"
         bgColor="from-purple-50 to-purple-100"
         iconColor="bg-purple-500"

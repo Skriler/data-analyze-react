@@ -57,9 +57,7 @@ export const useResults = () => {
         combinedResults.push({
           id: `clustering_${algorithmType}_${result.datasetId}_${Date.now()}`,
           type: algorithmType,
-          datasetId: result.datasetId.toString(),
-          datasetName: `Dataset ${result.datasetId}`,
-          timestamp: Date.now(),
+          datasetId: result.datasetId,
           result: result,
         });
       });
@@ -71,9 +69,7 @@ export const useResults = () => {
         combinedResults.push({
           id: `similarity_${result.datasetId}_${Date.now()}`,
           type: 'similarity',
-          datasetId: result.datasetId.toString(),
-          datasetName: `Dataset ${result.datasetId}`,
-          timestamp: Date.now(),
+          datasetId: result.datasetId,
           result: result,
         });
       });

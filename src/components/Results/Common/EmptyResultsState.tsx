@@ -11,7 +11,7 @@ const EmptyResultsState: React.FC<EmptyResultsStateProps> = ({
   onGoToAnalysis,
 }) => {
   return (
-    <Card className="border-0 shadow-sm">
+    <Card className="border-0 shadow-sm bg-white border-gray-100">
       <CardContent className="text-center py-16 px-8">
         <div className="mx-auto w-24 h-24 bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl flex items-center justify-center mb-6 shadow-sm">
           <BarChart3 className="w-12 h-12 text-blue-500" />

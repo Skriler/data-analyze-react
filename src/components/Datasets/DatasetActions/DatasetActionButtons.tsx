@@ -20,7 +20,6 @@ function DatasetActionButtons({
         <span>Create Dataset</span>
       </Button>
 
-      {/* TODO: Implement import functionality
       <Button
         variant="outline"
         className="flex items-center space-x-2 bg-white border-gray-200 text-gray-700 hover:bg-gray-50 shadow-sm"
@@ -29,7 +28,6 @@ function DatasetActionButtons({
         <Upload className="h-4 w-4" />
         <span>Import</span>
       </Button>
-      */}
     </div>
   );
 }

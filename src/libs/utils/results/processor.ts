@@ -46,7 +46,10 @@ export class ResultsProcessor {
       };
     }
 
-    const similarities = result.similarities.map(s => s.similarityPercentage);
+    const similarities = result.similarities.map(
+      s => s.similarityPercentage * 100
+    );
+
     const avgSimilarity = Math.round(
       similarities.reduce((acc, s) => acc + s, 0) / similarities.length
     );
@@ -83,7 +86,7 @@ export class ResultsProcessor {
     return results.filter(result => {
       const matchesDataset =
         filters.selectedDataset === 'all' ||
-        result.datasetId === filters.selectedDataset;
+        result.datasetId.toString() === filters.selectedDataset;
       const matchesType =
         filters.selectedType === 'all' || result.type === filters.selectedType;
 
@@ -95,9 +98,13 @@ export class ResultsProcessor {
     results: AnalysisResultItem[],
     ascending: boolean = false
   ): AnalysisResultItem[] {
-    return [...results].sort((a, b) =>
-      ascending ? a.timestamp - b.timestamp : b.timestamp - a.timestamp
-    );
+    return [...results].sort((a, b) => {
+      if (ascending) {
+        return a.result.createdAt.localeCompare(b.result.createdAt);
+      } else {
+        return b.result.createdAt.localeCompare(a.result.createdAt);
+      }
+    });
   }
 
   static calculateSummaryStats(results: AnalysisResultItem[]) {

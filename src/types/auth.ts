@@ -53,11 +53,3 @@ export enum UserRole {
 export interface RefreshTokenRequest {
   refreshToken: string;
 }
-
-/**
- * DTO used for user logout.
- * Optionally includes a refresh token to revoke on the server.
- */
-export interface LogoutRequest {
-  refreshToken?: string;
-}

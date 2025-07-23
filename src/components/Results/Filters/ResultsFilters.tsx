@@ -7,7 +7,7 @@ import type { DatasetDto } from '@api-types/dataset';
 
 interface ResultsFiltersProps {
   filters: ResultsFiltersType;
-  datasets: DatasetDto[] | undefined;
+  datasets: DatasetDto[];
   onFiltersChange: (filters: ResultsFiltersType) => void;
 }
 
@@ -17,22 +17,22 @@ const ResultsFilters: React.FC<ResultsFiltersProps> = ({
   onFiltersChange,
 }) => {
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+    <div className="bg-white rounded-2xl border border-gray-100 p-8 shadow-sm hover:shadow-md transition-all duration-300">
       <FilterSection />
 
-      <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+      <div className="flex flex-col lg:flex-row gap-6 items-start lg:items-end">
         <DatasetFilter
-          value={filters.selectedDataset}
+          value={filters?.selectedDataset || 'all'}
           datasets={datasets}
           onChange={value =>
-            onFiltersChange({ ...filters, selectedDataset: value })
+            onFiltersChange?.({ ...filters, selectedDataset: value })
           }
         />
 
         <TypeFilter
-          value={filters.selectedType}
+          value={filters?.selectedType || 'all'}
           onChange={value =>
-            onFiltersChange({ ...filters, selectedType: value })
+            onFiltersChange?.({ ...filters, selectedType: value })
           }
         />
       </div>

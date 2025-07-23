@@ -24,7 +24,7 @@ const AnalysisTypeItem: React.FC<AnalysisTypeItemProps> = ({
       <Label
         htmlFor={type.id}
         className={`
-          block p-6 border-2 rounded-2xl cursor-pointer transition-all duration-300 group hover:shadow-xl hover:scale-[1.02] transform
+          block p-6 border rounded-2xl cursor-pointer transition-all duration-300 group hover:shadow-xl hover:scale-[1.02] transform
           ${
             selected
               ? `border-${type.color}-400 bg-gradient-to-br from-${type.color}-50 to-${type.color}-100/50 shadow-lg ring-2 ring-${type.color}-200`

@@ -35,9 +35,13 @@ const CategoricalMetricSelector: React.FC<Props> = ({ control }) => (
               <SelectValue placeholder="Select categorical metric" />
             </SelectTrigger>
           </FormControl>
-          <SelectContent>
+          <SelectContent className="bg-white border-slate-200 shadow-lg">
             {CATEGORICAL_METRICS.map(metric => (
-              <SelectItem key={metric} value={metric}>
+              <SelectItem
+                key={metric}
+                value={metric}
+                className="hover:bg-slate-100 focus:bg-blue-50 focus:text-blue-900 data-[state=checked]:bg-blue-100 data-[state=checked]:text-blue-900"
+              >
                 {metric}
               </SelectItem>
             ))}

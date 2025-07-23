@@ -2,7 +2,7 @@ import { useSetLayout } from '@components/Layout';
 import { useNotFound } from '@hooks/features/notFound';
 import { NotFoundContent } from '@components/NotFound';
 
-export default function NotFound() {
+export default function NotFoundPage() {
   const { navigation, suggestions } = useNotFound();
 
   useSetLayout(

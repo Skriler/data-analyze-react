@@ -2,18 +2,13 @@ import React from 'react';
 import { ResultsFilters } from './Filters';
 import { ResultCard } from './Card';
 import { SummaryStats } from './Summary';
-import {
-  EmptyResultsState,
-  LoadingSkeleton,
-  ResultsHeader,
-  ResultsListHeader,
-} from './Common';
+import { EmptyResultsState, LoadingSkeleton, ResultsHeader } from './Common';
 import type { DatasetDto } from '@api-types/dataset';
 import type { AnalysisResultItem, ResultsFiltersType } from '@shared/results';
 import { AlertCircle, RefreshCw } from 'lucide-react';
 
 interface ResultsContentProps {
-  datasets: DatasetDto[] | undefined;
+  datasets: DatasetDto[];
   isDatasetsLoading: boolean;
   results: AnalysisResultItem[];
   summaryStats: any;
@@ -68,7 +63,7 @@ const ResultsContent: React.FC<ResultsContentProps> = ({
 
       <ResultsFilters
         filters={filters}
-        datasets={datasets}
+        datasets={datasets as DatasetDto[]}
         onFiltersChange={onFiltersChange}
       />
 
@@ -79,12 +74,12 @@ const ResultsContent: React.FC<ResultsContentProps> = ({
           <EmptyResultsState onGoToAnalysis={onGoToAnalysis} />
         ) : (
           <>
-            <ResultsListHeader count={results.length} />
             <div className="space-y-6">
               {results.map((resultItem, index) => (
                 <ResultCard
                   key={`${resultItem.id}-${index}`}
                   resultItem={resultItem}
+                  dataset={datasets.find(d => d.id === resultItem.datasetId)!}
                 />
               ))}
             </div>

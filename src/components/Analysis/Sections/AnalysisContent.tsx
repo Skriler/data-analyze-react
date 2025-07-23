@@ -16,7 +16,6 @@ interface AnalysisContentProps {
   setSelectedAnalysisType: (type: string) => void;
   setShowAnalysisModal: (show: boolean) => void;
   handleRunAnalysis: (dataset: DatasetDto, analysisType: string) => void;
-  handleViewResults: () => void;
   handleViewDocumentation: () => void;
 }
 
@@ -29,7 +28,6 @@ const AnalysisContent: React.FC<AnalysisContentProps> = ({
   setSelectedAnalysisType,
   setShowAnalysisModal,
   handleRunAnalysis,
-  handleViewResults,
   handleViewDocumentation,
 }) => {
   const currentAnalysisType = ANALYSIS_TYPE_CONFIGS.find(
@@ -63,7 +61,6 @@ const AnalysisContent: React.FC<AnalysisContentProps> = ({
               isLoading={isLoading}
               analysisTypeName={currentAnalysisType.name}
               onRunAnalysis={handleDatasetAnalysis}
-              onViewResults={handleViewResults}
               onViewDocumentation={handleViewDocumentation}
             />
           </div>

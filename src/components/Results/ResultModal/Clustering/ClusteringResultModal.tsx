@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { PaginationFooter } from '@components/Ui/Pagination';
 import { ClusteringChart } from './Charts';
 import { ClusteringList } from './List';
-import { Header, ActiveFilters, QuickStats } from './Sections';
+import { Header, QuickStats } from './Sections';
 import type { ClusteringAnalysisResult } from '@api-types/analysis';
 import type { ClusteringViewMode } from '@shared/results/clusteringResultModal';
 import {
@@ -44,16 +44,11 @@ export const ClusteringResultModal: React.FC<ClusteringResultModalProps> = ({
       <div className="bg-white rounded-xl shadow-2xl w-full max-w-[88vw] max-h-[88vh] flex flex-col overflow-hidden">
         <Header
           viewMode={viewMode}
+          searchTerm={searchTerm}
           onViewModeChange={setViewMode}
+          onSearchChange={setSearchTerm}
           onClose={onClose}
         />
-
-        {viewMode === 'list' && (
-          <ActiveFilters
-            searchTerm={searchTerm}
-            onSearchChange={setSearchTerm}
-          />
-        )}
 
         {viewMode === 'list' && !searchTerm && <QuickStats stats={stats} />}
 

@@ -13,20 +13,10 @@ interface DatasetGridProps {
 
 function DatasetGrid({ datasets, isLoading }: DatasetGridProps) {
   const navigate = useNavigate();
-
-  const [selectedDataset, setSelectedDataset] = useState<DatasetDto | null>(
-    null
-  );
   const [showCreateModal, setShowCreateModal] = useState(false);
-  const [showAnalysisModal, setShowAnalysisModal] = useState(false);
 
   const handleView = (dataset: DatasetDto) => {
     navigate(`/datasets/${dataset.id}`);
-  };
-
-  const handleAnalyze = (dataset: DatasetDto) => {
-    setSelectedDataset(dataset);
-    setShowAnalysisModal(true);
   };
 
   if (isLoading) {
@@ -41,12 +31,7 @@ function DatasetGrid({ datasets, isLoading }: DatasetGridProps) {
     <>
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
         {datasets.map(dataset => (
-          <DatasetCard
-            key={dataset.id}
-            dataset={dataset}
-            onView={handleView}
-            onAnalyze={handleAnalyze}
-          />
+          <DatasetCard key={dataset.id} dataset={dataset} onView={handleView} />
         ))}
       </div>
 

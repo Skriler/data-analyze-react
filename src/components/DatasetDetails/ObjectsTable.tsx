@@ -4,6 +4,10 @@ import { Badge } from '@components/Ui/Badge';
 import { Input } from '@components/Ui/Input';
 import { Search } from 'lucide-react';
 import type { DataObjectDto, ParameterDto } from '@api-types/dataset';
+import {
+  MAX_DISPLAYED_OBJECTS,
+  MAX_DISPLAYED_PARAMETERS_PER_OBJECT,
+} from '@shared/datasetDetails';
 
 interface DatasetObjectsTableProps {
   objects: DataObjectDto[];
@@ -49,31 +53,39 @@ function DatasetObjectsTable({
 
         <div className="max-h-96 overflow-auto">
           <div className="space-y-2">
-            {filteredObjects.slice(0, 10).map((obj, index) => (
-              <div key={index} className="p-3 bg-gray-50 rounded-lg border">
-                <div className="font-medium text-gray-900 mb-2">{obj.name}</div>
-                <div className="grid grid-cols-2 gap-2">
-                  {parameters.slice(0, 4).map(param => (
-                    <div key={param.id} className="text-sm">
-                      <span className="text-gray-500">{param.name}:</span>
-                      <span className="ml-1 text-gray-900">
-                        {getParameterValue(obj, param.id)}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-                {parameters.length > 4 && (
-                  <div className="mt-2 text-xs text-gray-500">
-                    +{parameters.length - 4} more parameters
+            {filteredObjects
+              .slice(0, MAX_DISPLAYED_OBJECTS)
+              .map((obj, index) => (
+                <div key={index} className="p-3 bg-gray-50 rounded-lg border">
+                  <div className="font-medium text-gray-900 mb-2">
+                    {obj.name}
                   </div>
-                )}
-              </div>
-            ))}
+                  <div className="grid grid-cols-2 gap-2">
+                    {parameters
+                      .slice(0, MAX_DISPLAYED_PARAMETERS_PER_OBJECT)
+                      .map(param => (
+                        <div key={param.id} className="text-sm">
+                          <span className="text-gray-500">{param.name}:</span>
+                          <span className="ml-1 text-gray-900">
+                            {getParameterValue(obj, param.id)}
+                          </span>
+                        </div>
+                      ))}
+                  </div>
+                  {parameters.length > MAX_DISPLAYED_PARAMETERS_PER_OBJECT && (
+                    <div className="mt-2 text-xs text-gray-500">
+                      +{parameters.length - MAX_DISPLAYED_PARAMETERS_PER_OBJECT}{' '}
+                      more parameters
+                    </div>
+                  )}
+                </div>
+              ))}
           </div>
 
-          {filteredObjects.length > 10 && (
+          {filteredObjects.length > MAX_DISPLAYED_OBJECTS && (
             <div className="mt-4 text-center text-sm text-gray-500">
-              Showing 10 of {filteredObjects.length} objects
+              Showing {MAX_DISPLAYED_OBJECTS} of {filteredObjects.length}{' '}
+              objects
             </div>
           )}
 

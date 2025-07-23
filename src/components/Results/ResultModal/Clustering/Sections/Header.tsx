@@ -1,19 +1,20 @@
 import React from 'react';
-import { X, BarChart3, List } from 'lucide-react';
-import type {
-  ClusteringStats,
-  ClusteringViewMode,
-} from '@shared/results/clusteringResultModal';
+import { X, BarChart3, List, Search } from 'lucide-react';
+import type { ClusteringViewMode } from '@shared/results/clusteringResultModal';
 
 interface HeaderProps {
   viewMode: ClusteringViewMode;
+  searchTerm: string;
   onViewModeChange: (mode: ClusteringViewMode) => void;
+  onSearchChange: (term: string) => void;
   onClose: () => void;
 }
 
 const Header: React.FC<HeaderProps> = ({
   viewMode,
+  searchTerm,
   onViewModeChange,
+  onSearchChange,
   onClose,
 }) => {
   return (
@@ -30,6 +31,19 @@ const Header: React.FC<HeaderProps> = ({
       </div>
 
       <div className="flex items-center space-x-4">
+        {viewMode === 'list' && (
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <input
+              type="text"
+              placeholder="Search objects..."
+              value={searchTerm}
+              onChange={e => onSearchChange(e.target.value)}
+              className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 w-80"
+            />
+          </div>
+        )}
+
         <div className="flex bg-gray-100 rounded-lg p-1">
           <button
             onClick={() => onViewModeChange('list')}

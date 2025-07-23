@@ -16,7 +16,7 @@ export class BaseHttpClient {
   constructor(baseURL: string = '', apiPrefix: string = '/api') {
     this.axiosInstance = axios.create({
       baseURL: baseURL + apiPrefix,
-      timeout: 10000,
+      timeout: 500000,
       headers: {
         'Content-Type': 'application/json',
       },

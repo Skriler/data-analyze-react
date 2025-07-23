@@ -1,5 +1,5 @@
 import React from 'react';
-import { Database, FileText, TrendingUp } from 'lucide-react';
+import { Database, FileText } from 'lucide-react';
 import { Button } from '@components/Ui/Button';
 import { DatasetGrid } from './DatasetGrid';
 import type { DatasetDto } from '@api-types/dataset';
@@ -9,7 +9,6 @@ interface DatasetSectionProps {
   isLoading: boolean;
   analysisTypeName: string;
   onRunAnalysis: (dataset: DatasetDto) => void;
-  onViewResults: () => void;
   onViewDocumentation: () => void;
 }
 
@@ -18,7 +17,6 @@ export const DatasetSection: React.FC<DatasetSectionProps> = ({
   isLoading,
   analysisTypeName,
   onRunAnalysis,
-  onViewResults,
   onViewDocumentation,
 }) => {
   return (

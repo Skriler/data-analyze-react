@@ -5,7 +5,6 @@ import type {
   RegisterDto,
   AuthResult,
   RefreshTokenRequest,
-  LogoutRequest,
 } from '@api-types/auth';
 
 export const authApi = {
@@ -60,11 +59,10 @@ export const authApi = {
    *
    * @param request - Optional logout data.
    */
-  async logout(request?: LogoutRequest): Promise<void> {
-    await httpClient.request<void, LogoutRequest>({
+  async logout(): Promise<void> {
+    await httpClient.request<void, void>({
       method: HttpMethod.POST,
       url: `${this.BASE_URL}/logout`,
-      data: request,
       requireAuth: true,
     });
   },

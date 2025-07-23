@@ -16,15 +16,15 @@ interface AnalysisTypeCardProps {
 const getCardColorClasses = (id: string) => {
   const colorMaps = {
     similarity: {
-      gradient: 'from-blue-500 to-blue-600',
-      bg: 'bg-blue-50',
-      border: 'border-blue-200',
-      selectedBorder: 'border-blue-500',
-      selectedBg: 'bg-blue-50',
-      selectedRing: 'ring-blue-200',
-      icon: 'text-blue-600',
+      gradient: 'from-rose-500 to-rose-600',
+      bg: 'bg-rose-50',
+      border: 'border-rose-200',
+      selectedBorder: 'border-rose-500',
+      selectedBg: 'bg-rose-50',
+      selectedRing: 'ring-rose-200',
+      icon: 'text-rose-600',
       selectedIcon: 'text-white',
-      title: 'text-blue-700',
+      title: 'text-rose-700',
     },
     kmeans: {
       gradient: 'from-green-500 to-green-600',

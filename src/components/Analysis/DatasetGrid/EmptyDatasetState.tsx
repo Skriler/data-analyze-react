@@ -1,5 +1,5 @@
 import React from 'react';
-import { Database, FileText, Plus, Upload } from 'lucide-react';
+import { Database, Plus } from 'lucide-react';
 import { Button } from '@components/Ui/Button';
 import { Card, CardContent } from '@components/Ui/Card';
 

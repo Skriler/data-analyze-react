@@ -3,7 +3,7 @@ import { useAnalysis } from '@hooks/features/analysis/useAnalysis';
 import { useDatasets } from '@hooks/api/useDatasets';
 import { AnalysisContent } from '@components/Analysis';
 
-export default function Analysis() {
+export default function AnalysisPage() {
   const analysisState = useAnalysis();
   const { data: datasets, isLoading } = useDatasets();
 

@@ -4,25 +4,26 @@ import { ResultCardActions } from './ResultCardActions';
 import { ResultCardHeader } from './ResultCardHeader';
 import { ResultCardContent } from './ResultCardContent';
 import { ANALYSIS_CONFIG, type AnalysisResultItem } from '@shared/results';
-import { ClusteringResultModal } from '../ClusteringResultModal';
-import { SimilarityResultModal } from '../SimilarityResultModal';
+import { ClusteringResultModal, SimilarityResultModal } from '../ResultModal';
 import type {
   ClusteringAnalysisResult,
   SimilarityAnalysisResult,
 } from '@api-types/analysis';
+import type { DatasetDto } from '@api-types/dataset';
 
 interface ResultCardProps {
   resultItem: AnalysisResultItem;
+  dataset: DatasetDto;
 }
 
-const ResultCard: React.FC<ResultCardProps> = ({ resultItem }) => {
+const ResultCard: React.FC<ResultCardProps> = ({ resultItem, dataset }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const COLOR_CLASSES = {
-    blue: {
-      bg: 'bg-blue-50 border-blue-200',
-      icon: 'bg-blue-500 text-white',
-      badge: 'bg-blue-100 text-blue-800 border-blue-200',
+    rose: {
+      bg: 'bg-rose-50 border-rose-200',
+      icon: 'bg-rose-500 text-white',
+      badge: 'bg-rose-100 text-rose-800 border-rose-200',
     },
     green: {
       bg: 'bg-emerald-50 border-emerald-200',
@@ -55,6 +56,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ resultItem }) => {
           <div className="flex items-start justify-between">
             <ResultCardHeader
               resultItem={resultItem}
+              dataset={dataset}
               config={config}
               colorClasses={colorClasses}
             />

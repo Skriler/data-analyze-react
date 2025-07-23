@@ -4,15 +4,18 @@ import { CardTitle, CardDescription } from '@components/Ui/Card';
 import { Badge } from '@components/Ui/Badge';
 import type { AnalysisResultItem } from '@shared/results';
 import { ResultsFormatter } from '@libs/utils/results';
+import type { DatasetDto } from '@api-types/dataset';
 
 interface ResultCardHeaderProps {
   resultItem: AnalysisResultItem;
+  dataset: DatasetDto;
   config: any;
   colorClasses: any;
 }
 
 const ResultCardHeader: React.FC<ResultCardHeaderProps> = ({
   resultItem,
+  dataset,
   config,
   colorClasses,
 }) => {
@@ -30,26 +33,22 @@ const ResultCardHeader: React.FC<ResultCardHeaderProps> = ({
           <CardTitle className="text-xl font-bold text-gray-900">
             {config.name}
           </CardTitle>
-          <Badge
-            variant="outline"
-            className={`${colorClasses.badge} border font-medium`}
-          >
-            {resultItem.type}
-          </Badge>
         </div>
         <CardDescription className="text-gray-600 space-y-1">
           <div className="flex items-center space-x-2">
             <Database className="w-4 h-4" />
             <span className="font-medium">Dataset:</span>
-            <span>{resultItem.datasetName}</span>
+            <span>{dataset.name}</span>
           </div>
           <div className="flex items-center space-x-2">
             <Clock className="w-4 h-4" />
             <span className="font-medium">Completed:</span>
-            <span>{ResultsFormatter.formatDate(resultItem.timestamp)}</span>
+            <span>
+              {ResultsFormatter.formatDate(resultItem.result.createdAt)}
+            </span>
             <span className="text-gray-400">•</span>
             <span className="text-gray-500">
-              {ResultsFormatter.getRelativeTime(resultItem.timestamp)}
+              {ResultsFormatter.getRelativeTime(resultItem.result.createdAt)}
             </span>
           </div>
         </CardDescription>

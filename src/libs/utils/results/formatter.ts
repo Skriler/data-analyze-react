@@ -12,13 +12,15 @@ export class ResultsFormatter {
     return text.substring(0, maxLength) + '...';
   }
 
-  static formatDate(timestamp: number): string {
+  static formatDate(timestamp: string): string {
     return new Date(timestamp).toLocaleDateString();
   }
 
-  static getRelativeTime(timestamp: number): string {
+  static getRelativeTime(timestamp: string): string {
     const now = Date.now();
-    const diff = now - timestamp;
+    const time = new Date(timestamp).getTime();
+    const diff = now - time;
+
     const minutes = Math.floor(diff / 60000);
     const hours = Math.floor(minutes / 60);
     const days = Math.floor(hours / 24);
