@@ -1,7 +1,7 @@
 import React from 'react';
-import { Database, FileText } from 'lucide-react';
+import { Database, FileText, Play } from 'lucide-react';
 import { Button } from '@components/Ui/Button';
-import { DatasetGrid } from './DatasetGrid';
+import { DatasetGrid } from '@components/Common/DatasetGrid';
 import type { DatasetDto } from '@api-types/dataset';
 
 interface DatasetSectionProps {
@@ -55,8 +55,13 @@ export const DatasetSection: React.FC<DatasetSectionProps> = ({
       <DatasetGrid
         datasets={datasets}
         isLoading={isLoading}
-        analysisTypeName={analysisTypeName}
-        onRunAnalysis={onRunAnalysis}
+        action={{
+          text: `Run ${analysisTypeName}`,
+          icon: Play,
+          onClick: onRunAnalysis,
+        }}
+        showCreatedDate={false}
+        showDescription={true}
       />
     </div>
   );

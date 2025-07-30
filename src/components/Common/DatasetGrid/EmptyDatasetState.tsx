@@ -3,7 +3,7 @@ import { Database, Plus } from 'lucide-react';
 import { Button } from '@components/Ui/Button';
 import { Card, CardContent } from '@components/Ui/Card';
 
-export const EmptyDatasetState: React.FC = () => {
+const EmptyDatasetState: React.FC = () => {
   return (
     <Card className="border-2 border-dashed border-gray-300 hover:border-blue-400 transition-all duration-300 bg-gradient-to-br from-gray-50 to-white">
       <CardContent className="text-center py-16">
@@ -39,3 +39,5 @@ export const EmptyDatasetState: React.FC = () => {
     </Card>
   );
 };
+
+export { EmptyDatasetState };

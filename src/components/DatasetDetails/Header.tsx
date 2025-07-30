@@ -10,13 +10,13 @@ interface DatasetDetailsHeaderProps {
   actions: DatasetActions;
 }
 
-function DatasetDetailsHeader({
+const DatasetDetailsHeader: React.FC<DatasetDetailsHeaderProps> = ({
   dataset,
   createdAt,
   actions,
-}: DatasetDetailsHeaderProps) {
+}) => {
   return (
-    <Card className="bg-white border border-gray-200 shadow-sm">
+    <Card className="bg-white rounded-xl border border-gray-200 shadow-sm">
       <CardContent className="p-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4">
@@ -24,7 +24,7 @@ function DatasetDetailsHeader({
               <Database className="text-blue-600 h-8 w-8" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-gray-900 mb-1">
+              <h1 className="text-3xl font-bold text-gray-900 mb-1">
                 {dataset.name}
               </h1>
               <p className="text-sm text-gray-500">Created {createdAt}</p>
@@ -34,7 +34,7 @@ function DatasetDetailsHeader({
           <div className="flex items-center space-x-3">
             <Button
               onClick={actions.handleAnalyze}
-              className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white"
+              className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
             >
               <BarChart3 className="h-4 w-4" />
               <span>Run Analysis</span>
@@ -42,7 +42,7 @@ function DatasetDetailsHeader({
 
             <Button
               onClick={actions.handleViewResults}
-              className="flex items-center space-x-2 bg-green-600 hover:bg-green-700 text-white"
+              className="flex items-center space-x-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-colors"
             >
               <Eye className="h-4 w-4" />
               <span>View Results</span>
@@ -52,6 +52,6 @@ function DatasetDetailsHeader({
       </CardContent>
     </Card>
   );
-}
+};
 
 export { DatasetDetailsHeader };

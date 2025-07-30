@@ -14,13 +14,13 @@ const EmptyState: React.FC<EmptyStateProps> = ({
       <div className="text-center text-gray-500">
         {searchTerm ? (
           <div>
-            <p className="text-lg font-medium">No results found</p>
-            <p className="text-sm mt-1">
+            <p className="text-lg font-medium mb-2">No results found</p>
+            <p className="text-base">
               Try adjusting your search term "{searchTerm}"
             </p>
           </div>
         ) : (
-          <p>{message}</p>
+          <p className="text-lg font-medium">{message}</p>
         )}
       </div>
     </div>

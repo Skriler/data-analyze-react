@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardContent } from '@components/Ui/Card';
 
-export const DatasetLoadingSkeleton: React.FC = () => {
+const DatasetLoadingSkeleton: React.FC = () => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
       {Array.from({ length: 6 }).map((_, i) => (
@@ -37,3 +37,5 @@ export const DatasetLoadingSkeleton: React.FC = () => {
     </div>
   );
 };
+
+export { DatasetLoadingSkeleton };

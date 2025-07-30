@@ -1,21 +1,31 @@
 import React from 'react';
+import type { LucideIcon } from 'lucide-react';
 import { DatasetCard } from './DatasetCard';
 import { DatasetLoadingSkeleton } from './DatasetLoadingSkeleton';
 import { EmptyDatasetState } from './EmptyDatasetState';
 import type { DatasetDto } from '@api-types/dataset';
 
+interface DatasetGridAction {
+  text: string;
+  icon: LucideIcon;
+  onClick: (dataset: DatasetDto) => void;
+  className?: string;
+}
+
 interface DatasetGridProps {
   datasets: DatasetDto[] | undefined;
   isLoading: boolean;
-  analysisTypeName: string;
-  onRunAnalysis: (dataset: DatasetDto) => void;
+  action: DatasetGridAction;
+  showCreatedDate?: boolean;
+  showDescription?: boolean;
 }
 
-export const DatasetGrid: React.FC<DatasetGridProps> = ({
+const DatasetGrid: React.FC<DatasetGridProps> = ({
   datasets,
   isLoading,
-  analysisTypeName,
-  onRunAnalysis,
+  action,
+  showCreatedDate = false,
+  showDescription = true,
 }) => {
   if (isLoading) {
     return <DatasetLoadingSkeleton />;
@@ -31,10 +41,13 @@ export const DatasetGrid: React.FC<DatasetGridProps> = ({
         <DatasetCard
           key={dataset.id}
           dataset={dataset}
-          analysisTypeName={analysisTypeName}
-          onRunAnalysis={onRunAnalysis}
+          action={action}
+          showCreatedDate={showCreatedDate}
+          showDescription={showDescription}
         />
       ))}
     </div>
   );
 };
+
+export { DatasetGrid };

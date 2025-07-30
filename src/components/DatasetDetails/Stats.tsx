@@ -5,7 +5,7 @@ interface DatasetDetailsStatsProps {
   stats: DatasetStatsData;
 }
 
-function DatasetDetailsStats({ stats }: DatasetDetailsStatsProps) {
+const DatasetDetailsStats: React.FC<DatasetDetailsStatsProps> = ({ stats }) => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       {STATS_CONFIG.map((config, index) => {
@@ -15,20 +15,20 @@ function DatasetDetailsStats({ stats }: DatasetDetailsStatsProps) {
         return (
           <Card
             key={index}
-            className="bg-white border border-gray-200 shadow-sm"
+            className="bg-white rounded-xl border border-gray-200 shadow-sm"
           >
-            <CardContent className="p-4">
+            <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-gray-600 mb-1">
                     {config.title}
                   </p>
-                  <p className="text-2xl font-bold text-gray-900">{value}</p>
+                  <p className="text-3xl font-bold text-gray-900">{value}</p>
                 </div>
                 <div
-                  className={`w-10 h-10 rounded-lg ${config.bgColor} flex items-center justify-center`}
+                  className={`w-12 h-12 rounded-xl ${config.bgColor} flex items-center justify-center`}
                 >
-                  <Icon className={`h-5 w-5 ${config.color}`} />
+                  <Icon className={`h-6 w-6 ${config.color}`} />
                 </div>
               </div>
             </CardContent>
@@ -37,6 +37,6 @@ function DatasetDetailsStats({ stats }: DatasetDetailsStatsProps) {
       })}
     </div>
   );
-}
+};
 
 export { DatasetDetailsStats };

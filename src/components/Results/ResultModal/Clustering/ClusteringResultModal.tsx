@@ -41,7 +41,7 @@ export const ClusteringResultModal: React.FC<ClusteringResultModalProps> = ({
 
   return ReactDOM.createPortal(
     <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
-      <div className="bg-white rounded-xl shadow-2xl w-full max-w-[88vw] max-h-[88vh] flex flex-col overflow-hidden">
+      <div className="bg-white rounded-xl shadow-2xl w-[88vw] h-[88vh] flex flex-col overflow-hidden">
         <Header
           viewMode={viewMode}
           searchTerm={searchTerm}

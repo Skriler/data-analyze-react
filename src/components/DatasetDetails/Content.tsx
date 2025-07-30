@@ -3,6 +3,7 @@ import { DatasetDetailsHeader } from './Header';
 import { DatasetDetailsStats } from './Stats';
 import { DatasetObjectsTable } from './ObjectsTable';
 import { DatasetParametersTable } from './ParametersTable';
+import { DatasetChartsSection } from './ChartsSection';
 import type { DatasetStatsData, DatasetActions } from '@shared/datasetDetails';
 import type { DatasetDto } from '@api-types/dataset';
 
@@ -15,14 +16,14 @@ interface DatasetDetailsContentProps {
   actions: DatasetActions;
 }
 
-function DatasetDetailsContent({
+const DatasetDetailsContent: React.FC<DatasetDetailsContentProps> = ({
   dataset,
   isLoading,
   error,
   createdAt,
   stats,
   actions,
-}: DatasetDetailsContentProps) {
+}) => {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-64">
@@ -40,24 +41,28 @@ function DatasetDetailsContent({
   }
 
   return (
-    <div className="space-y-6">
-      <DatasetDetailsHeader
-        dataset={dataset}
-        createdAt={createdAt}
-        actions={actions}
-      />
-
-      <DatasetDetailsStats stats={stats} />
-
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-        <DatasetParametersTable parameters={dataset.parameters} />
-        <DatasetObjectsTable
-          objects={dataset.objects}
-          parameters={dataset.parameters}
+    <div className="min-h-screen bg-gray-50">
+      <div className="max-w-7xl mx-auto p-6 space-y-6">
+        <DatasetDetailsHeader
+          dataset={dataset}
+          createdAt={createdAt}
+          actions={actions}
         />
+
+        <DatasetDetailsStats stats={stats} />
+
+        <DatasetChartsSection dataset={dataset} stats={stats} />
+
+        <div className="space-y-6">
+          <DatasetParametersTable parameters={dataset.parameters} />
+          <DatasetObjectsTable
+            objects={dataset.objects}
+            parameters={dataset.parameters}
+          />
+        </div>
       </div>
     </div>
   );
-}
+};
 
 export { DatasetDetailsContent };

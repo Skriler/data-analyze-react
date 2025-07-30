@@ -1,9 +1,11 @@
+import { useNavigate } from 'react-router-dom';
 import type { DatasetDto } from '@api-types/dataset';
 import { DatasetsListError } from './DatasetsListError';
 import { DatasetsListPagination } from './DatasetsListPagination';
-import { DatasetGrid } from '../DatasetGrid';
+import { DatasetGrid } from '@components/Common/DatasetGrid';
 import { DatasetActions } from '../DatasetActions';
 import { CreateDatasetModal } from '../CreateDatasetModal';
+import { Eye } from 'lucide-react';
 
 interface DatasetsListProps {
   datasets: DatasetDto[];
@@ -25,9 +27,15 @@ export function DatasetsList({
   error,
   actions,
 }: DatasetsListProps) {
+  const navigate = useNavigate();
+
   const handleImportDataset = () => {
     // TODO: Implement import functionality
     console.log('Import dataset clicked');
+  };
+
+  const handleViewDataset = (dataset: DatasetDto) => {
+    navigate(`/datasets/${dataset.id}`);
   };
 
   if (error) {
@@ -45,7 +53,19 @@ export function DatasetsList({
         onImportDataset={handleImportDataset}
       />
 
-      <DatasetGrid datasets={datasets} isLoading={isLoading} />
+      <DatasetGrid
+        datasets={datasets}
+        isLoading={isLoading}
+        action={{
+          text: 'View Dataset',
+          icon: Eye,
+          onClick: handleViewDataset,
+          className:
+            'w-full text-sm bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg shadow-sm transition-all duration-200 flex items-center justify-center space-x-2',
+        }}
+        showCreatedDate={true}
+        showDescription={false}
+      />
 
       <DatasetsListPagination
         totalDatasets={datasets.length}

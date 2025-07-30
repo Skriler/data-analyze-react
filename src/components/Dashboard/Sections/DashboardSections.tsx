@@ -31,7 +31,8 @@ const DashboardSections: React.FC<DashboardSectionsProps> = ({
       isLoading={isLoading}
       actions={actions}
     />
-    <ActivitySection activities={data.activities} />
+    {/* TODO: get recent activity
+    <ActivitySection activities={data.activities} /> */}
   </div>
 );
 
