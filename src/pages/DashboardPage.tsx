@@ -1,4 +1,4 @@
-import { useSetLayout } from '@components/Layout';
+import { useSetLayout } from '@hooks/features/layout';
 import { useDashboard } from '@hooks/features/dashboard';
 import { DashboardContent } from '@components/Dashboard';
 

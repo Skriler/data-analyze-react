@@ -1,4 +1,4 @@
-import { useSetLayout } from '@components/Layout';
+import { useSetLayout } from '@hooks/features/layout';
 import { useDatasetDetails } from '@hooks/features/datasetDetails';
 import { DatasetDetailsContent } from '@components/DatasetDetails';
 

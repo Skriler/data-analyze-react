@@ -2,18 +2,38 @@ import { useFormContext } from 'react-hook-form';
 import { AlertCircle } from 'lucide-react';
 import { SectionCard, SectionHeader } from '../Common';
 import { DataObjectsTable } from './DataObjectsTable';
+import type { DataObjectCreateDto } from '@api-types/dataset';
 
-function ObjectsCard({
+interface ObjectsCardProps {
+  parameters: string[];
+  objects: DataObjectCreateDto[];
+  addObject: () => void;
+  removeObject: (index: number) => void;
+  updateObject: (
+    index: number,
+    field: 'name' | 'values',
+    value: string | string[]
+  ) => void;
+  updateObjectValue: (
+    objIndex: number,
+    valueIndex: number,
+    value: string
+  ) => void;
+}
+
+const ObjectsCard: React.FC<ObjectsCardProps> = ({
   parameters,
   objects,
   addObject,
   removeObject,
   updateObject,
   updateObjectValue,
-}: any) {
+}) => {
   const {
     formState: { errors },
-  } = useFormContext();
+  } = useFormContext<{
+    objects?: unknown;
+  }>();
 
   return (
     <div className="space-y-4">
@@ -35,7 +55,6 @@ function ObjectsCard({
         />
       </SectionCard>
 
-      {/* General objects validation error */}
       {errors.objects && typeof errors.objects.message === 'string' && (
         <div className="flex items-center gap-2 text-red-600 text-sm bg-red-50 p-3 rounded-lg">
           <AlertCircle className="h-4 w-4" />
@@ -44,6 +63,6 @@ function ObjectsCard({
       )}
     </div>
   );
-}
+};
 
 export { ObjectsCard };

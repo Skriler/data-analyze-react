@@ -1,5 +1,5 @@
 import React from 'react';
-import { Clock, Database } from 'lucide-react';
+import { Clock, Database, type LucideIcon } from 'lucide-react';
 import { CardTitle, CardDescription } from '@components/Ui/Card';
 import type { AnalysisResultItem } from '@shared/results';
 import { ResultsFormatter } from '@libs/utils/results';
@@ -8,8 +8,17 @@ import type { DatasetDto } from '@api-types/dataset';
 interface ResultCardHeaderProps {
   resultItem: AnalysisResultItem;
   dataset: DatasetDto;
-  config: any;
-  colorClasses: any;
+  config: {
+    icon: LucideIcon;
+    color: string;
+    name: string;
+    description: string;
+  };
+  colorClasses: {
+    bg: string;
+    icon: string;
+    badge: string;
+  };
 }
 
 const ResultCardHeader: React.FC<ResultCardHeaderProps> = ({

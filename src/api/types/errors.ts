@@ -6,7 +6,7 @@ export class ApiError extends Error {
     public status: number,
     public statusText: string,
     message?: string,
-    public data?: any
+    public data?: unknown
   ) {
     super(message || `${status}: ${statusText}`);
     this.name = 'ApiError';

@@ -160,12 +160,13 @@ export const useCreateDatasetModal = ({
 
       onSuccess();
       resetForm();
-    } catch (error: any) {
+    } catch (error) {
       let errorMessage = 'An error occurred while creating the dataset.';
 
-      if (error instanceof ApiError && error.data?.errors) {
-        const errors = error.data.errors;
-        if (Array.isArray(errors) && errors.length > 0) {
+      if (error instanceof ApiError) {
+        const errors = (error.data as { errors?: unknown[] })?.errors;
+
+        if (Array.isArray(errors) && errors.length) {
           errorMessage = errors.join(', ');
         }
       }

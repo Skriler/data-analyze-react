@@ -1,4 +1,4 @@
-import { ParameterAveragesChart, ParameterTypesChart } from './Charts';
+import { ParameterAveragesChart, ParameterTypesChart } from '../Charts';
 import type { DatasetDto } from '@api-types/dataset';
 import type { DatasetStatsData } from '@shared/datasetDetails';
 

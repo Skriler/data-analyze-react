@@ -1,1 +1,2 @@
-export { DashboardContent } from './DashboardContent';
+export { ActivitySection } from './ActivitySection';
+export { MainContentSection } from './MainContentSection';

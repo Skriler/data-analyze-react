@@ -8,12 +8,16 @@ import {
   ParameterDistributionChartBuilder,
 } from '@libs/utils/datasetDetails';
 
+interface ChartCanvas extends HTMLCanvasElement {
+  chart?: Chart.Chart;
+}
+
 interface ParameterTypesChartProps {
   stats: DatasetStatsData;
 }
 
 const ParameterTypesChart: React.FC<ParameterTypesChartProps> = ({ stats }) => {
-  const pieChartRef = useRef<HTMLCanvasElement>(null);
+  const pieChartRef = useRef<ChartCanvas | null>(null);
 
   useEffect(() => {
     if (!pieChartRef.current) return;
@@ -23,7 +27,9 @@ const ParameterTypesChart: React.FC<ParameterTypesChartProps> = ({ stats }) => {
 
     const config = ParameterDistributionChartBuilder.createChartConfig(stats);
 
-    (pieChartRef.current as any).chart = new Chart.Chart(ctx!, config);
+    if (ctx) {
+      pieChartRef.current.chart = new Chart.Chart(ctx, config);
+    }
 
     return () => {
       DatasetChartUtils.destroyChart(pieChartRef);

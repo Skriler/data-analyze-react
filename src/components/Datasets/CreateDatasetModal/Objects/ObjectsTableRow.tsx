@@ -22,17 +22,18 @@ interface ObjectsTableRowProps {
   objectsCount: number;
 }
 
-function ObjectsTableRow({
+const ObjectsTableRow: React.FC<ObjectsTableRowProps> = ({
   obj,
   objIndex,
   onUpdateObject,
   onUpdateObjectValue,
   onRemoveObject,
   objectsCount,
-}: ObjectsTableRowProps) {
+}) => {
   const {
     formState: { errors },
   } = useFormContext<CreateDatasetFormData>();
+
   const objectError = errors.objects?.[objIndex];
 
   return (
@@ -82,7 +83,6 @@ function ObjectsTableRow({
             </div>
           </td>
         ))}
-
         <td className="px-6 py-4">
           <Button
             type="button"
@@ -129,6 +129,6 @@ function ObjectsTableRow({
       )}
     </>
   );
-}
+};
 
 export { ObjectsTableRow };

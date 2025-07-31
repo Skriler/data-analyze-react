@@ -41,7 +41,7 @@ const AnalysisModalContent: React.FC<AnalysisModalContentProps> = ({
               Choose Analysis Type
             </h3>
           </div>
-          <AnalysisTypeSelector control={form.control as any} />
+          <AnalysisTypeSelector control={form.control} />
         </div>
 
         {/* Settings Grid */}
@@ -80,7 +80,7 @@ const AnalysisModalContent: React.FC<AnalysisModalContentProps> = ({
                 </h3>
               </div>
               <AlgorithmSettings
-                control={form.control as any}
+                control={form.control}
                 analysisType={analysisType}
               />
             </div>

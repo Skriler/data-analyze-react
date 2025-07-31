@@ -21,14 +21,14 @@ interface DataObjectsTableProps {
   ) => void;
 }
 
-function DataObjectsTable({
+const DataObjectsTable: React.FC<DataObjectsTableProps> = ({
   parameters,
   objects,
   onAddObject,
   onRemoveObject,
   onUpdateObject,
   onUpdateObjectValue,
-}: DataObjectsTableProps) {
+}) => {
   const minColWidth = Math.max(150, 200 / Math.max(parameters.length, 1));
 
   return (
@@ -67,6 +67,6 @@ function DataObjectsTable({
       />
     </div>
   );
-}
+};
 
 export { DataObjectsTable };

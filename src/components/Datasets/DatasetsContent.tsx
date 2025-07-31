@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { Eye } from 'lucide-react';
-import { DatasetsContentError } from './DatasetsContentError';
-import { DatasetActions } from '../DatasetActions';
-import { CreateDatasetModal } from '../CreateDatasetModal';
+import { DatasetsContentError } from './Sections';
+import { DatasetActions } from './DatasetActions';
+import { CreateDatasetModal } from './CreateDatasetModal';
 import { DatasetGrid } from '@components/Common/DatasetGrid';
 import { PaginationFooter } from '@components/Ui/Pagination';
 import type { DatasetDto } from '@api-types/dataset';

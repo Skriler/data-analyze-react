@@ -1,16 +1,18 @@
 import { Spinner } from '@components/Ui/Spinner';
-import { DatasetDetailsHeader } from './Header';
-import { DatasetDetailsStats } from './Stats';
-import { DatasetObjectsTable } from './ObjectsTable';
-import { DatasetParametersTable } from './ParametersTable';
-import { DatasetChartsSection } from './ChartsSection';
+import {
+  DatasetDetailsHeader,
+  DatasetDetailsStats,
+  DatasetObjectsTable,
+  DatasetParametersTable,
+  DatasetChartsSection,
+} from './Sections';
 import type { DatasetStatsData, DatasetActions } from '@shared/datasetDetails';
 import type { DatasetDto } from '@api-types/dataset';
 
 interface DatasetDetailsContentProps {
   dataset: DatasetDto | undefined;
   isLoading: boolean;
-  error: any;
+  error: unknown;
   createdAt: string;
   stats: DatasetStatsData | null;
   actions: DatasetActions;

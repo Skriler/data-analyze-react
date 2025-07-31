@@ -11,12 +11,12 @@ interface ParametersSectionProps {
   onUpdateParameter: (index: number, value: string) => void;
 }
 
-function ParametersSection({
+const ParametersSection: React.FC<ParametersSectionProps> = ({
   parameters,
   onAddParameter,
   onRemoveParameter,
   onUpdateParameter,
-}: ParametersSectionProps) {
+}) => {
   const {
     formState: { errors },
   } = useFormContext<CreateDatasetFormData>();
@@ -103,6 +103,6 @@ function ParametersSection({
       )}
     </div>
   );
-}
+};
 
 export { ParametersSection };

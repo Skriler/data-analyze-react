@@ -15,7 +15,7 @@ export enum HttpMethod {
  *
  * @template T - Type of request body data.
  */
-export interface RequestConfig<T = any> extends AxiosRequestConfig {
+export interface RequestConfig<T = unknown> extends AxiosRequestConfig {
   method: HttpMethod;
   url: string;
   data?: T;

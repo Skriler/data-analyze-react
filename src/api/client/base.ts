@@ -34,7 +34,7 @@ export class BaseHttpClient {
    * @returns Promise resolving to response data of type TResponse.
    * @throws ApiError on request failure.
    */
-  public async request<TResponse = unknown, TRequest = any>(
+  public async request<TResponse = unknown, TRequest = unknown>(
     config: RequestConfig<TRequest>
   ): Promise<TResponse> {
     const { method, url, data, requireAuth = false, headers, timeout } = config;

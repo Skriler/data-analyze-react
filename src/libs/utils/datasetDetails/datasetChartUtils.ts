@@ -34,9 +34,15 @@ export class DatasetChartUtils {
   static destroyChart(
     canvasRef: React.RefObject<HTMLCanvasElement | null>
   ): void {
-    if (canvasRef.current && (canvasRef.current as any)?.chart) {
-      (canvasRef.current as any).chart.destroy();
-    }
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const chart = (
+      canvas as HTMLCanvasElement & { chart?: { destroy: () => void } }
+    ).chart;
+    if (!chart) return;
+
+    chart.destroy();
   }
 
   /**

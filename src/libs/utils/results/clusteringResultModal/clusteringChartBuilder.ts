@@ -1,5 +1,6 @@
 import type { ProcessedCluster } from '@shared/results/clusteringResultModal';
 import { CLUSTER_COLORS } from '@shared/results/clusteringResultModal';
+import type { TooltipItem } from 'chart.js';
 
 export class ClusteringChartBuilder {
   /**
@@ -48,9 +49,11 @@ export class ClusteringChartBuilder {
         },
         tooltip: {
           callbacks: {
-            label: (context: any) => {
+            label: (context: TooltipItem<'scatter'>) => {
               const cluster = clusters[context.datasetIndex];
-              return `${context.raw.label} (Cluster ${cluster.number})`;
+              const raw = context.raw as { label: string };
+
+              return `${raw.label} (Cluster ${cluster.number})`;
             },
           },
           backgroundColor: 'rgba(0, 0, 0, 0.9)',

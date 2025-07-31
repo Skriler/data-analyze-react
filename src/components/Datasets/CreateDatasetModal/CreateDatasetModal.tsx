@@ -11,7 +11,10 @@ interface CreateDatasetModalProps {
   onOpenChange: (open: boolean) => void;
 }
 
-function CreateDatasetModal({ open, onOpenChange }: CreateDatasetModalProps) {
+const CreateDatasetModal: React.FC<CreateDatasetModalProps> = ({
+  open,
+  onOpenChange,
+}) => {
   const hookData = useCreateDatasetModal({
     onSuccess: () => onOpenChange(false),
   });
@@ -35,6 +38,6 @@ function CreateDatasetModal({ open, onOpenChange }: CreateDatasetModalProps) {
       </DialogContent>
     </Dialog>
   );
-}
+};
 
 export { CreateDatasetModal };

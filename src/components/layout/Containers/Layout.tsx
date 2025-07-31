@@ -1,7 +1,7 @@
 import React from 'react';
 import { AppHeader } from '../AppHeader';
 import { AppSidebar } from '../AppSidebar';
-import { useLayoutContext } from './LayoutContext';
+import { useLayoutContext } from '@hooks/features/layout';
 
 interface LayoutProps {
   children: React.ReactNode;

@@ -52,7 +52,7 @@ const getAnalysisColors = (id: string) => {
   return colorMaps[id as keyof typeof colorMaps] || colorMaps.similarity;
 };
 
-export const AnalysisTypeDetails: React.FC<AnalysisTypeDetailsProps> = ({
+const AnalysisTypeDetails: React.FC<AnalysisTypeDetailsProps> = ({
   analysisType,
 }) => {
   const colors = getAnalysisColors(analysisType.id);
@@ -109,3 +109,5 @@ export const AnalysisTypeDetails: React.FC<AnalysisTypeDetailsProps> = ({
     </Card>
   );
 };
+
+export { AnalysisTypeDetails };

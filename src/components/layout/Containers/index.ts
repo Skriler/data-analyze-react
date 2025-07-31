@@ -1,2 +1,2 @@
-export { LayoutProvider, useSetLayout } from './LayoutContext';
+export { LayoutProvider, LayoutContext } from './LayoutProvider';
 export { Layout } from './Layout';

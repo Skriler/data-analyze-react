@@ -15,6 +15,7 @@ import { AlgorithmSettings } from '../AlgorithmSettings';
 import { useParameterSettings } from '@hooks/features/analysis';
 import { useAnalysisModal } from '@hooks/features/analysis';
 import type { DatasetDto } from '@api-types/dataset';
+import type { FormData as AnalysisFormData } from '@shared/analysis';
 
 interface AnalysisModalProps {
   open: boolean;
@@ -45,7 +46,7 @@ const AnalysisModal: React.FC<AnalysisModalProps> = ({
     updateFormParameterSettings(parameterSettings);
   }, [parameterSettings]);
 
-  const handleSubmit = (formData: any) => {
+  const handleSubmit = (formData: AnalysisFormData) => {
     submitAnalysis(formData, parameterSettings);
   };
 
@@ -98,7 +99,7 @@ const AnalysisModal: React.FC<AnalysisModalProps> = ({
                         Choose Analysis Type
                       </h3>
                     </div>
-                    <AnalysisTypeSelector control={form.control as any} />
+                    <AnalysisTypeSelector control={form.control} />
                   </div>
 
                   {/* Settings Grid */}
@@ -115,7 +116,7 @@ const AnalysisModal: React.FC<AnalysisModalProps> = ({
                           </h3>
                         </div>
                         <AlgorithmSettings
-                          control={form.control as any}
+                          control={form.control}
                           analysisType={analysisType}
                         />
                       </div>

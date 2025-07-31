@@ -7,5 +7,6 @@
   "arrowParens": "avoid",
   "trailingComma": "es5",
   "importOrderSortSpecifiers": true,
-  "importOrderSeparation": true
+  "importOrderSeparation": true,
+  "endOfLine": "auto"
 }

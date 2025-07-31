@@ -84,7 +84,7 @@ export class SimilarityResultsProcessor {
 
     // Split by arrow symbols and common separators
     const searchParts = lowerSearchTerm
-      .split(/[\s→←↔\-\—]+/)
+      .split(/[\s→←↔\-—]+/)
       .map(part => part.trim())
       .filter(part => part.length > 0);
 
@@ -163,7 +163,7 @@ export class SimilarityResultsProcessor {
 
     const distribution = Object.entries(SIMILARITY_RANGES)
       .filter(([key]) => key !== 'all')
-      .map(([_, range]) => {
+      .map(([, range]) => {
         const count = pairs.filter(
           pair =>
             pair.similarityPercentage >= range.min &&

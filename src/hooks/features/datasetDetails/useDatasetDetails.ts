@@ -14,7 +14,7 @@ export function useDatasetDetails() {
   const datasetId = parseInt(id || '0', 10);
   const { data: dataset, isLoading, error } = useDataset(datasetId);
 
-  const layoutTitle = dataset?.name || 'Dataset Details';
+  const layoutTitle = 'Dataset Details';
   const layoutSubtitle = dataset?.name || '';
 
   const handleAnalyze = () => {
@@ -48,7 +48,7 @@ export function useDatasetDetails() {
         description: `${dataset.name} has been successfully deleted.`,
       });
       navigate('/datasets');
-    } catch (error) {
+    } catch {
       toast({
         title: 'Delete failed',
         description: 'An error occurred while deleting the dataset.',

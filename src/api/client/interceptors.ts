@@ -1,5 +1,5 @@
 import { authStorage } from '@libs/storage/storage';
-import { ApiError } from '@api/types';
+import { ApiError, type RequestConfig } from '@api/types';
 import {
   HttpStatusCode,
   type AxiosError,
@@ -18,7 +18,7 @@ import {
 const addAuthHeaders = (
   config: InternalAxiosRequestConfig
 ): InternalAxiosRequestConfig => {
-  const requireAuth = (config as any)?.requireAuth ?? false;
+  const requireAuth = (config as RequestConfig)?.requireAuth ?? false;
 
   if (!requireAuth) {
     return config;
@@ -59,12 +59,16 @@ const transformAxiosError = (error: AxiosError): ApiError => {
   let message = error.message || 'Unknown error';
 
   if (error.response?.data) {
-    const errorData = error.response.data as any;
+    const errorData = error.response.data;
 
-    if (typeof errorData === 'object') {
-      message = errorData.message || errorData.error || statusText;
-    } else if (typeof errorData === 'string') {
+    if (typeof errorData === 'string') {
       message = errorData;
+    } else if (typeof errorData === 'object' && errorData !== null) {
+      const errorObj = errorData as Record<string, unknown>;
+      message =
+        (typeof errorObj.message === 'string' ? errorObj.message : '') ||
+        (typeof errorObj.error === 'string' ? errorObj.error : '') ||
+        statusText;
     }
   }
 

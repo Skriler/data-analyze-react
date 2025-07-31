@@ -96,10 +96,6 @@ export const toastReducer = (
         toasts: state.toasts.filter(toast => toast.id !== toastId),
       };
     }
-
-    default:
-      console.warn('Unknown toast action type:', (action as any).type);
-      return state;
   }
 };
 

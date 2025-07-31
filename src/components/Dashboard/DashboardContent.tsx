@@ -1,6 +1,6 @@
 import React from 'react';
-import { MainContentSection } from './MainContentSection';
-import { DashboardStats } from '../Stats';
+import { MainContentSection } from './Sections';
+import { DashboardStats } from './Stats';
 import type { DashboardActions, DashboardData } from '@shared/dashboard';
 
 interface DashboardSectionsProps {

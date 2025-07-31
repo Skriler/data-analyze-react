@@ -1,4 +1,4 @@
-import { useSetLayout } from '@components/Layout';
+import { useSetLayout } from '@hooks/features/layout';
 import { useNotFound } from '@hooks/features/notFound';
 import { NotFoundContent } from '@components/NotFound';
 

@@ -1,1 +1,1 @@
-export { DatasetsContent } from './DatasetsContent';
+export { DatasetsContentError } from './DatasetsContentError';

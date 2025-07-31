@@ -64,7 +64,7 @@ const getCardColorClasses = (id: string) => {
   return colorMaps[id as keyof typeof colorMaps] || colorMaps.similarity;
 };
 
-export const AnalysisTypeCard: React.FC<AnalysisTypeCardProps> = ({
+const AnalysisTypeCard: React.FC<AnalysisTypeCardProps> = ({
   analysisType,
   isSelected,
   onSelect,
@@ -121,3 +121,5 @@ export const AnalysisTypeCard: React.FC<AnalysisTypeCardProps> = ({
     </Card>
   );
 };
+
+export { AnalysisTypeCard };

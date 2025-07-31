@@ -14,7 +14,7 @@ export const useUserMenu = () => {
         title: 'Logged out successfully',
         description: 'You have been logged out of your account.',
       });
-    } catch (error) {
+    } catch {
       toast({
         title: 'Logout failed',
         description: 'An error occurred while logging out.',

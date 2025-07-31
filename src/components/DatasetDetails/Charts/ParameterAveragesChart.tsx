@@ -8,6 +8,10 @@ import {
   ParameterAveragesChartBuilder,
 } from '@libs/utils/datasetDetails';
 
+interface ChartCanvas extends HTMLCanvasElement {
+  chart?: Chart.Chart;
+}
+
 interface ParameterAveragesChartProps {
   dataset: DatasetDto;
 }
@@ -15,7 +19,7 @@ interface ParameterAveragesChartProps {
 const ParameterAveragesChart: React.FC<ParameterAveragesChartProps> = ({
   dataset,
 }) => {
-  const chartRef = useRef<HTMLCanvasElement>(null);
+  const chartRef = useRef<ChartCanvas | null>(null);
 
   useEffect(() => {
     if (!chartRef.current) return;
@@ -31,7 +35,7 @@ const ParameterAveragesChart: React.FC<ParameterAveragesChartProps> = ({
       parameterAverages
     );
 
-    (chartRef.current as any).chart = new Chart.Chart(ctx!, config);
+    chartRef.current.chart = new Chart.Chart(ctx!, config);
 
     return () => {
       DatasetChartUtils.destroyChart(chartRef);

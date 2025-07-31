@@ -1,12 +1,19 @@
 import { SectionCard, SectionHeader } from '../Common';
 import { ParametersSection } from './ParametersSection';
 
-function ParametersCard({
+interface ParametersCardProps {
+  parameters: string[];
+  addParameter: () => void;
+  removeParameter: (index: number) => void;
+  updateParameter: (index: number, value: string) => void;
+}
+
+const ParametersCard: React.FC<ParametersCardProps> = ({
   parameters,
   addParameter,
   removeParameter,
   updateParameter,
-}: any) {
+}) => {
   return (
     <div className="space-y-4">
       <SectionHeader
@@ -26,6 +33,6 @@ function ParametersCard({
       </SectionCard>
     </div>
   );
-}
+};
 
 export { ParametersCard };

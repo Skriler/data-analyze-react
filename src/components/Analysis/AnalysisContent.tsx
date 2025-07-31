@@ -1,9 +1,11 @@
 import React from 'react';
-import { AnalysisHeader } from './AnalysisHeader';
-import { AnalysisTypeSection } from './AnalysisTypeSection';
-import { AnalysisTypeDetails } from '../TypeGrid';
-import { AnalysisModal } from '../Modal';
-import { DatasetSection } from './DatasetSection';
+import {
+  AnalysisHeader,
+  DatasetSection,
+  AnalysisTypeSection,
+} from './Sections';
+import { AnalysisTypeDetails } from './TypeGrid';
+import { AnalysisModal } from './Modal';
 import { ANALYSIS_TYPE_CONFIGS } from '@shared/analysis';
 import type { DatasetDto } from '@api-types/dataset';
 

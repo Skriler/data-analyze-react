@@ -2,6 +2,7 @@ import type {
   ProcessedSimilarityPair,
   SimilarityDistributionData,
 } from '@shared/results/similarityResultModal';
+import type { TooltipItem } from 'chart.js';
 
 export class SimilarityChartBuilder {
   static buildHistogramChart(pairs: ProcessedSimilarityPair[]) {
@@ -44,7 +45,7 @@ export class SimilarityChartBuilder {
         },
         tooltip: {
           callbacks: {
-            label: (context: any) => `${context.parsed.y} pairs`,
+            label: (context: TooltipItem<'bar'>) => `${context.parsed.y} pairs`,
           },
         },
       },
@@ -104,7 +105,7 @@ export class SimilarityChartBuilder {
         },
         tooltip: {
           callbacks: {
-            label: (context: any) => {
+            label: (context: TooltipItem<'doughnut'>) => {
               const item = distribution[context.dataIndex];
               return `${item.range}: ${item.count} pairs (${item.percentage}%)`;
             },

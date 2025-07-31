@@ -4,6 +4,10 @@ import {
   ClusteringAlgorithm,
   type SimilarityAnalysisResult,
   type ClusteringAnalysisResult,
+  type BaseAnalysisResult,
+  type KMeansClusteringRequest,
+  type DBSCANClusteringRequest,
+  type AgglomerativeClusteringRequest,
 } from '@api-types/analysis';
 import type {
   ClusteringMutationVariables,
@@ -34,7 +38,10 @@ const createLoadingState = <T>(): T =>
 /**
  * Generate cache state for successful result.
  */
-const createSuccessState = <T>(result: any, timestamp = Date.now()): T =>
+const createSuccessState = <T>(
+  result: BaseAnalysisResult,
+  timestamp = Date.now()
+): T =>
   ({
     isLoading: false,
     result,
@@ -120,7 +127,12 @@ const useClustering = (algorithm: ClusteringAlgorithm) => {
     ClusteringMutationVariables
   >({
     mutationFn: ({ datasetId, request }: ClusteringMutationVariables) =>
-      apiFunction(datasetId, request as any),
+      apiFunction(
+        datasetId,
+        request as KMeansClusteringRequest &
+          DBSCANClusteringRequest &
+          AgglomerativeClusteringRequest
+      ),
 
     onMutate: async ({ datasetId }: ClusteringMutationVariables) => {
       const queryKey = ANALYSIS_QUERY_KEYS.clustering(datasetId, algorithm);

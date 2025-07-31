@@ -7,7 +7,7 @@ interface AnalysisTypeGridProps {
   onAnalysisTypeSelect: (id: string) => void;
 }
 
-export const AnalysisTypeGrid: React.FC<AnalysisTypeGridProps> = ({
+const AnalysisTypeGrid: React.FC<AnalysisTypeGridProps> = ({
   selectedAnalysisType,
   onAnalysisTypeSelect,
 }) => {
@@ -24,3 +24,5 @@ export const AnalysisTypeGrid: React.FC<AnalysisTypeGridProps> = ({
     </div>
   );
 };
+
+export { AnalysisTypeGrid };

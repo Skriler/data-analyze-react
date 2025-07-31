@@ -1,4 +1,4 @@
-import { useSetLayout } from '@components/Layout';
+import { useSetLayout } from '@hooks/features/layout';
 import { useDatasets } from '@hooks/api/useDatasets';
 import { useResults } from '@hooks/features/results';
 import { ResultsContent } from '@components/Results';

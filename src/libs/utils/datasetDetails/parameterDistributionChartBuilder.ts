@@ -1,5 +1,6 @@
 import * as Chart from 'chart.js';
 import type { DatasetStatsData } from '@shared/datasetDetails';
+import type { TooltipItem } from 'chart.js';
 
 export class ParameterDistributionChartBuilder {
   /**
@@ -65,13 +66,16 @@ export class ParameterDistributionChartBuilder {
             size: 12,
           },
           callbacks: {
-            label: (context: any) => {
+            label: (context: TooltipItem<'doughnut'>) => {
               const total = context.dataset.data.reduce(
                 (a: number, b: number) => a + b,
                 0
               );
-              const percentage = ((context.raw / total) * 100).toFixed(1);
-              return `${context.label}: ${context.raw} (${percentage}%)`;
+
+              const rawValue = context.raw as number;
+              const percentage = ((rawValue / total) * 100).toFixed(1);
+
+              return `${context.label}: ${rawValue} (${percentage}%)`;
             },
           },
         },

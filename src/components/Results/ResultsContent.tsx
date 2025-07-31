@@ -11,10 +11,14 @@ interface ResultsContentProps {
   datasets: DatasetDto[];
   isDatasetsLoading: boolean;
   results: AnalysisResultItem[];
-  summaryStats: any;
+  summaryStats: {
+    totalAnalyses: number;
+    uniqueDatasets: number;
+    analysisTypes: number;
+  } | null;
   filters: ResultsFiltersType;
   isLoading: boolean;
-  error: any;
+  error: unknown;
   onFiltersChange: (filters: ResultsFiltersType) => void;
   onGoToAnalysis: () => void;
   onRefresh: () => void;

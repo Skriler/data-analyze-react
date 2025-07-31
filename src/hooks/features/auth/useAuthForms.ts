@@ -52,7 +52,7 @@ export const useAuthForms = ({
       } else {
         onLoginError(result.error ?? 'Invalid credentials.');
       }
-    } catch (error) {
+    } catch {
       onLoginError('An error occurred while logging in.');
     }
   };
@@ -62,7 +62,7 @@ export const useAuthForms = ({
       await register.mutateAsync(data);
       onRegisterSuccess();
       registerForm.reset();
-    } catch (error) {
+    } catch {
       onRegisterError();
     }
   };

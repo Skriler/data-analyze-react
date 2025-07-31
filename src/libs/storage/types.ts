@@ -13,7 +13,7 @@ export enum AuthError {
  *
  * @template T - Type of the stored/retrieved data.
  */
-export type StorageResult<T = any> = {
+export type StorageResult<T = unknown> = {
   success: boolean;
   data?: T;
   error?: AuthError;
