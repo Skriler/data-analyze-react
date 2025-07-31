@@ -1,13 +1,14 @@
 import { useNavigate } from 'react-router-dom';
-import type { DatasetDto } from '@api-types/dataset';
-import { DatasetsListError } from './DatasetsListError';
-import { DatasetsListPagination } from './DatasetsListPagination';
-import { DatasetGrid } from '@components/Common/DatasetGrid';
+import { Eye } from 'lucide-react';
+import { DatasetsContentError } from './DatasetsContentError';
 import { DatasetActions } from '../DatasetActions';
 import { CreateDatasetModal } from '../CreateDatasetModal';
-import { Eye } from 'lucide-react';
+import { DatasetGrid } from '@components/Common/DatasetGrid';
+import { PaginationFooter } from '@components/Ui/Pagination';
+import type { DatasetDto } from '@api-types/dataset';
+import { usePaginatedDatasets } from '@hooks/features/datasets';
 
-interface DatasetsListProps {
+interface DatasetsContentProps {
   datasets: DatasetDto[];
   isLoading: boolean;
   error: unknown;
@@ -21,13 +22,15 @@ interface DatasetsListProps {
   };
 }
 
-export function DatasetsList({
+const DatasetsContent: React.FC<DatasetsContentProps> = ({
   datasets,
   isLoading,
   error,
   actions,
-}: DatasetsListProps) {
+}) => {
   const navigate = useNavigate();
+  const { paginatedDatasets, pagination, goToPage, nextPage, prevPage } =
+    usePaginatedDatasets(datasets);
 
   const handleImportDataset = () => {
     // TODO: Implement import functionality
@@ -39,11 +42,11 @@ export function DatasetsList({
   };
 
   if (error) {
-    return <DatasetsListError />;
+    return <DatasetsContentError />;
   }
 
   return (
-    <div className="space-y-6">
+    <div className="p-6 space-y-6">
       <DatasetActions
         searchQuery={actions.searchQuery}
         setSearchQuery={actions.setSearchQuery}
@@ -54,7 +57,7 @@ export function DatasetsList({
       />
 
       <DatasetGrid
-        datasets={datasets}
+        datasets={paginatedDatasets}
         isLoading={isLoading}
         action={{
           text: 'View Dataset',
@@ -67,11 +70,17 @@ export function DatasetsList({
         showDescription={false}
       />
 
-      <DatasetsListPagination
-        totalDatasets={datasets.length}
-        currentPage={1}
-        itemsPerPage={12}
-      />
+      {pagination.totalPages > 1 && (
+        <div className="mt-8 pt-6 border-t border-gray-100">
+          <PaginationFooter
+            pagination={pagination}
+            goToPage={goToPage}
+            nextPage={nextPage}
+            prevPage={prevPage}
+            variant="clean"
+          />
+        </div>
+      )}
 
       <CreateDatasetModal
         open={actions.showCreateModal}
@@ -79,4 +88,6 @@ export function DatasetsList({
       />
     </div>
   );
-}
+};
+
+export { DatasetsContent };

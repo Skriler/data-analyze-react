@@ -43,7 +43,7 @@ const AnalysisModal: React.FC<AnalysisModalProps> = ({
 
   React.useEffect(() => {
     updateFormParameterSettings(parameterSettings);
-  }, [parameterSettings, updateFormParameterSettings]);
+  }, [parameterSettings]);
 
   const handleSubmit = (formData: any) => {
     submitAnalysis(formData, parameterSettings);

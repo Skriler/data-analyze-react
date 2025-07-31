@@ -1,0 +1,49 @@
+# Node.js artifacts
+node_modules/
+dist/
+build/
+.npm/
+.pnpm-store/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+
+# IDE/editor files
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Git
+.git/
+.gitignore
+
+# Docker
+Dockerfile*
+docker-compose*
+.dockerignore
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Docs
+README*
+*.md
+
+# Build tools cache
+*.tsbuildinfo
+.cache/
+turbo/

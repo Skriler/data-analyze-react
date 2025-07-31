@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { cn } from '@libs/utils/cn';
-import { useFormField } from './useFormField';
+import { useFormField } from '@hooks/features/ui/useFormField';
 
 const descriptionClasses = `
   text-sm

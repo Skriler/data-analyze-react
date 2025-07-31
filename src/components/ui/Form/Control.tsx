@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
-import { useFormField } from './useFormField';
+import { useFormField } from '@hooks/features/ui/useFormField';
 
 const FormControl = React.forwardRef<
   React.ComponentRef<typeof Slot>,

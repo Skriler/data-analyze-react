@@ -1,1 +1,1 @@
-export { DashboardSections } from './DashboardSections';
+export { DashboardContent } from './DashboardContent';

@@ -7,6 +7,7 @@ interface PaginationFooterProps {
   goToPage: (page: number) => void;
   nextPage: () => void;
   prevPage: () => void;
+  variant?: 'default' | 'clean';
 }
 
 const PaginationFooter: React.FC<PaginationFooterProps> = ({
@@ -14,8 +15,11 @@ const PaginationFooter: React.FC<PaginationFooterProps> = ({
   goToPage,
   nextPage,
   prevPage,
+  variant = 'default',
 }) => (
-  <div className="px-6 py-4 bg-gray-50 border-t border-gray-200">
+  <div
+    className={`px-6 py-4 ${variant === 'default' ? 'border-t border-gray-200' : ''}`}
+  >
     <Pagination
       {...pagination}
       goToPage={goToPage}
@@ -23,6 +27,7 @@ const PaginationFooter: React.FC<PaginationFooterProps> = ({
       prevPage={prevPage}
       maxVisiblePages={5}
       showInfo={true}
+      variant={variant}
     />
   </div>
 );

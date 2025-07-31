@@ -35,6 +35,8 @@ const AnalysisContent: React.FC<AnalysisContentProps> = ({
   );
 
   const handleDatasetAnalysis = (dataset: DatasetDto) => {
+    if (!selectedAnalysisType) return;
+
     handleRunAnalysis(dataset, selectedAnalysisType);
   };
 

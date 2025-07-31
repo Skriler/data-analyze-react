@@ -22,7 +22,6 @@ interface ResultsContentProps {
 
 const ResultsContent: React.FC<ResultsContentProps> = ({
   datasets,
-  isDatasetsLoading,
   results,
   summaryStats,
   filters,

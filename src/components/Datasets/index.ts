@@ -1,1 +1,1 @@
-export { DatasetsList } from './DatasetsList';
+export { DatasetsContent } from './Sections';

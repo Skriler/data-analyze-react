@@ -8,7 +8,6 @@ import {
   FormMessage,
 } from '@components/Ui/Form';
 import { Input } from '@components/Ui/Input';
-import { Badge } from '@components/Ui/Badge';
 import type { AlgorithmSettingField, FormData } from '@shared/analysis';
 
 interface ParameterFieldsProps {
@@ -123,20 +122,13 @@ const ParameterField: React.FC<ParameterFieldProps> = ({
     control={control}
     name={name}
     render={({ field }) => {
-      // Приводим значение к числу или используем defaultValue
       const currentValue =
         typeof field.value === 'number' ? field.value : defaultValue;
 
       return (
         <FormItem>
-          <FormLabel className="flex items-center justify-between text-slate-900 font-semibold">
-            <span>{label}</span>
-            <Badge
-              variant="outline"
-              className={`bg-${color}-50 border-${color}-200 text-${color}-800 font-mono`}
-            >
-              {currentValue}
-            </Badge>
+          <FormLabel className="text-slate-900 font-semibold">
+            {label}
           </FormLabel>
           <FormControl>
             <Input
@@ -155,7 +147,7 @@ const ParameterField: React.FC<ParameterFieldProps> = ({
               ref={field.ref}
             />
           </FormControl>
-          <FormMessage />
+          <FormMessage className="text-red-500 text-sm font-medium" />
         </FormItem>
       );
     }}

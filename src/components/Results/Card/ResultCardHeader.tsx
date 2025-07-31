@@ -1,7 +1,6 @@
 import React from 'react';
 import { Clock, Database } from 'lucide-react';
 import { CardTitle, CardDescription } from '@components/Ui/Card';
-import { Badge } from '@components/Ui/Badge';
 import type { AnalysisResultItem } from '@shared/results';
 import { ResultsFormatter } from '@libs/utils/results';
 import type { DatasetDto } from '@api-types/dataset';

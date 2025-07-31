@@ -1,6 +1,5 @@
 import React from 'react';
 import { MainContentSection } from './MainContentSection';
-import { ActivitySection } from './ActivitySection';
 import { DashboardStats } from '../Stats';
 import type { DashboardActions, DashboardData } from '@shared/dashboard';
 
@@ -19,7 +18,7 @@ const StatsSection: React.FC<{
   </div>
 );
 
-const DashboardSections: React.FC<DashboardSectionsProps> = ({
+const DashboardContent: React.FC<DashboardSectionsProps> = ({
   data,
   isLoading,
   actions,
@@ -36,4 +35,4 @@ const DashboardSections: React.FC<DashboardSectionsProps> = ({
   </div>
 );
 
-export { DashboardSections };
+export { DashboardContent };

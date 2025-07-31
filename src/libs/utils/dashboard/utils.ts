@@ -128,7 +128,7 @@ export const createQuickActions = (callbacks: {
  * Limit array to maximum number of items
  */
 export const limitArrayItems = <T>(items: T[], maxItems: number): T[] => {
-  return items.slice(0, maxItems);
+  return items.slice(-maxItems).reverse();
 };
 
 /**

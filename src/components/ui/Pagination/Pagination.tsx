@@ -7,13 +7,13 @@ interface PaginationProps extends PaginationData, PaginationControls {
   maxVisiblePages?: number;
   showInfo?: boolean;
   className?: string;
+  variant?: 'default' | 'clean';
 }
 
 const Pagination: React.FC<PaginationProps> = ({
   currentPage,
   totalPages,
   totalItems,
-  itemsPerPage,
   startItem,
   endItem,
   goToPage,
@@ -22,6 +22,7 @@ const Pagination: React.FC<PaginationProps> = ({
   maxVisiblePages = 5,
   showInfo = true,
   className = '',
+  variant = 'default',
 }) => {
   const [inputPage, setInputPage] = useState('');
   const [isInputFocused, setIsInputFocused] = useState(false);
@@ -99,18 +100,27 @@ const Pagination: React.FC<PaginationProps> = ({
     <div className={`flex items-center justify-between ${className}`}>
       {/* Items info */}
       {showInfo && (
-        <div className="text-sm text-gray-600">
-          Showing {startItem} to {endItem} of {totalItems} results
+        <div
+          className={`text-sm ${variant === 'clean' ? 'text-gray-500 text-center mb-4' : 'text-gray-600'}`}
+        >
+          {variant === 'clean'
+            ? `${totalItems} datasets • Page ${currentPage} of ${totalPages}`
+            : `Showing ${startItem} to ${endItem} of ${totalItems} results`}
         </div>
       )}
-
       {/* Pagination controls */}
-      <div className="flex items-center space-x-2">
+      <div
+        className={`flex items-center space-x-1 ${variant === 'clean' ? 'justify-center' : ''}`}
+      >
         {/* Previous button */}
         <button
           onClick={prevPage}
           disabled={currentPage === 1}
-          className="p-2 text-gray-400 hover:text-gray-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className={`p-2 transition-colors ${
+            variant === 'clean'
+              ? 'text-gray-400 hover:text-gray-600 hover:bg-gray-50 rounded-lg disabled:opacity-30'
+              : 'text-gray-400 hover:text-gray-600'
+          } disabled:cursor-not-allowed`}
           aria-label="Previous page"
         >
           <ChevronLeft className="w-5 h-5" />
@@ -122,7 +132,11 @@ const Pagination: React.FC<PaginationProps> = ({
             <>
               <button
                 onClick={() => goToPage(1)}
-                className="px-3 py-1 text-sm rounded transition-colors text-gray-600 hover:bg-gray-100"
+                className={`px-3 py-1 text-sm rounded-lg transition-colors ${
+                  variant === 'clean'
+                    ? 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                    : 'text-gray-600 hover:bg-gray-100'
+                }`}
                 aria-label="Go to page 1"
               >
                 1
@@ -138,10 +152,10 @@ const Pagination: React.FC<PaginationProps> = ({
             <button
               key={page}
               onClick={() => goToPage(page)}
-              className={`px-3 py-1 text-sm rounded transition-colors ${
+              className={`px-3 py-1 text-sm rounded-lg transition-colors ${
                 currentPage === page
-                  ? 'bg-blue-500 text-white'
-                  : 'text-gray-600 hover:bg-gray-100'
+                  ? `text-white ${variant === 'clean' ? 'bg-blue-600 shadow-sm' : 'bg-blue-500'}`
+                  : `text-gray-600 hover:bg-gray-100 ${variant === 'clean' ? 'hover:text-gray-900' : ''}`
               }`}
               aria-label={`Go to page ${page}`}
               aria-current={currentPage === page ? 'page' : undefined}
@@ -185,10 +199,10 @@ const Pagination: React.FC<PaginationProps> = ({
               )}
               <button
                 onClick={() => goToPage(totalPages)}
-                className={`px-3 py-1 text-sm rounded transition-colors ${
+                className={`px-3 py-1 text-sm rounded-lg transition-colors ${
                   currentPage === totalPages
-                    ? 'bg-blue-500 text-white'
-                    : 'text-gray-600 hover:bg-gray-100'
+                    ? `text-white ${variant === 'clean' ? 'bg-blue-600 shadow-sm' : 'bg-blue-500'}`
+                    : `text-gray-600 hover:bg-gray-100 ${variant === 'clean' ? 'hover:text-gray-900' : ''}`
                 }`}
                 aria-label={`Go to page ${totalPages}`}
               >
@@ -202,7 +216,11 @@ const Pagination: React.FC<PaginationProps> = ({
         <button
           onClick={nextPage}
           disabled={currentPage === totalPages}
-          className="p-2 text-gray-400 hover:text-gray-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className={`p-2 transition-colors ${
+            variant === 'clean'
+              ? 'text-gray-400 hover:text-gray-600 hover:bg-gray-50 rounded-lg disabled:opacity-30'
+              : 'text-gray-400 hover:text-gray-600'
+          } disabled:cursor-not-allowed`}
           aria-label="Next page"
         >
           <ChevronRight className="w-5 h-5" />
