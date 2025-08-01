@@ -1,4 +1,4 @@
-# Multi-stage build для React + Vite + TypeScript
+# Build-only Dockerfile
 FROM node:22-alpine AS build
 WORKDIR /app
 
@@ -12,14 +12,6 @@ COPY . .
 # Build with production optimizations
 RUN npm run build
 
-# Production stage
-FROM nginx:alpine AS final
-
-# Copy built app
-COPY --from=build /app/dist /usr/share/nginx/html
-
-# Expose port
-EXPOSE 3000
-
-# Start nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Final stage - just the built files
+FROM scratch
+COPY --from=build /app/dist /dist
