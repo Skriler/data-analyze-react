@@ -42,11 +42,6 @@ function App() {
                       />
 
                       <Route path="/results" element={<ResultsPage />} />
-                      <Route
-                        path="/results/:datasetId"
-                        element={<ResultsPage />}
-                      />
-
                       <Route path="*" element={<NotFoundPage />} />
                     </Routes>
                   </AuthGuard>
