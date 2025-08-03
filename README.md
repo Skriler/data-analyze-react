@@ -4,7 +4,7 @@ React application providing interface for data analysis through similarity calcu
 
 **Backend API**: [DataAnalyzeApi](https://github.com/Skriler/DataAnalyzeApi)
 
-![Dashboard Screenshot](screenshots/dashboard.png)
+<img width="1907" height="902" alt="chrome_UOykIfCuEK" src="https://github.com/user-attachments/assets/037409c7-f712-462a-b8ab-0b7f672a57dc" />
 
 ## Technologies & Tools
 
@@ -41,7 +41,7 @@ React application providing interface for data analysis through similarity calcu
 
 ### Dataset Management
 
-![Dataset Details](screenshots/dataset-details.png)
+<img width="1894" height="898" alt="chrome_HJjTR4d21o" src="https://github.com/user-attachments/assets/ec4a72e6-6588-4561-b2b6-93bf02772241" />
 
 - **Interactive Dashboard**: Overview of all datasets with key statistics
 - **Dataset Creation**: Modal-based interface with real-time validation
@@ -50,7 +50,7 @@ React application providing interface for data analysis through similarity calcu
 
 ### Analysis Interface
 
-![Analysis Dashboard](screenshots/analysis-dashboard.png)
+<img width="1886" height="908" alt="chrome_VVfTuRvDz2" src="https://github.com/user-attachments/assets/260fb763-9498-4a15-a802-4caa2683008d" />
 
 - **Analysis Selection**: Interactive cards for algorithm selection
 - **Parameter Configuration**: Dynamic forms for algorithm-specific settings
@@ -61,25 +61,25 @@ React application providing interface for data analysis through similarity calcu
 
 #### Similarity Analysis Results
 
-![Similarity Results](screenshots/similarity-results-list.png)
+<img width="1880" height="881" alt="chrome_IOctxtnMBc" src="https://github.com/user-attachments/assets/6077f7e2-147f-410b-ac73-f14ab21a1b83" />
 
 - **Interactive Result Tables**: Sortable similarity pairs with percentage scores
 - **Advanced Filtering**: Search and filter capabilities across all result pairs
 - **Statistical Overview**: Distribution charts and similarity range analysis
 - **Export Options**: Multiple view modes (List/Chart) with pagination
 
-![Similarity Charts](screenshots/similarity-results-charts.png)
+<img width="1852" height="519" alt="chrome_n1dc4QY67E" src="https://github.com/user-attachments/assets/c545f9c2-86e1-46b1-9f50-230d417b4192" />
 
 #### Clustering Results Visualization
 
-![Clustering Results List](screenshots/clustering-results-list.png)
+<img width="1876" height="890" alt="chrome_lbcT5Zubue" src="https://github.com/user-attachments/assets/47198dd4-99a2-4c48-8b33-071ed4e458c6" />
 
 - **Algorithm Comparison**: Side-by-side result comparison for different clustering methods
 - **Cluster Statistics**: Detailed cluster composition with member counts
 - **Interactive Scatter Plots**: PCA-reduced 2D visualization with hover tooltips
 - **Color-coded Groupings**: Distinct cluster visualization with member identification
 
-![Clustering Visualization](screenshots/clustering-results-chart.png)
+<img width="1874" height="886" alt="chrome_bg4ADLjfvS" src="https://github.com/user-attachments/assets/c187d3ac-9a47-4c8b-809b-48e9f1a79001" />
 
 ## API Integration
 
