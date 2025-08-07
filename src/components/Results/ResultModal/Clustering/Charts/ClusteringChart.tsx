@@ -47,9 +47,9 @@ const ClusteringChart: React.FC<ClusteringChartProps> = ({ clusters }) => {
   }
 
   return (
-    <div className="h-full p-6">
-      <div className="bg-gradient-to-br from-gray-50 to-blue-50 rounded-lg p-6 h-full border border-gray-200">
-        <div className="h-full min-h-[600px]">
+    <div className="h-full p-6 flex flex-col">
+      <div className="bg-gradient-to-br from-gray-50 to-blue-50 rounded-lg p-6 flex-1 min-h-0 border border-gray-200 flex flex-col">
+        <div className="flex-1 min-h-0">
           <Scatter data={chartData} options={options} />
         </div>
       </div>

@@ -6,7 +6,10 @@ import { CreateDatasetModal } from './CreateDatasetModal';
 import { DatasetGrid } from '@components/Common/DatasetGrid';
 import { PaginationFooter } from '@components/Ui/Pagination';
 import type { DatasetDto } from '@api-types/dataset';
-import { usePaginatedDatasets } from '@hooks/features/datasets';
+import {
+  usePaginatedDatasets,
+  useModalUrlParams,
+} from '@hooks/features/datasets';
 
 interface DatasetsContentProps {
   datasets: DatasetDto[];
@@ -31,6 +34,12 @@ const DatasetsContent: React.FC<DatasetsContentProps> = ({
   const navigate = useNavigate();
   const { paginatedDatasets, pagination, goToPage, nextPage, prevPage } =
     usePaginatedDatasets(datasets);
+
+  const { handleModalChange } = useModalUrlParams({
+    paramName: 'create',
+    isOpen: actions.showCreateModal,
+    setIsOpen: actions.setShowCreateModal,
+  });
 
   const handleImportDataset = () => {
     // TODO: Implement import functionality
@@ -84,7 +93,7 @@ const DatasetsContent: React.FC<DatasetsContentProps> = ({
 
       <CreateDatasetModal
         open={actions.showCreateModal}
-        onOpenChange={actions.setShowCreateModal}
+        onOpenChange={handleModalChange}
       />
     </div>
   );

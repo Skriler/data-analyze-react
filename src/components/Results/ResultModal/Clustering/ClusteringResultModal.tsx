@@ -50,7 +50,7 @@ export const ClusteringResultModal: React.FC<ClusteringResultModalProps> = ({
           onClose={onClose}
         />
 
-        {viewMode === 'list' && !searchTerm && <QuickStats stats={stats} />}
+        {!searchTerm && <QuickStats stats={stats} />}
 
         <div className="flex-1 overflow-y-auto min-h-0">
           {viewMode === 'visualization' ? (

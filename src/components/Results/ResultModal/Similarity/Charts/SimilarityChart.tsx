@@ -66,18 +66,18 @@ const SimilarityChart: React.FC<SimilarityChartProps> = ({
   }
 
   return (
-    <div className="h-full p-6">
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 h-full">
+    <div className="h-full p-6 flex flex-col">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 flex-1 min-h-0">
         {/* Histogram */}
-        <div className="bg-gray-50 rounded-lg p-6">
-          <div className="h-80">
+        <div className="bg-gray-50 rounded-lg p-6 flex flex-col">
+          <div className="flex-1 min-h-0">
             <Bar data={histogramData} options={histogramOptions} />
           </div>
         </div>
 
         {/* Doughnut Chart */}
-        <div className="bg-gray-50 rounded-lg p-6">
-          <div className="h-80">
+        <div className="bg-gray-50 rounded-lg p-6 flex flex-col">
+          <div className="flex-1 min-h-0">
             {distribution.length > 0 ? (
               <Doughnut data={doughnutData} options={doughnutOptions} />
             ) : (

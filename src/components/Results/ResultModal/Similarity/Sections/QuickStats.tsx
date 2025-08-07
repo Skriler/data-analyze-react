@@ -5,18 +5,9 @@ import React from 'react';
 interface QuickStatsProps {
   stats: SimilarityStats;
   exactMatches: ProcessedSimilarityPair[];
-  filter: string;
-  searchTerm: string;
 }
 
-const QuickStats: React.FC<QuickStatsProps> = ({
-  stats,
-  exactMatches,
-  filter,
-  searchTerm,
-}) => {
-  if (searchTerm || filter !== 'all') return null;
-
+const QuickStats: React.FC<QuickStatsProps> = ({ stats, exactMatches }) => {
   return (
     <div className="px-6 py-4 bg-gradient-to-r from-gray-50 to-blue-50 border-b border-gray-200">
       <div className="grid grid-cols-2 md:grid-cols-5 gap-4">

@@ -63,13 +63,8 @@ const SimilarityResultModal: React.FC<SimilarityResultModalProps> = ({
           onClose={onClose}
         />
 
-        {viewMode === 'list' && (
-          <QuickStats
-            stats={stats}
-            exactMatches={exactMatches}
-            filter={filter}
-            searchTerm={searchTerm}
-          />
+        {!searchTerm && (
+          <QuickStats stats={stats} exactMatches={exactMatches} />
         )}
 
         <div className="flex-1 overflow-y-auto min-h-0">

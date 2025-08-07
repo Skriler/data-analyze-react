@@ -39,7 +39,7 @@ export const useDashboard = (): DashboardState & {
   const actions: DashboardActions = useMemo(
     () => ({
       handleCreateDataset: () => {
-        navigate('/datasets/create');
+        navigate('/datasets?create=true');
       },
       handleRunAnalysis: () => {
         navigate('/analysis');
