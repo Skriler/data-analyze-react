@@ -3,7 +3,13 @@ import { Database, Plus } from 'lucide-react';
 import { Button } from '@components/Ui/Button';
 import { Card, CardContent } from '@components/Ui/Card';
 
-const EmptyDatasetState: React.FC = () => {
+interface EmptyDatasetStateProps {
+  onCreateDataset?: () => void;
+}
+
+const EmptyDatasetState: React.FC<EmptyDatasetStateProps> = ({
+  onCreateDataset,
+}) => {
   return (
     <Card className="border-2 border-dashed border-gray-300 hover:border-blue-400 transition-all duration-300 bg-gradient-to-br from-gray-50 to-white">
       <CardContent className="text-center py-16">
@@ -20,7 +26,10 @@ const EmptyDatasetState: React.FC = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <Button className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition-all duration-200 hover:shadow-xl flex items-center space-x-2">
+          <Button
+            onClick={onCreateDataset}
+            className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white shadow-sm"
+          >
             <Plus className="h-5 w-5" />
             <span>Create Dataset</span>
           </Button>

@@ -8,7 +8,7 @@ import { formatDistanceToNow } from 'date-fns';
 interface DatasetCardAction {
   text: string;
   icon: LucideIcon;
-  onClick: (dataset: DatasetDto) => void;
+  onClick: (dataset: DatasetDto, analysisType: string) => void;
   className?: string;
 }
 
@@ -131,7 +131,7 @@ const DatasetCard: React.FC<DatasetCardProps> = ({
               action.className ||
               'w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold py-3 px-4 rounded-lg shadow-md transition-all duration-200 hover:shadow-lg flex items-center justify-center space-x-2'
             }
-            onClick={() => action.onClick(dataset)}
+            onClick={() => action.onClick(dataset, 'DBSCAN')}
           >
             <action.icon className="h-4 w-4" />
             <span>{action.text}</span>

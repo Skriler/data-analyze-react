@@ -61,7 +61,7 @@ const DatasetsContent: React.FC<DatasetsContentProps> = ({
         setSearchQuery={actions.setSearchQuery}
         sortBy={actions.sortBy}
         setSortBy={actions.setSortBy}
-        onCreateDataset={() => actions.setShowCreateModal(true)}
+        onCreateDataset={() => handleModalChange(true)}
         onImportDataset={handleImportDataset}
       />
 
@@ -77,6 +77,7 @@ const DatasetsContent: React.FC<DatasetsContentProps> = ({
         }}
         showCreatedDate={true}
         showDescription={false}
+        onCreateDataset={() => handleModalChange(true)}
       />
 
       {pagination.totalPages > 1 && (

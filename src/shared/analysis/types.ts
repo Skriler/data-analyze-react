@@ -1,3 +1,4 @@
+import type { DatasetDto } from '@api-types/dataset';
 import type { AnalysisType, ClusteringType } from './constants';
 
 export interface AnalysisTypeConfig {
@@ -37,4 +38,10 @@ export interface AlgorithmConfig {
 export interface ValidationResult {
   isValid: boolean;
   errors: string[];
+}
+
+export interface AnalysisActions {
+  handleRunAnalysis: (dataset: DatasetDto, analysisType: string) => void;
+  handleCreateDataset: () => void;
+  handleViewDocumentation: () => void;
 }

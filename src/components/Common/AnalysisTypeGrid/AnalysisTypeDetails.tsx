@@ -8,49 +8,11 @@ import {
   CardTitle,
 } from '@components/Ui/Card';
 import type { AnalysisTypeConfig } from '@shared/analysis';
+import { getAnalysisColors } from '@libs/utils/common/analysisTypeGrid/utils';
 
-interface AnalysisTypeDetailsProps {
+export interface AnalysisTypeDetailsProps {
   analysisType: AnalysisTypeConfig;
 }
-
-const getAnalysisColors = (id: string) => {
-  const colorMaps = {
-    similarity: {
-      gradient: 'from-rose-500 to-rose-600',
-      lightGradient: 'from-rose-50 to-rose-100',
-      iconBg: 'bg-rose-500',
-      featureBg: 'bg-rose-50',
-      featureBorder: 'border-rose-200',
-      accent: 'text-rose-600',
-    },
-    kmeans: {
-      gradient: 'from-green-500 to-green-600',
-      lightGradient: 'from-green-50 to-green-100',
-      iconBg: 'bg-green-500',
-      featureBg: 'bg-green-50',
-      featureBorder: 'border-green-200',
-      accent: 'text-green-600',
-    },
-    dbscan: {
-      gradient: 'from-purple-500 to-purple-600',
-      lightGradient: 'from-purple-50 to-purple-100',
-      iconBg: 'bg-purple-500',
-      featureBg: 'bg-purple-50',
-      featureBorder: 'border-purple-200',
-      accent: 'text-purple-600',
-    },
-    agglomerative: {
-      gradient: 'from-orange-500 to-orange-600',
-      lightGradient: 'from-orange-50 to-orange-100',
-      iconBg: 'bg-orange-500',
-      featureBg: 'bg-orange-50',
-      featureBorder: 'border-orange-200',
-      accent: 'text-orange-600',
-    },
-  };
-
-  return colorMaps[id as keyof typeof colorMaps] || colorMaps.similarity;
-};
 
 const AnalysisTypeDetails: React.FC<AnalysisTypeDetailsProps> = ({
   analysisType,

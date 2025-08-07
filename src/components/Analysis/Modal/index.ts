@@ -1,1 +1,1 @@
-export { AnalysisModal } from './Sections';
+export { AnalysisModal } from './AnalysisModal';

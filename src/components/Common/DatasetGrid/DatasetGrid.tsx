@@ -8,7 +8,7 @@ import type { DatasetDto } from '@api-types/dataset';
 interface DatasetGridAction {
   text: string;
   icon: LucideIcon;
-  onClick: (dataset: DatasetDto) => void;
+  onClick: (dataset: DatasetDto, analysisType: string) => void;
   className?: string;
 }
 
@@ -16,6 +16,7 @@ interface DatasetGridProps {
   datasets: DatasetDto[] | undefined;
   isLoading: boolean;
   action: DatasetGridAction;
+  onCreateDataset?: () => void;
   showCreatedDate?: boolean;
   showDescription?: boolean;
 }
@@ -24,6 +25,7 @@ const DatasetGrid: React.FC<DatasetGridProps> = ({
   datasets,
   isLoading,
   action,
+  onCreateDataset,
   showCreatedDate = false,
   showDescription = true,
 }) => {
@@ -32,7 +34,7 @@ const DatasetGrid: React.FC<DatasetGridProps> = ({
   }
 
   if (!datasets || datasets.length === 0) {
-    return <EmptyDatasetState />;
+    return <EmptyDatasetState onCreateDataset={onCreateDataset} />;
   }
 
   return (

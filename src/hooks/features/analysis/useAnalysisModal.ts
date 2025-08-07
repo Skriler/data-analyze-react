@@ -1,7 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
-  DEFAULT_VALUES,
   ANALYSIS_TYPE_DEFAULTS,
   analysisSchema,
   type AnalysisType,
@@ -21,14 +20,16 @@ import { CATEGORICAL_METRIC_MAP, NUMERIC_METRIC_MAP } from '@shared/analysis';
 interface UseAnalysisModalProps {
   dataset: DatasetDto;
   initialParameterSettings: ParameterSettingsDto[];
-  initialType?: AnalysisType;
+  selectedAnalysisType: string;
+  onAnalysisTypeChange: (type: string) => void;
   onClose: () => void;
 }
 
 export const useAnalysisModal = ({
   dataset,
   initialParameterSettings,
-  initialType = DEFAULT_VALUES.type,
+  selectedAnalysisType,
+  onAnalysisTypeChange,
   onClose,
 }: UseAnalysisModalProps) => {
   const { toast } = useToast();
@@ -46,7 +47,7 @@ export const useAnalysisModal = ({
 
   const form = useForm<FormData>({
     resolver: zodResolver(analysisSchema),
-    defaultValues: getDefaultValues(initialType),
+    defaultValues: getDefaultValues(selectedAnalysisType as AnalysisType),
   });
 
   const analysisType = form.watch('type') as FormData['type'];
@@ -63,15 +64,9 @@ export const useAnalysisModal = ({
     form.setValue('parameterSettings', parameterSettings);
   };
 
-  const resetToDefaults = (type?: AnalysisType) => {
-    const targetType = type || analysisType;
-    const defaultValues = getDefaultValues(targetType);
-    form.reset(defaultValues);
-  };
-
-  const changeAnalysisType = (newType: AnalysisType) => {
+  const handleAnalysisTypeChange = (newType: string) => {
     const currentValues = form.getValues();
-    const newDefaults = getDefaultValues(newType);
+    const newDefaults = getDefaultValues(newType as AnalysisType);
 
     const mergedValues = {
       ...newDefaults,
@@ -80,6 +75,13 @@ export const useAnalysisModal = ({
     };
 
     form.reset(mergedValues);
+    onAnalysisTypeChange(newType);
+  };
+
+  const resetToDefaults = (type?: AnalysisType) => {
+    const targetType = type || analysisType;
+    const defaultValues = getDefaultValues(targetType);
+    form.reset(defaultValues);
   };
 
   const submitAnalysis = async (
@@ -169,7 +171,7 @@ export const useAnalysisModal = ({
     isLoading,
     updateFormParameterSettings,
     resetToDefaults,
-    changeAnalysisType,
+    handleAnalysisTypeChange,
     submitAnalysis,
   };
 };

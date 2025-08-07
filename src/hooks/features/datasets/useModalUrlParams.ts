@@ -17,22 +17,22 @@ export const useModalUrlParams = ({
   useEffect(() => {
     const shouldOpen = searchParams.get(paramName) === 'true';
 
-    if (shouldOpen && !isOpen) {
-      setIsOpen(true);
-    } else if (!shouldOpen && isOpen) {
-      setIsOpen(false);
+    if (shouldOpen !== isOpen) {
+      setIsOpen(shouldOpen);
     }
   }, [searchParams, paramName, isOpen, setIsOpen]);
 
   const handleModalChange = useCallback(
     (open: boolean) => {
       setIsOpen(open);
+      const newParams = new URLSearchParams(searchParams);
 
-      if (!open && searchParams.get(paramName) === 'true') {
-        const newParams = new URLSearchParams(searchParams);
+      if (open) {
+        newParams.set(paramName, 'true');
+      } else {
         newParams.delete(paramName);
-        setSearchParams(newParams);
       }
+      setSearchParams(newParams);
     },
     [paramName, searchParams, setSearchParams, setIsOpen]
   );

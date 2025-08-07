@@ -3,21 +3,20 @@ import { Database, FileText, Play } from 'lucide-react';
 import { Button } from '@components/Ui/Button';
 import { DatasetGrid } from '@components/Common/DatasetGrid';
 import type { DatasetDto } from '@api-types/dataset';
+import type { AnalysisActions } from '@shared/analysis';
 
 interface DatasetSectionProps {
   datasets: DatasetDto[] | undefined;
   isLoading: boolean;
   analysisTypeName: string;
-  onRunAnalysis: (dataset: DatasetDto) => void;
-  onViewDocumentation: () => void;
+  actions: AnalysisActions;
 }
 
 export const DatasetSection: React.FC<DatasetSectionProps> = ({
   datasets,
   isLoading,
   analysisTypeName,
-  onRunAnalysis,
-  onViewDocumentation,
+  actions,
 }) => {
   return (
     <div className="space-y-6">
@@ -44,7 +43,7 @@ export const DatasetSection: React.FC<DatasetSectionProps> = ({
             variant="outline"
             size="sm"
             className="flex items-center space-x-2 border-2 border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-gray-300 transition-all duration-200"
-            onClick={onViewDocumentation}
+            onClick={actions.handleViewDocumentation}
           >
             <FileText className="h-4 w-4" />
             <span>View Documentation</span>
@@ -58,8 +57,9 @@ export const DatasetSection: React.FC<DatasetSectionProps> = ({
         action={{
           text: `Run ${analysisTypeName}`,
           icon: Play,
-          onClick: onRunAnalysis,
+          onClick: actions.handleRunAnalysis,
         }}
+        onCreateDataset={actions.handleCreateDataset}
         showCreatedDate={false}
         showDescription={true}
       />

@@ -17,7 +17,7 @@ const AnalysisModalFooter: React.FC<AnalysisModalFooterProps> = ({
   onSubmit,
 }) => {
   return (
-    <div className="border-t border-slate-200/60 bg-white/80 backdrop-blur-sm px-6 py-4 flex-shrink-0">
+    <div className="border-t border-slate-200/60 bg-white px-8 py-6 flex-shrink-0">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-6 text-sm text-slate-600">
           <div className="flex items-center space-x-2">

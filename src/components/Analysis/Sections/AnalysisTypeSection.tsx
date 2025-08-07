@@ -1,6 +1,6 @@
 import React from 'react';
-import { AnalysisTypeGrid } from '../TypeGrid';
 import { ANALYSIS_TYPE_CONFIGS } from '@shared/analysis';
+import { AnalysisTypeGrid } from '@components/Common/AnalysisTypeGrid';
 
 interface AnalysisTypeSectionProps {
   selectedAnalysisType: string;
@@ -25,6 +25,8 @@ const AnalysisTypeSection: React.FC<AnalysisTypeSectionProps> = ({
       <AnalysisTypeGrid
         selectedAnalysisType={selectedAnalysisType}
         onAnalysisTypeSelect={onAnalysisTypeSelect}
+        showDetails={true}
+        variant="default"
       />
     </div>
   );

@@ -4,9 +4,8 @@ import {
   DatasetSection,
   AnalysisTypeSection,
 } from './Sections';
-import { AnalysisTypeDetails } from './TypeGrid';
 import { AnalysisModal } from './Modal';
-import { ANALYSIS_TYPE_CONFIGS } from '@shared/analysis';
+import { ANALYSIS_TYPE_CONFIGS, type AnalysisActions } from '@shared/analysis';
 import type { DatasetDto } from '@api-types/dataset';
 
 interface AnalysisContentProps {
@@ -17,8 +16,7 @@ interface AnalysisContentProps {
   showAnalysisModal: boolean;
   setSelectedAnalysisType: (type: string) => void;
   setShowAnalysisModal: (show: boolean) => void;
-  handleRunAnalysis: (dataset: DatasetDto, analysisType: string) => void;
-  handleViewDocumentation: () => void;
+  actions: AnalysisActions;
 }
 
 const AnalysisContent: React.FC<AnalysisContentProps> = ({
@@ -29,18 +27,11 @@ const AnalysisContent: React.FC<AnalysisContentProps> = ({
   showAnalysisModal,
   setSelectedAnalysisType,
   setShowAnalysisModal,
-  handleRunAnalysis,
-  handleViewDocumentation,
+  actions,
 }) => {
   const currentAnalysisType = ANALYSIS_TYPE_CONFIGS.find(
     config => config.id === selectedAnalysisType
   );
-
-  const handleDatasetAnalysis = (dataset: DatasetDto) => {
-    if (!selectedAnalysisType) return;
-
-    handleRunAnalysis(dataset, selectedAnalysisType);
-  };
 
   return (
     <div className="min-h-screen bg-gray-50/50 p-6">
@@ -53,21 +44,12 @@ const AnalysisContent: React.FC<AnalysisContentProps> = ({
         />
 
         {currentAnalysisType && (
-          <div className="animate-fade-in">
-            <AnalysisTypeDetails analysisType={currentAnalysisType} />
-          </div>
-        )}
-
-        {currentAnalysisType && (
-          <div className="animate-fade-in">
-            <DatasetSection
-              datasets={datasets}
-              isLoading={isLoading}
-              analysisTypeName={currentAnalysisType.name}
-              onRunAnalysis={handleDatasetAnalysis}
-              onViewDocumentation={handleViewDocumentation}
-            />
-          </div>
+          <DatasetSection
+            datasets={datasets}
+            isLoading={isLoading}
+            analysisTypeName={currentAnalysisType.name}
+            actions={actions}
+          />
         )}
 
         {selectedDataset && (
@@ -75,6 +57,8 @@ const AnalysisContent: React.FC<AnalysisContentProps> = ({
             open={showAnalysisModal}
             onOpenChange={setShowAnalysisModal}
             dataset={selectedDataset}
+            selectedAnalysisType={selectedAnalysisType}
+            onAnalysisTypeChange={setSelectedAnalysisType}
           />
         )}
       </div>
