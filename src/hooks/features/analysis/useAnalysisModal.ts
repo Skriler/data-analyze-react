@@ -1,3 +1,4 @@
+import { useEffect, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -40,10 +41,13 @@ export const useAnalysisModal = ({
   const dbscanAnalysis = useDBSCANClustering();
   const agglomerativeAnalysis = useAgglomerativeClustering();
 
-  const getDefaultValues = (type: AnalysisType) => ({
-    ...ANALYSIS_TYPE_DEFAULTS[type],
-    parameterSettings: initialParameterSettings,
-  });
+  const getDefaultValues = useCallback(
+    (type: AnalysisType) => ({
+      ...ANALYSIS_TYPE_DEFAULTS[type],
+      parameterSettings: initialParameterSettings,
+    }),
+    [initialParameterSettings]
+  );
 
   const form = useForm<FormData>({
     resolver: zodResolver(analysisSchema),
@@ -51,6 +55,17 @@ export const useAnalysisModal = ({
   });
 
   const analysisType = form.watch('type') as FormData['type'];
+
+  // Sync form with external selectedAnalysisType changes
+  useEffect(() => {
+    const currentFormType = form.getValues('type');
+    if (selectedAnalysisType !== currentFormType) {
+      const newDefaults = getDefaultValues(
+        selectedAnalysisType as AnalysisType
+      );
+      form.reset(newDefaults);
+    }
+  }, [selectedAnalysisType, form, getDefaultValues]);
 
   const isLoading =
     similarityAnalysis.isPending ||

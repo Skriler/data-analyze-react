@@ -1,19 +1,12 @@
 import React from 'react';
 import { Sparkles } from 'lucide-react';
-import { Button } from '@components/Ui/Button';
 import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
 } from '@components/Ui/Dialog';
 
-interface AnalysisModalHeaderProps {
-  onClose: () => void;
-}
-
-const AnalysisModalHeader: React.FC<AnalysisModalHeaderProps> = ({
-  onClose,
-}) => {
+const AnalysisModalHeader: React.FC = () => {
   return (
     <DialogHeader className="px-8 pt-8 pb-6 border-b border-slate-200/60 flex-shrink-0">
       <div className="flex items-center justify-between">
@@ -30,12 +23,6 @@ const AnalysisModalHeader: React.FC<AnalysisModalHeaderProps> = ({
             </DialogDescription>
           </div>
         </div>
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={onClose}
-          className="h-8 w-8 p-0 hover:bg-slate-100 rounded-full"
-        />
       </div>
     </DialogHeader>
   );

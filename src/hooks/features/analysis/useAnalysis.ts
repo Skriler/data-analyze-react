@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import type { DatasetDto } from '@api-types/dataset';
 import type { AnalysisActions } from '@shared/analysis';
@@ -13,6 +13,20 @@ export const useAnalysis = () => {
     type || 'similarity'
   );
   const [showAnalysisModal, setShowAnalysisModal] = useState(false);
+  const [showDocumentationModal, setShowDocumentationModal] = useState(false);
+
+  useEffect(() => {
+    if (type && type !== selectedAnalysisType) {
+      setSelectedAnalysisType(type);
+    }
+  }, [type, selectedAnalysisType]);
+
+  const handleAnalysisTypeChange = (newType: string) => {
+    setSelectedAnalysisType(newType);
+    if (newType !== type) {
+      navigate(`/analysis/${newType}`, { replace: true });
+    }
+  };
 
   const actions: AnalysisActions = useMemo(
     () => ({
@@ -24,7 +38,7 @@ export const useAnalysis = () => {
         navigate('/datasets?create=true');
       },
       handleViewDocumentation: () => {
-        navigate('/analysis/documentation');
+        setShowDocumentationModal(true);
       },
     }),
     [navigate]
@@ -34,8 +48,10 @@ export const useAnalysis = () => {
     selectedDataset,
     selectedAnalysisType,
     showAnalysisModal,
-    setSelectedAnalysisType,
+    showDocumentationModal,
+    setSelectedAnalysisType: handleAnalysisTypeChange,
     setShowAnalysisModal,
+    setShowDocumentationModal,
     actions,
   };
 };

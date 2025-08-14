@@ -60,7 +60,7 @@ const AnalysisModal: React.FC<AnalysisModalProps> = ({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-7xl max-h-[95vh] p-0 bg-black/50 backdrop-blur-sm overflow-hidden">
         <div className="bg-white rounded-lg h-[95vh] flex flex-col">
-          <AnalysisModalHeader onClose={handleClose} />
+          <AnalysisModalHeader />
 
           <Form {...form}>
             <form

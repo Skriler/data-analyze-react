@@ -44,7 +44,7 @@ const AnalysisModalContent: React.FC<AnalysisModalContentProps> = ({
             </h3>
           </div>
           <AnalysisTypeGrid
-            selectedAnalysisType={form.watch('type')}
+            selectedAnalysisType={analysisType}
             onAnalysisTypeSelect={onAnalysisTypeChange}
             showDetails={false}
             variant="modal"

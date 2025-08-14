@@ -37,6 +37,10 @@ function App() {
 
                       <Route path="/analysis" element={<AnalysisPage />} />
                       <Route
+                        path="/analysis/:type"
+                        element={<AnalysisPage />}
+                      />
+                      <Route
                         path="/analysis/:datasetId"
                         element={<AnalysisPage />}
                       />

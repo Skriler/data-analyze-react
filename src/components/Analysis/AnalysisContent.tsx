@@ -4,7 +4,8 @@ import {
   DatasetSection,
   AnalysisTypeSection,
 } from './Sections';
-import { AnalysisModal } from './Modal';
+import { AnalysisModal } from './AnalysisModal';
+import { DocumentationModal } from './DocumentationModal';
 import { ANALYSIS_TYPE_CONFIGS, type AnalysisActions } from '@shared/analysis';
 import type { DatasetDto } from '@api-types/dataset';
 
@@ -14,8 +15,10 @@ interface AnalysisContentProps {
   selectedDataset: DatasetDto | null;
   selectedAnalysisType: string;
   showAnalysisModal: boolean;
+  showDocumentationModal: boolean;
   setSelectedAnalysisType: (type: string) => void;
   setShowAnalysisModal: (show: boolean) => void;
+  setShowDocumentationModal: (show: boolean) => void;
   actions: AnalysisActions;
 }
 
@@ -25,8 +28,10 @@ const AnalysisContent: React.FC<AnalysisContentProps> = ({
   selectedDataset,
   selectedAnalysisType,
   showAnalysisModal,
+  showDocumentationModal,
   setSelectedAnalysisType,
   setShowAnalysisModal,
+  setShowDocumentationModal,
   actions,
 }) => {
   const currentAnalysisType = ANALYSIS_TYPE_CONFIGS.find(
@@ -57,6 +62,15 @@ const AnalysisContent: React.FC<AnalysisContentProps> = ({
             open={showAnalysisModal}
             onOpenChange={setShowAnalysisModal}
             dataset={selectedDataset}
+            selectedAnalysisType={selectedAnalysisType}
+            onAnalysisTypeChange={setSelectedAnalysisType}
+          />
+        )}
+
+        {selectedAnalysisType && (
+          <DocumentationModal
+            open={showDocumentationModal}
+            onOpenChange={setShowDocumentationModal}
             selectedAnalysisType={selectedAnalysisType}
             onAnalysisTypeChange={setSelectedAnalysisType}
           />
